@@ -2,9 +2,11 @@ import Fristname from "./Firstname";
 import Gender from "./Gender";
 import SelectDropdown from "./SelectDropdown";
 import { useState } from "react";
-import Button from "./Sginbutton";
+import Button from "./Button";
+
 import validator from "email-validator";
 export default function FromCard() {
+
   const [firstName, setFirstName] = useState("");
   const [firstnameerror, setfirstnameError] = useState(false);
   const [lastName, setLastName] = useState("");
@@ -54,7 +56,7 @@ export default function FromCard() {
     }
     if (name === "gender") {
       setGender(valuess);
-      setGenderError(false); // Clear error when a gender is selected
+      setGenderError(false); 
     }
   };
   const handleClick = (event) => {
@@ -83,6 +85,10 @@ export default function FromCard() {
     if (gender === "") {
       setGenderError(true);
     }
+    
+      
+    
+    
     console.log(
       firstName,
       lastName,
@@ -93,6 +99,7 @@ export default function FromCard() {
       selectday,
      gender
     );
+    
   };
 
   const monthOptions = [
@@ -141,11 +148,8 @@ export default function FromCard() {
   return (
     <div class="row">
       <div class="col-4">
-        <p>hey how are you</p>
-        <h5 class="card-title text-light"> another col-</h5>
-        <p class="card-text text-light">
-          With supporting text below as a natural lead-ntent.
-        </p>
+    
+        
       </div>
       <div class="col-5">
         <div
@@ -354,15 +358,9 @@ export default function FromCard() {
         </div>
       </div>
       <div class="col-3 ">
-        <div class="card">
-          <div class="card-body bg-white">
-            <h5 class="card-title text-light"> another col-</h5>
-            <p class="card-text text-light">
-              With supporting text below as a natural lead-ntent.
-            </p>
-          </div>
-        </div>
+        
       </div>
     </div>
   );
 }
+

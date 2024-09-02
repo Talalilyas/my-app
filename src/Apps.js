@@ -1,7 +1,7 @@
 import './App.css';
 import Formcard from "./Fromcard";
 import 'bootstrap/dist/css/bootstrap.min.css';
-function App() {
+function Apps() {
   return (
     <div className="App">
       <header className="App-header">
@@ -11,4 +11,4 @@ function App() {
   );
 }
 
-export default App;
+export default Apps;
