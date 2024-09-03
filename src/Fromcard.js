@@ -3,10 +3,8 @@ import Gender from "./Gender";
 import SelectDropdown from "./SelectDropdown";
 import { useState } from "react";
 import Button from "./Button";
-
 import validator from "email-validator";
 export default function FromCard() {
-
   const [firstName, setFirstName] = useState("");
   const [firstnameerror, setfirstnameError] = useState(false);
   const [lastName, setLastName] = useState("");
@@ -56,7 +54,7 @@ export default function FromCard() {
     }
     if (name === "gender") {
       setGender(valuess);
-      setGenderError(false); 
+      setGenderError(false);
     }
   };
   const handleClick = (event) => {
@@ -85,10 +83,7 @@ export default function FromCard() {
     if (gender === "") {
       setGenderError(true);
     }
-    
-      
-    
-    
+
     console.log(
       firstName,
       lastName,
@@ -97,9 +92,8 @@ export default function FromCard() {
       selectedOption,
       selectyear,
       selectday,
-     gender
+      gender
     );
-    
   };
 
   const monthOptions = [
@@ -147,10 +141,7 @@ export default function FromCard() {
 
   return (
     <div class="row">
-      <div class="col-4">
-    
-        
-      </div>
+      <div class="col-4"></div>
       <div class="col-5">
         <div
           class="card   "
@@ -193,7 +184,6 @@ export default function FromCard() {
                 <Fristname
                   type="text"
                   className="form-control"
-                  
                   id="lastName"
                   name="lastName"
                   placeholder="Lastname"
@@ -348,19 +338,16 @@ export default function FromCard() {
               <div className="col-md-3"></div>
             </div>
 
-            <div class="d-grid gap-2 col-6 mx-auto" style={{marginTop:"15px"}}>
-       <Button
-         onClick={handleClick}
-        />
-        </div>
-            
+            <div
+              class="d-grid gap-2 col-6 mx-auto"
+              style={{ marginTop: "15px" }}
+            >
+              <Button onClick={handleClick} />
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-3 ">
-        
-      </div>
+      <div class="col-3 "></div>
     </div>
   );
 }
-

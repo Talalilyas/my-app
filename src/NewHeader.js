@@ -1,4 +1,4 @@
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function NewHeader() {
   return (
@@ -43,16 +43,7 @@ export default function NewHeader() {
             <div class="col-md-3 text-end"></div>
           </header>
         </div>
-        {/* <Link to="/NewHeader" >
-            <a class="btn btn-sm btn-outline-danger" href="#" style={{marginRight:"30px" ,height:"35px" ,width:"100px"}}>Sign up</a>
-            </Link>
-            <Link to= "/Login">
-            <a class="btn btn-sm btn-outline-danger" href="#" style={{marginLeft:"10px",height:"35px" ,width:"100px"}}>Login</a>
-            </Link> */}
-
-        <div class="col-4 text-center">
-          <a class="blog-header-logo text-dark" href="#"></a>
-        </div>
+        <div class="col-4 text-center"></div>
       </div>
     </header>
   );
