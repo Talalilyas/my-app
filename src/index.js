@@ -1,11 +1,10 @@
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
-
 import FromCard from "./Fromcard";
-
 import Login from "./Login";
 import Greeting from "./Greeting";
+import React from "react";
 
 export default function App() {
   return (
@@ -22,4 +21,8 @@ export default function App() {
 }
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<App />);
+root.render(
+  <React.StrictMode>
+    <App /> 
+  </React.StrictMode>
+);    

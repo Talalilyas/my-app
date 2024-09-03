@@ -24,14 +24,14 @@ export default function NewHeader() {
             </div>
 
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-              <div class="col-md-3 text-center" style={{ marginRight: "40px" }}>
+              {/* <div class="col-md-3 text-center" style={{ marginRight: "40px" }}>
                 <Link to="/Login">
                   <button type="button" class="btn btn-outline-primary me-2">
                     Login
                   </button>
                 </Link>
-              </div>
-              <div class="col-md-6 t">
+              </div> */}
+              <div class="col-md-12 t">
                 <Link to="/NewHeader">
                   <button type="button" class="btn btn-primary">
                     Sign-up
