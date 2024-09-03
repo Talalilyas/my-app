@@ -67,7 +67,6 @@ export default function FromCard() {
     if (password === "") {
       setPasswordErorr(true);
     }
-
     if (!validator.validate(email)) {
       setEmailError(!validator.validate(email));
     }
@@ -83,7 +82,6 @@ export default function FromCard() {
     if (gender === "") {
       setGenderError(true);
     }
-
     console.log(
       firstName,
       lastName,
@@ -95,7 +93,6 @@ export default function FromCard() {
       gender
     );
   };
-
   const monthOptions = [
     { value: "1", label: "January" },
     { value: "2", label: "February" },
@@ -105,7 +102,6 @@ export default function FromCard() {
     { value: "6", label: "june" },
     { value: "7", label: "July" },
   ];
-
   const yearOptions = [
     { value: "2024", label: "2024" },
     { value: "2023", label: "2023" },
@@ -138,15 +134,13 @@ export default function FromCard() {
     { value: "19", label: "19" },
     { value: "20", label: "20" },
   ];
-
   return (
     <div class="row">
       <div class="col-4"></div>
       <div class="col-5">
         <div
           class="card   "
-          style={{ marginTop: "100px", maxHeight: "900px", maxWidth: "410px" }}
-        >
+          style={{ marginTop: "100px", maxHeight: "900px", maxWidth: "410px" }}>
           <div class="card-header bg-white">
             <h3> Sign up</h3>
             <button
@@ -158,8 +152,7 @@ export default function FromCard() {
               }}
               type="button"
               class="btn-close position-absolute top-0 end-0 "
-              aria-label="Close"
-            ></button>
+              aria-label="Close"></button>
             <p class="text-muted fs-6">it's quick and easy</p>
           </div>
           <div class="card-body">
@@ -172,8 +165,7 @@ export default function FromCard() {
                   name="firstName"
                   placeholder="Firstname"
                   value={firstName}
-                  onChange={handleChange}
-                />
+                  onChange={handleChange}/>
                 {firstnameerror && (
                   <p className="text-danger" style={{ fontSize: "10px" }}>
                     Please enter your first name
@@ -205,8 +197,7 @@ export default function FromCard() {
                 name="email"
                 placeholder="Email address"
                 value={email}
-                onChange={handleChange}
-              />
+                onChange={handleChange}/>
               {emailerorr && (
                 <p className="text-danger" style={{ fontSize: "10px" }}>
                   please enter you email adress
