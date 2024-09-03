@@ -10,17 +10,16 @@ export default function SelectDropdown(props) {
     props.onChange(valuess, props.name);
   };
 
-  
-  let button =  <label>Good AfterNoon</label>;
-  if(props.name === "selectyear"){
-    button  = <label>Good Morning</label>
+  let button = <label>Good AfterNoon</label>;
+  if (props.name === "selectyear") {
+    button = <label>Good Morning</label>;
   }
 
-  if(props.value === "custom"){
-    return <label>Good Morning</label>
+  if (props.value === "custom") {
+    return <label>Good Morning</label>;
   }
- 
-  console.log(props.valuer)
+
+  console.log(props.valuer);
 
   return (
     <div className="mb-3">

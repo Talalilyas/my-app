@@ -2,7 +2,7 @@ import Fristname from "./Firstname";
 import Gender from "./Gender";
 import SelectDropdown from "./SelectDropdown";
 import { useState } from "react";
-import Button from "./Sginbutton";
+import Button from "./Button";
 import validator from "email-validator";
 export default function FromCard() {
   const [firstName, setFirstName] = useState("");
@@ -54,7 +54,7 @@ export default function FromCard() {
     }
     if (name === "gender") {
       setGender(valuess);
-      setGenderError(false); // Clear error when a gender is selected
+      setGenderError(false);
     }
   };
   const handleClick = (event) => {
@@ -67,7 +67,6 @@ export default function FromCard() {
     if (password === "") {
       setPasswordErorr(true);
     }
-
     if (!validator.validate(email)) {
       setEmailError(!validator.validate(email));
     }
@@ -91,10 +90,9 @@ export default function FromCard() {
       selectedOption,
       selectyear,
       selectday,
-     gender
+      gender
     );
   };
-
   const monthOptions = [
     { value: "1", label: "January" },
     { value: "2", label: "February" },
@@ -104,7 +102,6 @@ export default function FromCard() {
     { value: "6", label: "june" },
     { value: "7", label: "July" },
   ];
-
   const yearOptions = [
     { value: "2024", label: "2024" },
     { value: "2023", label: "2023" },
@@ -137,21 +134,13 @@ export default function FromCard() {
     { value: "19", label: "19" },
     { value: "20", label: "20" },
   ];
-
   return (
     <div class="row">
-      <div class="col-4">
-        <p>hey how are you</p>
-        <h5 class="card-title text-light"> another col-</h5>
-        <p class="card-text text-light">
-          With supporting text below as a natural lead-ntent.
-        </p>
-      </div>
+      <div class="col-4"></div>
       <div class="col-5">
         <div
           class="card   "
-          style={{ marginTop: "100px", maxHeight: "900px", maxWidth: "410px" }}
-        >
+          style={{ marginTop: "100px", maxHeight: "900px", maxWidth: "410px" }}>
           <div class="card-header bg-white">
             <h3> Sign up</h3>
             <button
@@ -163,8 +152,7 @@ export default function FromCard() {
               }}
               type="button"
               class="btn-close position-absolute top-0 end-0 "
-              aria-label="Close"
-            ></button>
+              aria-label="Close"></button>
             <p class="text-muted fs-6">it's quick and easy</p>
           </div>
           <div class="card-body">
@@ -177,8 +165,7 @@ export default function FromCard() {
                   name="firstName"
                   placeholder="Firstname"
                   value={firstName}
-                  onChange={handleChange}
-                />
+                  onChange={handleChange}/>
                 {firstnameerror && (
                   <p className="text-danger" style={{ fontSize: "10px" }}>
                     Please enter your first name
@@ -189,7 +176,6 @@ export default function FromCard() {
                 <Fristname
                   type="text"
                   className="form-control"
-                  
                   id="lastName"
                   name="lastName"
                   placeholder="Lastname"
@@ -211,8 +197,7 @@ export default function FromCard() {
                 name="email"
                 placeholder="Email address"
                 value={email}
-                onChange={handleChange}
-              />
+                onChange={handleChange}/>
               {emailerorr && (
                 <p className="text-danger" style={{ fontSize: "10px" }}>
                   please enter you email adress
@@ -243,8 +228,7 @@ export default function FromCard() {
                     <SelectDropdown
                       options={monthOptions}
                       onChange={handleChange}
-                      name="selectedOption"
-                    />
+                      name="selectedOption"/>
                   </div>
                   {selectError && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -258,8 +242,7 @@ export default function FromCard() {
                     <SelectDropdown
                       options={yearOptions}
                       onChange={handleChange}
-                      name="selectyear"
-                    />
+                      name="selectyear"/>
                   </div>
                   {selectyearerorr && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -272,8 +255,7 @@ export default function FromCard() {
                     <SelectDropdown
                       options={dayoptions}
                       onChange={handleChange}
-                      name="selectday"
-                    />
+                      name="selectday"   />
                   </div>
                   {selectdayerorr && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -283,28 +265,24 @@ export default function FromCard() {
                 </div>
               </div>
             </div>
-
             <div className="row">
               <p className="fs-6 text-muted ">SelectGender</p>
               <div
                 className="col-md-4"
-                style={{ maxHeight: "50px", fontSize: "15px" }}
-              >
+                style={{ maxHeight: "50px", fontSize: "15px" }}>
                 <div className="card">
                   <div className="card-body" style={{ maxHeight: "45px" }}>
                     <Gender
                       name="gender"
                       value="Female"
                       label="Female"
-                      onChange={handleChange}
-                    />
+                      onChange={handleChange}/>
                   </div>
                 </div>
               </div>
               <div
                 className="col-md-4"
-                style={{ maxHeight: "100px", fontSize: "15px" }}
-              >
+                style={{ maxHeight: "100px", fontSize: "15px" }} >
                 <div className="card">
                   <div className="card-body" style={{ maxHeight: "45px" }}>
                     <Gender
@@ -344,25 +322,16 @@ export default function FromCard() {
               <div className="col-md-3"></div>
             </div>
 
-            <div class="d-grid gap-2 col-6 mx-auto" style={{marginTop:"15px"}}>
-       <Button
-         onClick={handleClick}
-        />
-        </div>
-            
+            <div
+              class="d-grid gap-2 col-6 mx-auto"
+              style={{ marginTop: "15px" }}
+            >
+              <Button onClick={handleClick} />
+            </div>
           </div>
         </div>
       </div>
-      <div class="col-3 ">
-        <div class="card">
-          <div class="card-body bg-white">
-            <h5 class="card-title text-light"> another col-</h5>
-            <p class="card-text text-light">
-              With supporting text below as a natural lead-ntent.
-            </p>
-          </div>
-        </div>
-      </div>
+      <div class="col-3 "></div>
     </div>
   );
 }

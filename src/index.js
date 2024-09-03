@@ -1,25 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; // Import necessary components from react-router-dom
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import Home from './Home'; 
-import About from './About'; 
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./Layout";
 
+import FromCard from "./Fromcard";
 
+import Login from "./Login";
+import Greeting from "./Greeting";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter> {/* Wrap your app with BrowserRouter to enable routing */}
-      <Routes> 
-        <Route path="/" element={<App />} /> Default route for your main App component
-        <Route path="/home" element={<Home />} /> 
-        <Route path="/about" element={<About />} /> 
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route path="NewHeader" element={<FromCard />} />
+          <Route path="Login" element={<Login />} />
+          <Route path="/greeting" element={<Greeting />} />
+        </Route>
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
-);
+  );
+}
 
-reportWebVitals();
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
