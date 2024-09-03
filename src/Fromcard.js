@@ -237,8 +237,7 @@ export default function FromCard() {
                     <SelectDropdown
                       options={monthOptions}
                       onChange={handleChange}
-                      name="selectedOption"
-                    />
+                      name="selectedOption"/>
                   </div>
                   {selectError && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -252,8 +251,7 @@ export default function FromCard() {
                     <SelectDropdown
                       options={yearOptions}
                       onChange={handleChange}
-                      name="selectyear"
-                    />
+                      name="selectyear"/>
                   </div>
                   {selectyearerorr && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -266,8 +264,7 @@ export default function FromCard() {
                     <SelectDropdown
                       options={dayoptions}
                       onChange={handleChange}
-                      name="selectday"
-                    />
+                      name="selectday"   />
                   </div>
                   {selectdayerorr && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -277,28 +274,24 @@ export default function FromCard() {
                 </div>
               </div>
             </div>
-
             <div className="row">
               <p className="fs-6 text-muted ">SelectGender</p>
               <div
                 className="col-md-4"
-                style={{ maxHeight: "50px", fontSize: "15px" }}
-              >
+                style={{ maxHeight: "50px", fontSize: "15px" }}>
                 <div className="card">
                   <div className="card-body" style={{ maxHeight: "45px" }}>
                     <Gender
                       name="gender"
                       value="Female"
                       label="Female"
-                      onChange={handleChange}
-                    />
+                      onChange={handleChange}/>
                   </div>
                 </div>
               </div>
               <div
                 className="col-md-4"
-                style={{ maxHeight: "100px", fontSize: "15px" }}
-              >
+                style={{ maxHeight: "100px", fontSize: "15px" }} >
                 <div className="card">
                   <div className="card-body" style={{ maxHeight: "45px" }}>
                     <Gender
