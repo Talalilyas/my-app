@@ -13,7 +13,7 @@ export default function App() {
         <Route path="/" element={<Layout />}>
           <Route path="NewHeader" element={<FromCard />} />
           <Route path="Login" element={<Login />} />
-          <Route path="/greeting" element={<Greeting />} />
+          <Route path="/Greeting" element={<Greeting />} />
         </Route>
       </Routes>
     </BrowserRouter>
