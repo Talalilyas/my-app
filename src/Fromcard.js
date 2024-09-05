@@ -4,6 +4,7 @@ import SelectDropdown from "./SelectDropdown";
 import { useState } from "react";
 import Button from "./Button";
 import validator from "email-validator";
+import { useNavigate } from "react-router-dom";
 export default function FromCard() {
   const [firstName, setFirstName] = useState("");
   const [firstnameerror, setfirstnameError] = useState(false);
@@ -21,6 +22,7 @@ export default function FromCard() {
   const [selectdayerorr, setselectdayerorr] = useState(false);
   const [gender, setGender] = useState("");
   const [genderError, setGenderError] = useState(false);
+  const navigate = useNavigate();
   const handleChange = (valuess, name) => {
     console.log([valuess, name]);
     if (name === "firstName") {
@@ -82,17 +84,33 @@ export default function FromCard() {
     if (gender === "") {
       setGenderError(true);
     }
-    console.log(
-      firstName,
-      lastName,
-      password,
-      email,
-      selectedOption,
-      selectyear,
-      selectday,
-      gender
-    );
+    console.log(firstName);
+
+    if (
+      firstName !== "" &&
+      lastName !== "" &&
+      password !== "" &&
+      validator.validate(email) &&
+      selectedOption !== "" &&
+      selectyear !== "" &&
+      selectday !== "" &&
+      gender !== ""
+    ) {
+      navigate("/greeting", {
+        state: {
+          firstName,
+          lastName,
+          password,
+          email,
+          selectedOption,
+          selectyear,
+          selectday,
+          gender,
+        },
+      });
+    }
   };
+
   const monthOptions = [
     { value: "1", label: "January" },
     { value: "2", label: "February" },
@@ -140,7 +158,8 @@ export default function FromCard() {
       <div class="col-5">
         <div
           class="card   "
-          style={{ marginTop: "100px", maxHeight: "900px", maxWidth: "410px" }}>
+          style={{ marginTop: "100px", maxHeight: "900px", maxWidth: "410px" }}
+        >
           <div class="card-header bg-white">
             <h3> Sign up</h3>
             <button
@@ -152,7 +171,8 @@ export default function FromCard() {
               }}
               type="button"
               class="btn-close position-absolute top-0 end-0 "
-              aria-label="Close"></button>
+              aria-label="Close"
+            ></button>
             <p class="text-muted fs-6">it's quick and easy</p>
           </div>
           <div class="card-body">
@@ -165,7 +185,8 @@ export default function FromCard() {
                   name="firstName"
                   placeholder="Firstname"
                   value={firstName}
-                  onChange={handleChange}/>
+                  onChange={handleChange}
+                />
                 {firstnameerror && (
                   <p className="text-danger" style={{ fontSize: "10px" }}>
                     Please enter your first name
@@ -197,7 +218,8 @@ export default function FromCard() {
                 name="email"
                 placeholder="Email address"
                 value={email}
-                onChange={handleChange}/>
+                onChange={handleChange}
+              />
               {emailerorr && (
                 <p className="text-danger" style={{ fontSize: "10px" }}>
                   please enter you email adress
@@ -228,7 +250,8 @@ export default function FromCard() {
                     <SelectDropdown
                       options={monthOptions}
                       onChange={handleChange}
-                      name="selectedOption"/>
+                      name="selectedOption"
+                    />
                   </div>
                   {selectError && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -242,7 +265,8 @@ export default function FromCard() {
                     <SelectDropdown
                       options={yearOptions}
                       onChange={handleChange}
-                      name="selectyear"/>
+                      name="selectyear"
+                    />
                   </div>
                   {selectyearerorr && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -255,7 +279,8 @@ export default function FromCard() {
                     <SelectDropdown
                       options={dayoptions}
                       onChange={handleChange}
-                      name="selectday"   />
+                      name="selectday"
+                    />
                   </div>
                   {selectdayerorr && (
                     <p className="text-danger" style={{ fontSize: "10px" }}>
@@ -269,20 +294,23 @@ export default function FromCard() {
               <p className="fs-6 text-muted ">SelectGender</p>
               <div
                 className="col-md-4"
-                style={{ maxHeight: "50px", fontSize: "15px" }}>
+                style={{ maxHeight: "50px", fontSize: "15px" }}
+              >
                 <div className="card">
                   <div className="card-body" style={{ maxHeight: "45px" }}>
                     <Gender
                       name="gender"
                       value="Female"
                       label="Female"
-                      onChange={handleChange}/>
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
               </div>
               <div
                 className="col-md-4"
-                style={{ maxHeight: "100px", fontSize: "15px" }} >
+                style={{ maxHeight: "100px", fontSize: "15px" }}
+              >
                 <div className="card">
                   <div className="card-body" style={{ maxHeight: "45px" }}>
                     <Gender
