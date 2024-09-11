@@ -1,14 +1,10 @@
 import { useLocation } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 export default function Greeting() {
   const location = useLocation();
-  const { firstName, lastName, email } = location.state || {}; 
-
+  const { firstName, lastName, email , password ,   selectedOption ,selectyear ,selectday , gender} = location.state || {};
   return (
-    
-
     <div class="container-fluid">
       <div class="row flex-nowrap">
         <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -36,7 +32,7 @@ export default function Greeting() {
                   class="nav-link px-0 align-middle"
                 >
                   <i class="fs-4 bi-speedometer2"></i>{" "}
-                  <span class="ms-1 d-none d-sm-inline">Dashboard</span>{" "}
+                  <span class="ms-1 d-none d-sm-inline">Dashboard</span>
                 </a>
                 <ul
                   class="collapse show nav flex-column ms-1"
@@ -44,21 +40,21 @@ export default function Greeting() {
                   data-bs-parent="#menu"
                 >
                   <li class="w-100">
-                    <a href="#" class="nav-link px-0">
-                      {" "}
-                      <span class="d-none d-sm-inline">Item</span> 1{" "}
+                    <a  class="nav-link px-0">
+              
+                      <span class="d-none d-sm-inline">Item</span> 1
                     </a>
                   </li>
                   <li>
-                    <a href="#" class="nav-link px-0">
+                    <a class="nav-link px-0">
                       {" "}
-                      <span class="d-none d-sm-inline">Item</span> 2{" "}
+                      <span class="d-none d-sm-inline">Item</span> 2
                     </a>
                   </li>
                 </ul>
               </li>
               <li>
-                <a href="#" class="nav-link px-0 align-middle">
+                <a  class="nav-link px-0 align-middle">
                   <i class="fs-4 bi-table"></i>{" "}
                   <span class="ms-1 d-none d-sm-inline">Orders</span>
                 </a>
@@ -79,7 +75,7 @@ export default function Greeting() {
                 >
                   <li class="w-100">
                     <a href="#" class="nav-link px-0">
-                      {" "}
+                    
                       <span class="d-none d-sm-inline">Item</span> 1
                     </a>
                   </li>
@@ -154,7 +150,7 @@ export default function Greeting() {
                   height="30"
                   class="rounded-circle"
                 ></img>
-                <span class="d-none d-sm-inline mx-1">{firstName}</span>
+                <span class="d-none d-sm-inline mx-1">{firstName} {lastName}</span>
               </a>
 
               <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
@@ -185,7 +181,15 @@ export default function Greeting() {
             </div>
           </div>
         </div>
-        <div class="col py-3"> <p>This your Email</p> {email}</div>
+        <div class="col py-3">
+
+          <h4>User Email</h4> {email}
+          <h4>User password</h4>{ password}
+          <h4>User birthdaymonth</h4>{selectedOption}
+          <h4>User birthyear</h4>{selectyear}
+          <h4>User birthday</h4>{selectday}
+          <h4>User birthday</h4>{gender}
+        </div>
       </div>
     </div>
   );

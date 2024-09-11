@@ -2,7 +2,6 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./Layout";
 import FromCard from "./Fromcard";
-import Login from "./Login";
 import Greeting from "./Greeting";
 import React from "react";
 
@@ -12,7 +11,6 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route path="NewHeader" element={<FromCard />} />
-          <Route path="Login" element={<Login />} />
           <Route path="/Greeting" element={<Greeting />} />
         </Route>
       </Routes>
@@ -23,6 +21,6 @@ export default function App() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App /> 
+    <App />
   </React.StrictMode>
-);    
+);
