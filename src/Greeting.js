@@ -20,7 +20,7 @@ export default function Greeting() {
               id="menu"
             >
               <li class="nav-item">
-                <a href="#" class="nav-link align-middle px-0">
+                <a>
                   <i class="fs-4 bi-house"></i>{" "}
                   <span class="ms-1 d-none d-sm-inline">Home</span>
                 </a>
@@ -40,13 +40,13 @@ export default function Greeting() {
                   data-bs-parent="#menu"
                 >
                   <li class="w-100">
-                    <a  class="nav-link px-0">
+                    <a  class=" px-0">
               
                       <span class="d-none d-sm-inline">Item</span> 1
                     </a>
                   </li>
                   <li>
-                    <a class="nav-link px-0">
+                    <a class="px-0">
                       {" "}
                       <span class="d-none d-sm-inline">Item</span> 2
                     </a>
