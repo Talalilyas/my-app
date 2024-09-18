@@ -17,6 +17,7 @@ export default function Fristname(props) {
             className={props.className}
             id="firstName"
             onChange={onChange}
+            value={props.value}
             placeholder={props.placeholder}
           ></input>
         </div>

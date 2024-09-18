@@ -1,3 +1,9 @@
+
+
+
+
+
+
 import { Link, useLocation } from "react-router-dom";
 
 export default function NewHeader() {
@@ -13,6 +19,7 @@ export default function NewHeader() {
                 <button type="button" className="btn btn-primary">
                   Sign-up
                 </button>
+                
               </Link>
             </div>
           )}
