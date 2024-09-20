@@ -12,8 +12,8 @@ export default function FromCard() {
   const [lastnameeror, setLastnameErorr] = useState(false);
   const [password, setPassword] = useState("");
   const [Passworderorr, setPasswordErorr] = useState(false);
-  const [email, setEmail] = useState(false);
-  const [emailerorr, setEmailError] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailerorr, setEmailError] = useState(false);
   const [selectedOption, setSelectedOption] = useState("");
   const [selectError, setSelectError] = useState(false);
   const [selectyear, setsselectyear] = useState("");
@@ -96,7 +96,7 @@ export default function FromCard() {
       selectday !== "" &&
       gender !== ""
     ) {
-      navigate("/greeting", {
+      navigate("/profile/greeting", {
         state: {
           firstName,
           lastName,
