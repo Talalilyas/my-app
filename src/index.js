@@ -10,9 +10,12 @@ import React from "react";
 const LayoutTwow = () => {
 
   return (
-      <div className="cols-lg-12">
+   
+      <div className="cols-lg-4">
+        
       <Outlet />
       </div>
+
   );
 };
 
@@ -25,7 +28,7 @@ export default function App() {
           <Route path="NewHeader" element={<FromCard />} />
         </Route>
         <Route path="/" element={<LayoutTwow />}>
-          <Route path="profile/Greeting" element={<Greeting />} />
+          <Route path="/profile/greeting" element={<Greeting />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -96,7 +96,7 @@ export default function FromCard() {
       selectday !== "" &&
       gender !== ""
     ) {
-      navigate("/greeting", {
+      navigate("/profile/greeting", {
         state: {
           firstName,
           lastName,
