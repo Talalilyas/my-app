@@ -1,9 +1,20 @@
 import { useLocation } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+<<<<<<< Updated upstream
 export default function Greeting() {
   const location = useLocation();
   const { firstName, lastName, email , password ,   selectedOption ,selectyear ,selectday , gender} = location.state || {};
+=======
+import Navigationlink from "./Navigationlink";
+import UserDetails from "./UserDetails";
+import Username from "./Username";
+
+export default function Greeting() {
+  const location = useLocation();
+  const {} = location.state || {};
+
+>>>>>>> Stashed changes
   return (
     <div class="container-fluid">
       <div class="row flex-nowrap">
@@ -15,6 +26,7 @@ export default function Greeting() {
             >
               <span class="fs-5 d-none d-sm-inline">Menu</span>
             </a>
+<<<<<<< Updated upstream
             <ul
               class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
               id="menu"
@@ -189,6 +201,14 @@ export default function Greeting() {
           <h4>User birthyear</h4>{selectyear}
           <h4>User birthday</h4>{selectday}
           <h4>User birthday</h4>{gender}
+=======
+            <Navigationlink />
+            <Username state={location.state || {}} />
+          </div>
+        </div>
+        <div className="col py-3">
+          <UserDetails state={location.state || {}} />
+>>>>>>> Stashed changes
         </div>
       </div>
     </div>

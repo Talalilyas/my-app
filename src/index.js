@@ -4,7 +4,8 @@ import Layout from "./Layout";
 import FromCard from "./Fromcard";
 import Greeting from "./Greeting";
 import React from "react";
-
+import useLocalStorage from "use-local-storage";
+import useLocalStorageState from 'use-local-storage-state'
 
 
 const LayoutTwow = () => {
@@ -21,15 +22,18 @@ const LayoutTwow = () => {
 
 
 export default function App() {
+  const [todos, setTodos] = useLocalStorageState('todos',false)
+  console.log('--------todo--ddd----',todos);
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        
+        {todos === undefined && <Route path="/" element={<Layout />}>
           <Route path="NewHeader" element={<FromCard />} />
-        </Route>
-        <Route path="/" element={<LayoutTwow />}>
-          <Route path="/profile/greeting" element={<Greeting />} />
-        </Route>
+        </Route>}
+        {todos === true &&  <Route path="/" element={<LayoutTwow />}>
+          <Route path="/" element={<Greeting />} />
+        </Route>}
       </Routes>
     </BrowserRouter>
   );
