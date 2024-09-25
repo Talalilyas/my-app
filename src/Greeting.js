@@ -1,21 +1,39 @@
-import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navigationlink from "./Navigationlink";
 import UserDetails from "./UserDetails";
+import Username from "./Username";
 
 export default function Greeting() {
-  const location = useLocation();
+ 
+
+  
+  
+  const [userData, setUserData] = useState("");
+
+  useEffect(() => {
+    const data = localStorage.getItem('todos');
+    if (data) {
+      const parsedData = JSON.parse(data);
+      setUserData(parsedData);
+    }
+  }, []);
+
+ 
+ 
+
+
   const {
-    firstName,
-    lastName,
-    email,
-    password,
-    selectedOption,
-    selectyear,
-    selectday,
-    gender,
-  } = location.state || {};
+    firstName = "",
+    lastName = "",
+    email = "",
+    password = "",
+    selectedOption = "",
+    selectyear = "",
+    selectday = "",
+    gender = "",
+  } = userData;
 
   return (
     <div className="container-fluid">
@@ -29,35 +47,13 @@ export default function Greeting() {
               <span className="fs-5 d-none d-sm-inline">Menu</span>
             </a>
             <Navigationlink />
-            <div className="dropdown pb-4">
-              <a
-                href="#"
-                className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                id="dropdownUser1"
-                data-bs-toggle="dropdown"
-                aria-expanded="false">
-                <img
-                  src="https://github.com/mdo.png"
-                  alt="hugenerd"
-                  width="30"
-                  height="30"
-                  className="rounded-circle"
-                ></img>
-                <span className="d-none d-sm-inline mx-1">
-                  {firstName} {lastName}
-                </span>
-              </a>
-              <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
-                <li><a className="dropdown-item" href="#">New project...</a></li>
-                <li><a className="dropdown-item" href="#">Settings</a></li>
-                <li><a className="dropdown-item" href="#">Profile</a></li>
-                <li className="dropdown-divider"> </li>
-                <li><a className="dropdown-item" href="#">Sign out</a></li>
-              </ul>
-            </div>
+            
+            {/* Pass data to Username component */}
+            <Username firstName={firstName} lastName={lastName} />
           </div>
         </div>
         <div className="col py-3">
+          {/* Pass data to UserDetails component */}
           <UserDetails
             firstName={firstName}
             lastName={lastName}

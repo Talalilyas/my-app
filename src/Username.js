@@ -25,7 +25,7 @@ const Username = (props) => {
           className="rounded-circle"
         ></img>
         <span className="d-none d-sm-inline mx-1">
-          {firstName} {lastName}
+          {props.firstName} {props.lastName}
         </span>
       </a>
       <ul className="dropdown-menu dropdown-menu-dark text-small shadow">

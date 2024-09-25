@@ -1,39 +1,46 @@
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from "react-router-dom";
 import Layout from "./Layout";
 import FromCard from "./Fromcard";
 import Greeting from "./Greeting";
 import React from "react";
-import useLocalStorage from "use-local-storage";
-import useLocalStorageState from 'use-local-storage-state'
+import useLocalStorageState from 'use-local-storage-state';
 
-
+// Layout for after login
 const LayoutTwow = () => {
-
   return (
-   
-      <div className="cols-lg-4">
-        
+    <div className="cols-lg-4">
       <Outlet />
-      </div>
-
+    </div>
   );
 };
 
-
 export default function App() {
-  const [todos, setTodos] = useLocalStorageState('todos',false)
-  console.log('--------todo--ddd----',todos);
+  // Use localStorage to manage login state
+  const [isLogin, setIsLogin] = useLocalStorageState('isLogin', false);
+
+  console.log('isLogin status:', isLogin);
+
   return (
     <BrowserRouter>
       <Routes>
-        
-        {todos === undefined && <Route path="/" element={<Layout />}>
-          <Route path="NewHeader" element={<FromCard />} />
-        </Route>}
-        {todos === true &&  <Route path="/" element={<LayoutTwow />}>
-          <Route path="/" element={<Greeting />} />
-        </Route>}
+        {/* Route for when not logged in */}
+        {!isLogin && (
+          <Route path="/" element={<Layout />}>
+            <Route path="NewHeader" element={<FromCard setIsLogin={setIsLogin} />} />
+            {/* Redirect to NewHeader if not logged in */}
+            <Route path="*" element={<Navigate to="/NewHeader" />} />
+          </Route>
+        )}
+
+        {/* Route for when logged in */}
+        {isLogin && (
+          <Route path="/" element={<LayoutTwow />}>
+            <Route path="/" element={<Greeting />} />
+            {/* Redirect to Greeting if logged in */}
+            <Route path="*" element={<Navigate to="/" />} />
+          </Route>
+        )}
       </Routes>
     </BrowserRouter>
   );

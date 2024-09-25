@@ -5,12 +5,10 @@ import { useState } from "react";
 import Button from "./Button";
 import validator from "email-validator";
 import { useNavigate } from "react-router-dom";
-import useLocalStorageState from 'use-local-storage-state'
-
+import useLocalStorageState from "use-local-storage-state";
 
 export default function FromCard() {
-  const [todos, setTodos] = useLocalStorageState('todos', false)
-
+  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
 
   const [firstName, setFirstName] = useState("");
   const [firstnameerror, setfirstnameError] = useState(false);
@@ -102,22 +100,22 @@ export default function FromCard() {
       selectday !== "" &&
       gender !== ""
     ) {
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        password,
+        selectedOption,
+        selectyear,
+        selectday,
+        gender,
+      };
 
-      console.log("------ddd0------------");
-      setTodos(true)
-      console.log(todos);
-      navigate("/", {
-        state: {
-          firstName,
-          lastName,
-          password,
-          email,
-          selectedOption,
-          selectyear,
-          selectday,
-          gender,
-        },
-      });
+      localStorage.setItem("todos", JSON.stringify(userData));
+
+      setIsLogin(true);
+
+      navigate("/");
     }
   };
 
