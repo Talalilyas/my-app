@@ -1,40 +1,19 @@
-import { useEffect, useState } from "react";
+import { useLocation, Navigate } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navigationlink from "./Navigationlink";
 import UserDetails from "./UserDetails";
 import Username from "./Username";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function Greeting() {
- 
+  const [user, setUser] = useLocalStorageState("user", false);
+  const location = useLocation();
+  const { userdata } = location.state || {};
 
-  
-  
-  const [userData, setUserData] = useState("");
-
-  useEffect(() => {
-    const data = localStorage.getItem('todos');
-    if (data) {
-      const parsedData = JSON.parse(data);
-      setUserData(parsedData);
-    }
-  }, []);
-
- 
- 
-
-
-  const {
-    firstName = "",
-    lastName = "",
-    email = "",
-    password = "",
-    selectedOption = "",
-    selectyear = "",
-    selectday = "",
-    gender = "",
-  } = userData;
-
+  console.log(user, "-------user---");
+  const currentUser = userdata ? JSON.parse(userdata) : user;
+console.log(currentUser)
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
@@ -47,23 +26,11 @@ export default function Greeting() {
               <span className="fs-5 d-none d-sm-inline">Menu</span>
             </a>
             <Navigationlink />
-            
-            {/* Pass data to Username component */}
-            <Username firstName={firstName} lastName={lastName} />
+            <Username user={currentUser} />
           </div>
         </div>
         <div className="col py-3">
-          {/* Pass data to UserDetails component */}
-          <UserDetails
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            password={password}
-            selectedOption={selectedOption}
-            selectyear={selectyear}
-            selectday={selectday}
-            gender={gender}
-          />
+          <UserDetails user={currentUser} />
         </div>
       </div>
     </div>

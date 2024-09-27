@@ -9,6 +9,7 @@ import useLocalStorageState from "use-local-storage-state";
 
 export default function FromCard() {
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
+  const [user, setUser] = useLocalStorageState("user", false);
 
   const [firstName, setFirstName] = useState("");
   const [firstnameerror, setfirstnameError] = useState(false);
@@ -37,7 +38,6 @@ export default function FromCard() {
       setLastName(valuess);
       setLastnameErorr(valuess === "");
     }
-
     if (name === "password") {
       setPassword(valuess);
       setPasswordErorr(valuess === "");
@@ -110,12 +110,11 @@ export default function FromCard() {
         selectday,
         gender,
       };
-
-      localStorage.setItem("todos", JSON.stringify(userData));
-
+      const jsonString = JSON.stringify(userData);
+      console.log("-----stringg-----", jsonString);
       setIsLogin(true);
-
-      navigate("/");
+      setUser(userData, true);
+      navigate("/", { state: { userData: jsonString } });
     }
   };
 
