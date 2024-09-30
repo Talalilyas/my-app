@@ -1,4 +1,4 @@
-import { useLocation, Navigate } from "react-router-dom";
+import { useLocation,  } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navigationlink from "./Navigationlink";
@@ -7,11 +7,12 @@ import Username from "./Username";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function Greeting() {
-  const [user, setUser] = useLocalStorageState("user", false);
+  const [user, setUser] = useLocalStorageState("user", true);
   const location = useLocation();
   const { userdata } = location.state || {};
 
   console.log(user, "-------user---");
+ 
   const currentUser = userdata ? JSON.parse(userdata) : user;
 console.log(currentUser)
   return (

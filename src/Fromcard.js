@@ -113,7 +113,7 @@ export default function FromCard() {
       const jsonString = JSON.stringify(userData);
       console.log("-----stringg-----", jsonString);
       setIsLogin(true);
-      setUser(userData, true);
+      setUser(true);
       navigate("/", { state: { userData: jsonString } });
     }
   };
