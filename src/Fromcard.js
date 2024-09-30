@@ -5,7 +5,12 @@ import { useState } from "react";
 import Button from "./Button";
 import validator from "email-validator";
 import { useNavigate } from "react-router-dom";
+import useLocalStorageState from "use-local-storage-state";
+
 export default function FromCard() {
+  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
+  const [user, setUser] = useLocalStorageState("user", false);
+
   const [firstName, setFirstName] = useState("");
   const [firstnameerror, setfirstnameError] = useState(false);
   const [lastName, setLastName] = useState("");
@@ -33,7 +38,6 @@ export default function FromCard() {
       setLastName(valuess);
       setLastnameErorr(valuess === "");
     }
-
     if (name === "password") {
       setPassword(valuess);
       setPasswordErorr(valuess === "");
@@ -96,18 +100,21 @@ export default function FromCard() {
       selectday !== "" &&
       gender !== ""
     ) {
-      navigate("/profile/greeting", {
-        state: {
-          firstName,
-          lastName,
-          password,
-          email,
-          selectedOption,
-          selectyear,
-          selectday,
-          gender,
-        },
-      });
+      const userData = {
+        firstName,
+        lastName,
+        email,
+        password,
+        selectedOption,
+        selectyear,
+        selectday,
+        gender,
+      };
+     
+      console.log("-----stringg-----",userData);
+      setIsLogin(true);
+      setUser(userData);
+      navigate("/");
     }
   };
 
