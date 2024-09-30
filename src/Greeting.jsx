@@ -1,4 +1,3 @@
-import { useLocation,  } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navigationlink from "./Navigationlink";
@@ -7,14 +6,11 @@ import Username from "./Username";
 import useLocalStorageState from "use-local-storage-state";
 
 export default function Greeting() {
-  const [user, setUser] = useLocalStorageState("user", true);
-  const location = useLocation();
-  const { userdata } = location.state || {};
+  
+  const [user ,setuser] = useLocalStorageState("user", false);
 
-  console.log(user, "-------user---");
- 
-  const currentUser = userdata ? JSON.parse(userdata) : user;
-console.log(currentUser)
+  console.log(user, "-------user----");
+
   return (
     <div className="container-fluid">
       <div className="row flex-nowrap">
@@ -26,12 +22,14 @@ console.log(currentUser)
             >
               <span className="fs-5 d-none d-sm-inline">Menu</span>
             </a>
+       
             <Navigationlink />
-            <Username user={currentUser} />
+         
+            <Username user={user} />
           </div>
         </div>
         <div className="col py-3">
-          <UserDetails user={currentUser} />
+          <UserDetails user={user} />
         </div>
       </div>
     </div>

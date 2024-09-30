@@ -110,11 +110,11 @@ export default function FromCard() {
         selectday,
         gender,
       };
-      const jsonString = JSON.stringify(userData);
-      console.log("-----stringg-----", jsonString);
+     
+      console.log("-----stringg-----",userData);
       setIsLogin(true);
-      setUser(true);
-      navigate("/", { state: { userData: jsonString } });
+      setUser(userData);
+      navigate("/");
     }
   };
 

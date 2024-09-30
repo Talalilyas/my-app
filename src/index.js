@@ -30,7 +30,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {!isLogin && (
+        {isLogin === undefined && (
           <Route path="/" element={<Layout />}>
             <Route
               path="NewHeader"
@@ -39,7 +39,7 @@ export default function App() {
           </Route>
         )}
 
-        {isLogin && (
+        {isLogin === true && (
           <Route path="/" element={<LayoutTwow />}>
             <Route path="/" element={<Greeting />} />
           </Route>
