@@ -1,7 +1,5 @@
 export default function Gender(props) {
-  console.log("-----props--------");
-  console.log(props);
-  console.log("-----props--------");
+
 
   const onChange = (event) => {
     const valuess = event.target.value;
