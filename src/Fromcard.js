@@ -1,7 +1,7 @@
 import Fristname from "./Firstname";
 import Gender from "./Gender";
 import SelectDropdown from "./SelectDropdown";
-import { useState } from "react";
+import { useState  , createContext} from "react";
 import Button from "./Button";
 import validator from "email-validator";
 import { useNavigate } from "react-router-dom";
@@ -92,6 +92,7 @@ export default function FromCard() {
 
     if (
       firstName !== "" &&
+      
       lastName !== "" &&
       password !== "" &&
       validator.validate(email) &&
@@ -110,14 +111,12 @@ export default function FromCard() {
         selectday,
         gender,
       };
-     
       console.log("-----stringg-----",userData);
       setIsLogin(true);
       setUser(userData);
       navigate("/");
     }
-  };
-
+   };
   const monthOptions = [
     { value: "1", label: "January" },
     { value: "2", label: "February" },
@@ -305,7 +304,7 @@ export default function FromCard() {
               >
                 <div className="card">
                   <div className="card-body" style={{ maxHeight: "45px" }}>
-                    <Gender
+                    <Gender 
                       name="gender"
                       value="Female"
                       label="Female"
