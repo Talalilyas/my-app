@@ -89,7 +89,8 @@ export default function FromCard() {
       setGenderError(true);
     }
     console.log(firstName);
-
+    console.log(isLogin);
+    console.log(user);
     if (
       firstName !== "" &&
       lastName !== "" &&
@@ -110,14 +111,21 @@ export default function FromCard() {
         selectday,
         gender,
       };
+<<<<<<< Updated upstream
      
       console.log("-----stringg-----",userData);
+=======
+      console.log("-----stringg-----", userData);
+>>>>>>> Stashed changes
       setIsLogin(true);
       setUser(userData);
       navigate("/");
     }
   };
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
   const monthOptions = [
     { value: "1", label: "January" },
     { value: "2", label: "February" },

@@ -1,13 +1,10 @@
- import { useLocation  } from "react-router-dom";
-const Username = ({user}) => {
-  const Location1   = useLocation();
+import { useContext } from "react";
 
+import UserContext from "./Usercontext";
 
-    const {
-        firstName,
-        lastName,
-       
-} = Location1.state || {};
+const Username = () => {
+  const user = useContext(UserContext);
+
   return (
     <div className="dropdown pb-4">
       <a
@@ -23,7 +20,7 @@ const Username = ({user}) => {
           width="30"
           height="30"
           className="rounded-circle"
-        ></img>
+        />
         <span className="d-none d-sm-inline mx-1">
           {user.firstName} {user.lastName}
         </span>
@@ -54,4 +51,5 @@ const Username = ({user}) => {
     </div>
   );
 };
+
 export default Username;
