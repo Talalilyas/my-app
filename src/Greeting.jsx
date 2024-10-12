@@ -4,11 +4,11 @@ import Navigationlink from "./Navigationlink";
 import UserDetails from "./UserDetails";
 import Username from "./Username";
 import useLocalStorageState from "use-local-storage-state";
-import UserContext from "./Userontext";
+import UserContext from './UserContext';
+
 
 export default function Greeting() {
-  const [user, setuser] = useLocalStorageState("user", { name: "", isLoggedIn: false });
-
+  const [user, setuser] = useLocalStorageState("user", false);
 
   console.log(user, "-------user----");
 
@@ -24,7 +24,7 @@ export default function Greeting() {
               >
                 <span className="fs-5 d-none d-sm-inline">Menu</span>
               </a>
-             <Navigationlink/>
+              <Navigationlink />
               <Username />
             </div>
           </div>
