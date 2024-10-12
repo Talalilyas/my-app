@@ -4,7 +4,7 @@ import Navigationlink from "./Navigationlink";
 import UserDetails from "./UserDetails";
 import Username from "./Username";
 import useLocalStorageState from "use-local-storage-state";
-import UserContext from "./Usercontext";
+import UserContext from "./Userontext";
 
 export default function Greeting() {
   const [user, setuser] = useLocalStorageState("user", { name: "", isLoggedIn: false });
