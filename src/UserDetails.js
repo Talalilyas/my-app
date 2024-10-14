@@ -7,7 +7,6 @@ export default function UserDetails() {
   const [useCalculator, handleClick] = useCalculate(3); 
   console.log(useCalculator)
 
-<<<<<<< HEAD
   return (
     <div>
       {user ? (
@@ -25,21 +24,8 @@ export default function UserDetails() {
       ) : (
         <p></p>
       )}
-=======
-
-import UserContext from "./UserContext"; 
-export default function UserDetails() {
-  const user = useContext(UserContext);
-
-const UserDetails = () => {
-  const [message, setMessage] = useState('');
->>>>>>> main
 
     </div>
 
-<<<<<<< HEAD
   );
 }
-=======
-
->>>>>>> main
