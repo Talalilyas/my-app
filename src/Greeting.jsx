@@ -6,7 +6,6 @@ import Username from "./Username";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./UserContext";
 
-
 export default function Greeting() {
   const [user, setuser] = useLocalStorageState("user", false);
 
