@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import useCalculate from "./useCalculate";
-import UserContext from "./UserContext"; 
+import UserContext from "./userContext"; 
 import useLocalStorageState from "use-local-storage-state";
 export default function UserDetails() {
   const user = useContext(UserContext);
