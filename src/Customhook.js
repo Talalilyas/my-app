@@ -4,7 +4,6 @@
 
 // const Customhook = () => {
 //   const [useCalculator, handleClick] = useCalculate(3); // Using the custom hook
-
 //   return (
 //     <div style={{ textAlign: 'center', marginTop: '50px' }}>
 //       <h1>Value: {useCalculator}</h1> {/* Rendering the number */}
