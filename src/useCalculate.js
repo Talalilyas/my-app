@@ -1,5 +1,4 @@
-// useCalculate.js - Custom Hook
-import { useState } from 'react';
+import { useState } from "react";
 
 const useCalculate = (val) => {
   const [value, setValue] = useState(val);
