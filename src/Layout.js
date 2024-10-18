@@ -8,11 +8,7 @@ const Layout = () => {
 
   return (
     <>
-      <nav>
-        <ul>
-          <NewHeader />
-        </ul>
-      </nav>
+      <NewHeader />
 
       {location.pathname === "/" ? (
         <div>

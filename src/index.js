@@ -14,7 +14,7 @@ import useLocalStorageState from "use-local-storage-state";
 
 const LayoutTwow = () => {
   return (
-    <div className="cols-lg-4">
+    <div >
       <Outlet />
     </div>
   );

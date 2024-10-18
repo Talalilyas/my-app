@@ -4,9 +4,9 @@ export default function NewHeader() {
   const location = useLocation();
 
   return (
-    <div className="container">
-      <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-center ">
-        <div className="col-12 col-md-auto justify-content-center">
+   
+      
+        <div >
           {location.pathname === "/" && (
             <div className="col-md-12 t">
               <Link to="/NewHeader">
@@ -17,8 +17,8 @@ export default function NewHeader() {
             </div>
           )}
         </div>
-      </div>
-    </div>
+     
+  
   );
 }
 
