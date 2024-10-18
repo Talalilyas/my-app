@@ -41,7 +41,7 @@ export default function App() {
           </Route>
         )}
 
-        {/* Routes for logged-in users */}
+
         {isLogin && (
           <Route path="/" element={<LayoutTwow />}>
             <Route path="/" element={<Greeting />} />

@@ -1,12 +1,9 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import Navigationlink from "./Navigationlink";
 import UserDetails from "./UserDetails";
 import Username from "./Username";
 import useLocalStorageState from "use-local-storage-state";
 
-import UserContext from './userContext';
-
+import UserContext from "./userContext";
 
 export default function Greeting() {
   const [user, setuser] = useLocalStorageState("user", false);
@@ -14,7 +11,7 @@ export default function Greeting() {
   console.log(user, "-------user----");
 
   return (
-      <UserContext.Provider value={user}>
+    <UserContext.Provider value={user}>
       <div className="container-fluid">
         <div className="row flex-nowrap">
           <div className="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
@@ -34,6 +31,6 @@ export default function Greeting() {
           </div>
         </div>
       </div>
-      </UserContext.Provider>
+    </UserContext.Provider>
   );
 }
