@@ -35,8 +35,7 @@ export default function SignupForm() {
             </Form.Item>
             <Form.Item label="Gender">
               <Radio.Group
-                style={{ display: "flex", justifyContent: "space-between" }}
-              >
+                style={{ display: "flex", justifyContent: "space-between" }} >
                 <Radio value="Female">Female</Radio>
                 <Radio value="Male">Male</Radio>
                 <Radio value="Custom">Custom</Radio>

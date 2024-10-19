@@ -14,7 +14,7 @@ import useLocalStorageState from "use-local-storage-state";
 
 const LayoutTwow = () => {
   return (
-    <div >
+    <div className="cols-lg-4">
       <Outlet />
     </div>
   );
@@ -41,7 +41,7 @@ export default function App() {
           </Route>
         )}
 
-
+        {/* Routes for logged-in users */}
         {isLogin && (
           <Route path="/" element={<LayoutTwow />}>
             <Route path="/" element={<Greeting />} />
