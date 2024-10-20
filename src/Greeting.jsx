@@ -7,13 +7,13 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
-import { useContext } from "react";
 import UserContext from "./userContext";
 
 const { Header, Sider, Content } = Layout;
 
 export default function Greeting() {
-  const [user, setuser] = useLocalStorageState("user", false);
+  // Fetch user from localStorageState with a fallback to null
+  const [user, setUser] = useLocalStorageState("user", null);
 
   console.log(user, "-------user----");
 
@@ -76,6 +76,7 @@ export default function Greeting() {
               Customers
             </Menu.Item>
           </Menu>
+
           {/* Username and Dropdown */}
           <Dropdown overlay={menu} placement="bottomLeft">
             <div className="d-flex align-items-center text-white" style={{ padding: "10px" }}>
@@ -83,12 +84,18 @@ export default function Greeting() {
                 style={{ backgroundColor: "#87d068" }}
                 icon={<UserOutlined />}
               />
-              <span className="d-none d-sm-inline mx-1">
-                {user.firstName} {user.lastName}
-              </span>
+              {/* Conditional rendering of user info */}
+              {user ? (
+                <span className="d-none d-sm-inline mx-1">
+                  {user.firstName} {user.lastName}
+                </span>
+              ) : (
+                <span className="d-none d-sm-inline mx-1">Guest</span>
+              )}
             </div>
           </Dropdown>
         </Sider>
+
         {/* Main Content */}
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
