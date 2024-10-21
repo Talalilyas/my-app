@@ -4,7 +4,7 @@ import {
   Routes,
   Route,
   Outlet,
-  Navigate, // Import Navigate to handle redirection
+  Navigate, 
 } from "react-router-dom";
 import Layout from "./Layout";
 import FromCard from "./Fromcard";
