@@ -12,7 +12,7 @@ import UserContext from "./userContext";
 const { Header, Sider, Content } = Layout;
 
 export default function Greeting() {
-  // Fetch user from localStorageState with a fallback to null
+ 
   const [user, setUser] = useLocalStorageState("user", null);
 
   console.log(user, "-------user----");
@@ -38,7 +38,6 @@ export default function Greeting() {
   return (
     <UserContext.Provider value={user}>
       <Layout style={{ minHeight: "100vh" }}>
-        {/* Sidebar */}
         <Sider collapsible>
           <div className="logo" style={{ padding: "10px", color: "white" }}>
             Menu
@@ -73,7 +72,6 @@ export default function Greeting() {
             </Menu.Item>
           </Menu>
 
-          {/* Username and Dropdown */}
           <Dropdown overlay={menu} placement="bottomLeft">
             <div
               className="d-flex align-items-center text-white"
@@ -83,7 +81,7 @@ export default function Greeting() {
                 style={{ backgroundColor: "#87d068" }}
                 icon={<UserOutlined />}
               />
-              {/* Conditional rendering of user info */}
+
               {user ? (
                 <span className="d-none d-sm-inline mx-1">
                   {user.firstName} {user.lastName}
@@ -95,7 +93,6 @@ export default function Greeting() {
           </Dropdown>
         </Sider>
 
-        {/* Main Content */}
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: "16px" }}>
