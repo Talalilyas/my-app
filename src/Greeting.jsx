@@ -58,11 +58,7 @@ export default function Greeting() {
             <Menu.Item key="5" icon={<TableOutlined />}>
               Orders
             </Menu.Item>
-            <Menu.SubMenu
-              key="6"
-              icon={<AppstoreOutlined />}
-              title="Bootstrap"
-            >
+            <Menu.SubMenu key="6" icon={<AppstoreOutlined />} title="Bootstrap">
               <Menu.Item key="7">Item 1</Menu.Item>
               <Menu.Item key="8">Item 2</Menu.Item>
             </Menu.SubMenu>
@@ -79,7 +75,10 @@ export default function Greeting() {
 
           {/* Username and Dropdown */}
           <Dropdown overlay={menu} placement="bottomLeft">
-            <div className="d-flex align-items-center text-white" style={{ padding: "10px" }}>
+            <div
+              className="d-flex align-items-center text-white"
+              style={{ padding: "10px" }}
+            >
               <Avatar
                 style={{ backgroundColor: "#87d068" }}
                 icon={<UserOutlined />}
@@ -100,7 +99,14 @@ export default function Greeting() {
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: "16px" }}>
-            <div>User details and other content can go here.</div>
+            <h4>Email</h4>
+            <p>{user.email}</p>
+            <h3>password</h3>
+            <p>{user.password}</p>
+            <h3>Date of birth</h3>
+            <p>{user.birthDate}</p>
+            <h3>Gender</h3>
+            <p>{user.gender}</p>
           </Content>
         </Layout>
       </Layout>
