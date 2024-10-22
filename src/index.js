@@ -4,7 +4,7 @@ import {
   Routes,
   Route,
   Outlet,
-  Navigate, // Import Navigate to handle redirection
+  Navigate,
 } from "react-router-dom";
 import Layout from "./Layout";
 import FromCard from "./Fromcard";
@@ -20,6 +20,9 @@ const LayoutTwow = () => {
   );
 };
 
+
+
+
 export default function App() {
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
 
@@ -34,7 +37,6 @@ export default function App() {
               path="NewHeader"
               element={<FromCard setIsLogin={setIsLogin} />}
             />
-
             <Route path="/" element={<Navigate to="/NewHeader" />} />
           </Route>
         )}
@@ -44,6 +46,9 @@ export default function App() {
             <Route path="/" element={<Greeting />} />
           </Route>
         )}
+
+        {/* New table route */}
+      
 
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

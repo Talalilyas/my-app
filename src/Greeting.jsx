@@ -1,4 +1,4 @@
-import { Layout, Menu, Avatar, Dropdown } from "antd";
+import { Layout, Menu, Avatar, Dropdown, Table, Button } from "antd";
 import {
   DashboardOutlined,
   HomeOutlined,
@@ -12,10 +12,54 @@ import UserContext from "./userContext";
 const { Header, Sider, Content } = Layout;
 
 export default function Greeting() {
- 
-  const [user, setUser] = useLocalStorageState("user", null);
+  const [user, setUser] = useLocalStorageState("user", null); // Set default to null
+  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
+  
+  const handleSignOut = () => {
+    setUser(null); // Set user to null to clear it from localStorage
+    setIsLogin(false);
+  };
 
-  console.log(user, "-------user----");
+  const ordersData = [
+    {
+      key: "1",
+      orderNumber: "001",
+      customer: "John Doe",
+      date: "2024-10-10",
+      status: "Completed",
+    },
+    {
+      key: "2",
+      orderNumber: "002",
+      customer: "Jane Smith",
+      date: "2024-10-12",
+      status: "Pending",
+    },
+    // More order data here
+  ];
+
+  const ordersColumns = [
+    {
+      title: "Order Number",
+      dataIndex: "orderNumber",
+      key: "orderNumber",
+    },
+    {
+      title: "Customer",
+      dataIndex: "customer",
+      key: "customer",
+    },
+    {
+      title: "Date",
+      dataIndex: "date",
+      key: "date",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+  ];
 
   const menu = (
     <Menu>
@@ -30,7 +74,9 @@ export default function Greeting() {
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item>
-        <a>Sign out</a>
+        <Button type="link" onClick={handleSignOut}>
+          Sign out
+        </Button>
       </Menu.Item>
     </Menu>
   );
@@ -81,7 +127,6 @@ export default function Greeting() {
                 style={{ backgroundColor: "#87d068" }}
                 icon={<UserOutlined />}
               />
-
               {user ? (
                 <span className="d-none d-sm-inline mx-1">
                   {user.firstName} {user.lastName}
@@ -95,16 +140,24 @@ export default function Greeting() {
 
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
-          <Content style={{ margin: "16px" }}>
-            <h4>Email</h4>
-            <p>{user.email}</p>
-            <h3>password</h3>
-            <p>{user.password}</p>
-            <h3>Date of birth</h3>
-            <p>{user.birthDate}</p>
-            <h3>Gender</h3>
-            <p>{user.gender}</p>
-          </Content>
+
+          {user ? (
+            <>
+              <h4>Email</h4>
+              <p>{user.email}</p>
+              <h3>Password</h3>
+              <p>{user.password}</p>
+              <h3>Date of Birth</h3>
+              <p>{user.birthDate}</p>
+              <h3>Gender</h3>
+              <p>{user.gender}</p>
+            </>
+          ) : (
+            <p>No user data available.</p>
+          )}
+
+          <h3>Orders</h3>
+          <Table dataSource={ordersData} columns={ordersColumns} />
         </Layout>
       </Layout>
     </UserContext.Provider>
