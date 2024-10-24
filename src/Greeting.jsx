@@ -17,6 +17,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
+import { useNavigate } from "react-router-dom";
 import UserContext from "./userContext";
 import { useState } from "react";
 
@@ -24,11 +25,13 @@ const { Header, Sider, Content } = Layout;
 
 export default function Greeting() {
   const [user, setUser] = useLocalStorageState("user", null);
-  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
+  const [isLogin, setIsLogin] = useLocalStorageState("isLogin",false);
   const [selectedKey, setSelectedKey] = useState("1");
+  const navigate = useNavigate();
   const handleSignOut = () => {
-    setUser(null); // Clear the user data
-    setIsLogin(false); // Set the login state to false
+    setUser(null); 
+    setIsLogin(false); 
+    navigate("/NewHeader");
   };
 
   const menu = (

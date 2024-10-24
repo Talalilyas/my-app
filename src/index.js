@@ -1,3 +1,4 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
 import {
   BrowserRouter,
@@ -9,8 +10,8 @@ import {
 import Layout from "./Layout";
 import FromCard from "./Fromcard";
 import Greeting from "./Greeting";
-import React from "react";
 import useLocalStorageState from "use-local-storage-state";
+import UserContext from "./userContext";
 
 const LayoutTwow = () => {
   return (
@@ -20,39 +21,37 @@ const LayoutTwow = () => {
   );
 };
 
-
-
-
 export default function App() {
+  const [user, setUser] = useLocalStorageState("user", null);
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
 
-  console.log("isLogin status:", isLogin);
-
   return (
-    <BrowserRouter>
-      <Routes>
-        {!isLogin && (
-          <Route path="/" element={<Layout />}>
-            <Route
-              path="NewHeader"
-              element={<FromCard setIsLogin={setIsLogin} />}
-            />
-            <Route path="/" element={<Navigate to="/NewHeader" />} />
-          </Route>
-        )}
+    <UserContext.Provider value={user}>
+      <BrowserRouter>
+        <Routes>
+          {!isLogin && (
+            <Route path="/" element={<Layout />}>
+              <Route
+                path="NewHeader"
+                element={<FromCard setIsLogin={setIsLogin} setUser={setUser} />}
+              />
+              <Route path="/" element={<Navigate to="/NewHeader" />} />
+            </Route>
+          )}
 
-        {isLogin && (
-          <Route path="/" element={<LayoutTwow />}>
-            <Route path="/" element={<Greeting />} />
-          </Route>
-        )}
+          {isLogin && (
+            <Route path="/" element={<LayoutTwow />}>
+              <Route path="/" element={<Greeting />} />
+            </Route>
+          )}
 
-        {/* New table route */}
-      
-
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
+          <Route
+            path="*"
+            element={<Navigate to={isLogin ? "/" : "/NewHeader"} />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </UserContext.Provider>
   );
 }
 
