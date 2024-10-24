@@ -1,4 +1,4 @@
-import { Layout, Menu, Avatar, Dropdown, Table, Button } from "antd";
+import { Layout, Menu, Avatar, Dropdown, Button, Table } from "antd";
 import {
   DashboardOutlined,
   HomeOutlined,
@@ -8,58 +8,19 @@ import {
 } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./userContext";
+import { useState } from "react";
 
 const { Header, Sider, Content } = Layout;
 
 export default function Greeting() {
-  const [user, setUser] = useLocalStorageState("user", null); // Set default to null
+  const [user, setUser] = useLocalStorageState("user", null);
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
-  
+  const [selectedKey, setSelectedKey] = useState("1"); // Track selected menu item
+
   const handleSignOut = () => {
-    setUser(null); // Set user to null to clear it from localStorage
-    setIsLogin(false);
+    setUser(null); // Clear the user data
+    setIsLogin(false); // Set the login state to false
   };
-
-  const ordersData = [
-    {
-      key: "1",
-      orderNumber: "001",
-      customer: "John Doe",
-      date: "2024-10-10",
-      status: "Completed",
-    },
-    {
-      key: "2",
-      orderNumber: "002",
-      customer: "Jane Smith",
-      date: "2024-10-12",
-      status: "Pending",
-    },
-    // More order data here
-  ];
-
-  const ordersColumns = [
-    {
-      title: "Order Number",
-      dataIndex: "orderNumber",
-      key: "orderNumber",
-    },
-    {
-      title: "Customer",
-      dataIndex: "customer",
-      key: "customer",
-    },
-    {
-      title: "Date",
-      dataIndex: "date",
-      key: "date",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
-    },
-  ];
 
   const menu = (
     <Menu>
@@ -81,6 +42,48 @@ export default function Greeting() {
     </Menu>
   );
 
+  // Define user data for the table
+  const userData = [
+    {
+      key: "1",
+      attribute: "First Name",
+      value: user?.firstName || "N/A",
+    },
+    {
+      key: "2",
+      attribute: "Last Name",
+      value: user?.lastName || "N/A",
+    },
+    {
+      key: "3",
+      attribute: "Email",
+      value: user?.email || "N/A",
+    },
+    {
+      key: "4",
+      attribute: "Date of Birth",
+      value: user?.birthDate || "N/A",
+    },
+    {
+      key: "5",
+      attribute: "Gender",
+      value: user?.gender || "N/A",
+    },
+  ];
+
+  const userColumns = [
+    {
+      title: "User Data",
+      dataIndex: "attribute",
+      key: "attribute",
+    },
+    {
+      title: "Value",
+      dataIndex: "value",
+      key: "value",
+    },
+  ];
+
   return (
     <UserContext.Provider value={user}>
       <Layout style={{ minHeight: "100vh" }}>
@@ -88,7 +91,12 @@ export default function Greeting() {
           <div className="logo" style={{ padding: "10px", color: "white" }}>
             Menu
           </div>
-          <Menu theme="dark" mode="inline" defaultSelectedKeys={["1"]}>
+          <Menu
+            theme="dark"
+            mode="inline"
+            defaultSelectedKeys={["1"]}
+            onClick={(e) => setSelectedKey(e.key)}
+          >
             <Menu.Item key="1" icon={<HomeOutlined />}>
               Home
             </Menu.Item>
@@ -104,8 +112,7 @@ export default function Greeting() {
               Orders
             </Menu.Item>
             <Menu.SubMenu key="6" icon={<AppstoreOutlined />} title="Bootstrap">
-              <Menu.Item key="7">Item 1</Menu.Item>
-              <Menu.Item key="8">Item 2</Menu.Item>
+              <Menu.Item key="7">User Data</Menu.Item>
             </Menu.SubMenu>
             <Menu.SubMenu key="9" icon={<AppstoreOutlined />} title="Products">
               <Menu.Item key="10">Product 1</Menu.Item>
@@ -140,24 +147,20 @@ export default function Greeting() {
 
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
-
-          {user ? (
-            <>
-              <h4>Email</h4>
-              <p>{user.email}</p>
-              <h3>Password</h3>
-              <p>{user.password}</p>
-              <h3>Date of Birth</h3>
-              <p>{user.birthDate}</p>
-              <h3>Gender</h3>
-              <p>{user.gender}</p>
-            </>
-          ) : (
-            <p>No user data available.</p>
-          )}
-
-          <h3>Orders</h3>
-          <Table dataSource={ordersData} columns={ordersColumns} />
+          <Content style={{ margin: "16px" }}>
+            {selectedKey === "7" ? (
+              <div>
+                <h2>User Data</h2>
+                <Table
+                  dataSource={userData}
+                  columns={userColumns}
+                  pagination={false}
+                />
+              </div>
+            ) : (
+              <div></div>
+            )}
+          </Content>
         </Layout>
       </Layout>
     </UserContext.Provider>
