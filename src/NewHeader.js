@@ -14,12 +14,7 @@ export default function NewHeader() {
               <Button type="primary">Sign in</Button>
             </Flex>
           </Link>
-          <Link to="/table">
-            <Flex gap="small" wrap>
-              {/* Second button with different style or functionality */}
-              <Button type="default">Go to Table</Button>
-            </Flex>
-          </Link>
+         
         </div>
       )}
     </div>
