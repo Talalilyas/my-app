@@ -1,8 +1,4 @@
-<<<<<<< Updated upstream
-import { Layout, Menu, Avatar, Dropdown } from "antd";
-=======
 import { Layout, Menu, Avatar, Dropdown, Button, Table } from "antd";
->>>>>>> Stashed changes
 import {
   DashboardOutlined,
   HomeOutlined,
@@ -17,13 +13,6 @@ import { useState } from "react";
 const { Header, Sider, Content } = Layout;
 
 export default function Greeting() {
-<<<<<<< Updated upstream
- 
-  const [user, setUser] = useLocalStorageState("user", null);
-
-  console.log(user, "-------user----");
-
-=======
   const [user, setUser] = useLocalStorageState("user", null);
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const [selectedKey, setSelectedKey] = useState("1"); // Track selected menu item
@@ -33,7 +22,6 @@ export default function Greeting() {
     setIsLogin(false);
   };
 
->>>>>>> Stashed changes
   const menu = (
     <Menu>
       <Menu.Item>
@@ -161,16 +149,6 @@ export default function Greeting() {
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: "16px" }}>
-<<<<<<< Updated upstream
-            <h4>Email</h4>
-            <p>{user.email}</p>
-            <h3>password</h3>
-            <p>{user.password}</p>
-            <h3>Date of birth</h3>
-            <p>{user.birthDate}</p>
-            <h3>Gender</h3>
-            <p>{user.gender}</p>
-=======
            
             {selectedKey === "7" ? (
               <div>
@@ -186,7 +164,6 @@ export default function Greeting() {
                
               </div>
             )}
->>>>>>> Stashed changes
           </Content>
         </Layout>
       </Layout>

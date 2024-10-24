@@ -29,20 +29,6 @@ export default function App() {
   console.log("isLogin status:", isLogin);
 
   return (
-<<<<<<< Updated upstream
-    <BrowserRouter>
-      <Routes>
-        {!isLogin && (
-          <Route path="/" element={<Layout />}>
-            <Route
-              path="NewHeader"
-              element={<FromCard setIsLogin={setIsLogin} />}
-            />
-
-            <Route path="/" element={<Navigate to="/NewHeader" />} />
-          </Route>
-        )}
-=======
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Routes>
@@ -56,7 +42,6 @@ export default function App() {
               <Route path="/" element={<Navigate to="/NewHeader" />} />
             </Route>
           )}
->>>>>>> Stashed changes
 
           {/* Route for logged-in users */}
           {isLogin && (
@@ -66,17 +51,11 @@ export default function App() {
             </Route>
           )}
 
-<<<<<<< Updated upstream
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
-=======
           {/* Default route if no match is found */}
           <Route path="*" element={<Navigate to={isLogin ? "/" : "/NewHeader"} />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
->>>>>>> Stashed changes
   );
 }
 
