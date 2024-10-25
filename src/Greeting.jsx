@@ -1,14 +1,6 @@
-import {
-  Layout,
-  Menu,
-  Avatar,
-  Dropdown,
-  Button,
-  Table,
-  Col,
-  Divider,
-  Row,
-} from "antd";
+
+import React, { useState } from "react";
+import { Layout, Menu, Avatar, Dropdown, Button, Col, Row } from "antd";
 import {
   DashboardOutlined,
   HomeOutlined,
@@ -19,21 +11,18 @@ import {
 import useLocalStorageState from "use-local-storage-state";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./userContext";
-import { useState } from "react";
-
+import DataTable from "./ DataTable";
 const { Header, Sider, Content } = Layout;
-
 export default function Greeting() {
   const [user, setUser] = useLocalStorageState("user", null);
-  const [isLogin, setIsLogin] = useLocalStorageState("isLogin",false);
+  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const [selectedKey, setSelectedKey] = useState("1");
   const navigate = useNavigate();
   const handleSignOut = () => {
-    setUser(null); 
-    setIsLogin(false); 
+    setUser(null);
+    setIsLogin(false);
     navigate("/NewHeader");
   };
-
   const menu = (
     <Menu>
       <Menu.Item>
@@ -53,81 +42,28 @@ export default function Greeting() {
       </Menu.Item>
     </Menu>
   );
-
-  // Define user data for the first table
   const userData = [
-    {
-      key: "1",
-      attribute: "First Name",
-      data: user?.firstName || "N/A",
-    },
-    {
-      key: "2",
-      attribute: "Last Name",
-      data: user?.lastName || "N/A",
-    },
-    {
-      key: "3",
-      attribute: "Email",
-      data: user?.email || "N/A",
-    },
-    {
-      key: "4",
-      attribute: "Date of Birth",
-      data: user?.birthDate || "N/A",
-    },
-    {
-      key: "5",
-      attribute: "Gender",
-      data: user?.gender || "N/A",
-    },
+    { key: "1", attribute: "First Name", data: user?.firstName || "N/A" },
+    { key: "2", attribute: "Last Name", data: user?.lastName || "N/A" },
+    { key: "3", attribute: "Email", data: user?.email || "N/A" },
+    { key: "4", attribute: "Date of Birth", data: user?.birthDate || "N/A" },
+    { key: "5", attribute: "Gender", data: user?.gender || "N/A" },
   ];
 
   const userColumns = [
-    {
-      title: "User Data",
-      dataIndex: "attribute",
-      key: "attribute",
-    },
-    {
-      title: "Data",
-      dataIndex: "data",
-      key: "data",
-    },
+    { title: "User Data", dataIndex: "attribute", key: "attribute" },
+    { title: "Data", dataIndex: "data", key: "data" },
   ];
 
-  
   const dataSource = [
-    {
-      key: "1",
-      name: "Mike",
-      age: 32,
-      address: "10 Downing Street",
-    },
-    {
-      key: "2",
-      name: "John",
-      age: 42,
-      address: "10 Downing Street",
-    },
+    { key: "1", name: "Mike", age: 32, address: "10 Downing Street" },
+    { key: "2", name: "John", age: 42, address: "10 Downing Street" },
   ];
 
   const columns = [
-    {
-      title: "Name",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "Age",
-      dataIndex: "age",
-      key: "age",
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
-      key: "address",
-    },
+    { title: "Name", dataIndex: "name", key: "name" },
+    { title: "Age", dataIndex: "age", key: "age" },
+    { title: "Address", dataIndex: "address", key: "address" },
   ];
 
   return (
@@ -158,7 +94,6 @@ export default function Greeting() {
               Orders
             </Menu.Item>
             <Menu.SubMenu key="6" icon={<AppstoreOutlined />} title="Bootstrap">
-             
               <Menu.Item key="7">User Data</Menu.Item>
               <Menu.Item key="8">This is a table</Menu.Item>
             </Menu.SubMenu>
@@ -196,40 +131,30 @@ export default function Greeting() {
         <Layout className="site-layout">
           <Header className="site-layout-background" style={{ padding: 0 }} />
           <Content style={{ margin: "16px" }}>
-        
             {selectedKey === "7" ? (
-             <Row justify="start">
-             <Col span={4}></Col>
-             <Col span={12}> <div>
-                <h2>User Data</h2>
-                <Table
-                  dataSource={userData}
-                  columns={userColumns}
-                  pagination={false}
-                />
-              </div></Col>
-
-             <Col span={4}></Col>
-            
-           </Row>
-             
-            ) : selectedKey === "8" ? (
-              <div>
-                
-                <Row justify="start">
+              <Row justify="start">
                 <Col span={4}></Col>
                 <Col span={12}>
-                <h3>Another table</h3>
-                <Table
-                  dataSource={dataSource}
-                  columns={columns}
-                  pagination={false}
-                /></Col>
+                  <DataTable
+                    title="User Data"
+                    dataSource={userData}
+                    columns={userColumns}
+                  />
+                </Col>
                 <Col span={4}></Col>
+              </Row>
+            ) : selectedKey === "8" ? (
+              <Row justify="start">
                 <Col span={4}></Col>
-
-                </Row>
-              </div>
+                <Col span={12}>
+                  <DataTable
+                    title="Another Table"
+                    dataSource={dataSource}
+                    columns={columns}
+                  />
+                </Col>
+                <Col span={4}></Col>
+              </Row>
             ) : (
               <div></div>
             )}
