@@ -18,6 +18,8 @@ import {
 } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./userContext";
+import DataTable from "./ DataTable";
+import {  useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 const { Header, Sider, Content } = Layout;
@@ -26,9 +28,12 @@ export default function Greeting() {
   const [user, setUser] = useLocalStorageState("user", null);
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const [selectedKey, setSelectedKey] = useState("1");
+ const Navigate = useNavigate()
+
   const handleSignOut = () => {
     setUser(null); // Clear the user data
     setIsLogin(false); // Set the login state to false
+    Navigate("./NewHeader")
   };
 
   const menu = (
@@ -199,11 +204,12 @@ export default function Greeting() {
              <Col span={4}></Col>
              <Col span={12}> <div>
                 <h2>User Data</h2>
-                <Table
-                  dataSource={userData}
-                  columns={userColumns}
-                  pagination={false}
-                />
+               
+              <DataTable
+           
+                    dataSource={userData}
+                    columns={userColumns}
+                  />
               </div></Col>
 
              <Col span={4}></Col>
@@ -217,11 +223,11 @@ export default function Greeting() {
                 <Col span={4}></Col>
                 <Col span={12}>
                 <h3>Another table</h3>
-                <Table
-                  dataSource={dataSource}
-                  columns={columns}
-                  pagination={false}
-                /></Col>
+                <DataTable
+       
+                    dataSource={dataSource}
+                    columns={columns}
+                  /></Col>
                 <Col span={4}></Col>
                 <Col span={4}></Col>
 
