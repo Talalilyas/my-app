@@ -7,8 +7,6 @@ const { Header } = Layout;
 
 export default function NewHeader() {
   const location = useLocation();
-
-  // Only show header on the home page "/"
   if (location.pathname !== "/") {
     return null;
   }
@@ -20,8 +18,6 @@ export default function NewHeader() {
           
         </div>
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
-         
-          
           <div style={{ float: "right" }}>
             <Link to="/NewHeader">
               <Button
@@ -32,8 +28,6 @@ export default function NewHeader() {
                 Sign in
               </Button>
             </Link>
-
-            
           </div>
         </Menu>
       </Header>
