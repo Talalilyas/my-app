@@ -133,8 +133,8 @@ export default function Greeting() {
         </Sider>
 
         <Layout className="site-layout">
-          <Header className="site-layout-background" style={{ padding: 0 }} />
-          <Content style={{ margin: "16px" }}>
+          <Header className="site-layout-background"   />
+          <Content >
             {selectedKey === "7" ? (
              <Row justify="start">
              <Col span={4}></Col>
