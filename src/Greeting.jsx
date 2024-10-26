@@ -9,19 +9,23 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
-import { useNavigate } from "react-router-dom";
+
 import UserContext from "./userContext";
 import DataTable from "./ DataTable";
+import { useNavigate } from "react-router-dom";
+
+
 const { Header, Sider, Content } = Layout;
 export default function Greeting() {
   const [user, setUser] = useLocalStorageState("user", null);
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const [selectedKey, setSelectedKey] = useState("1");
-  const navigate = useNavigate();
+ const Navigate = useNavigate()
+
   const handleSignOut = () => {
-    setUser(null);
-    setIsLogin(false);
-    navigate("/NewHeader");
+    setUser(null); // Clear the user data
+    setIsLogin(false); // Set the login state to false
+    Navigate("./NewHeader")
   };
   const menu = (
     <Menu>
@@ -132,27 +136,33 @@ export default function Greeting() {
           <Header className="site-layout-background"   />
           <Content >
             {selectedKey === "7" ? (
-              <Row justify="start">
-                <Col span={4}></Col>
-                <Col span={14}>
-                  <DataTable
-                    title="User Data"
+             <Row justify="start">
+             <Col span={4}></Col>
+             <Col span={12}> <div>
+                <h2>User Data</h2>
+               
+              <DataTable
+           
                     dataSource={userData}
                     columns={userColumns}
                   />
-                </Col>
-                <Col span={4}></Col>
-              </Row>
+              </div></Col>
+
+             <Col span={4}></Col>
+            
+           </Row>
+             
             ) : selectedKey === "8" ? (
               <Row justify="start">
                 <Col span={4}></Col>
                 <Col span={12}>
-                  <DataTable
-                    title="Another Table"
+                <h3>Another table</h3>
+                <DataTable
+       
                     dataSource={dataSource}
                     columns={columns}
-                  />
-                </Col>
+                  /></Col>
+                <Col span={4}></Col>
                 <Col span={4}></Col>
               </Row>
             ) : (
