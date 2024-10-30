@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Layout, Menu, Avatar, Dropdown, Button, Col, Row } from "antd";
 import {
@@ -9,24 +8,24 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
-
 import UserContext from "./userContext";
 import DataTable from "./ DataTable";
 import { useNavigate } from "react-router-dom";
 
-
 const { Header, Sider, Content } = Layout;
+
 export default function Greeting() {
   const [user, setUser] = useLocalStorageState("user", null);
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const [selectedKey, setSelectedKey] = useState("1");
- const Navigate = useNavigate()
+  const Navigate = useNavigate();
 
   const handleSignOut = () => {
-    setUser(null); // Clear the user data
-    setIsLogin(false); // Set the login state to false
-    Navigate("./NewHeader")
+    setUser(null);
+    setIsLogin(false);
+    Navigate("./NewHeader");
   };
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -46,6 +45,7 @@ export default function Greeting() {
       </Menu.Item>
     </Menu>
   );
+
   const userData = [
     { key: "1", attribute: "First Name", data: user?.firstName || "N/A" },
     { key: "2", attribute: "Last Name", data: user?.lastName || "N/A" },
@@ -73,7 +73,7 @@ export default function Greeting() {
   return (
     <UserContext.Provider value={user}>
       <Layout style={{ minHeight: "100vh" }}>
-        <Sider collapsible>
+        <Sider collapsible breakpoint="lg">
           <div className="logo" style={{ padding: "10px", color: "white" }}>
             Menu
           </div>
@@ -133,37 +133,27 @@ export default function Greeting() {
         </Sider>
 
         <Layout className="site-layout">
-          <Header className="site-layout-background"   />
-          <Content >
-            {selectedKey === "7" ? (
-             <Row justify="start">
-             <Col span={4}></Col>
-             <Col span={12}> <div>
-                <h2>User Data</h2>
-               
-              <DataTable
-           
-                    dataSource={userData}
-                    columns={userColumns}
-                  />
-              </div></Col>
-
-             <Col span={4}></Col>
-            
-           </Row>
-             
-            ) : selectedKey === "8" ? (
-              <Row justify="start">
-                <Col span={4}></Col>
-                <Col span={12}>
-                <h3>Another table</h3>
-                <DataTable
-       
-                    dataSource={dataSource}
-                    columns={columns}
-                  /></Col>
-                <Col span={4}></Col>
-                <Col span={4}></Col>
+          <Header className="site-layout-background" />
+          <Content>
+            {selectedKey === "7" || selectedKey === "8" ? (
+              <Row
+                justify="center"
+                align="middle"
+                style={{ padding: "20px 10px", minHeight: "100vh" }}
+              >
+                <Col xs={24} sm={20} md={16} lg={12}>
+                  {selectedKey === "7" ? (
+                    <div>
+                      <h2>User Data</h2>
+                      <DataTable dataSource={userData} columns={userColumns} />
+                    </div>
+                  ) : (
+                    <div>
+                      <h3>Another table</h3>
+                      <DataTable dataSource={dataSource} columns={columns} />
+                    </div>
+                  )}
+                </Col>
               </Row>
             ) : (
               <div></div>
