@@ -28,6 +28,7 @@ export default function FromCard() {
     setIsLogin(true);
     navigate("/");
     console.log("Form Submitted", values);
+    console.log(isLogin)
   };
 
   return (
