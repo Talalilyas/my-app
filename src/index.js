@@ -11,7 +11,7 @@ import Layout from "./Layout";
 import FromCard from "./Fromcard";
 import Greeting from "./Greeting";
 import useLocalStorageState from "use-local-storage-state";
-import UserContext from "./userContext";
+import UserContext from "./UserContext";
 
 const LayoutTwow = () => {
   return (
