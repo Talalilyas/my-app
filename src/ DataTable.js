@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 const DataTable = ({ title, dataSource, columns }) => {
   return (
     <div>
-      <h2>{title}</h2>
+      <h2>{title} this is table</h2>
       <Table dataSource={dataSource} columns={columns} pagination={false} />
     </div>
   );
