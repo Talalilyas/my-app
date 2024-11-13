@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Layout, Menu, Avatar, Dropdown, Button, Col, Row } from "antd";
+
+
 import {
   DashboardOutlined,
   HomeOutlined,
@@ -11,6 +13,7 @@ import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./UserContext";
 import DataTable from "./ DataTable";
 import { useNavigate } from "react-router-dom";
+import { createStyles } from 'antd-style';
 
 const { Header, Sider, Content } = Layout;
 
@@ -18,12 +21,31 @@ export default function Greeting() {
   const [user, setUser] = useLocalStorageState("user", null);
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const [selectedKey, setSelectedKey] = useState("1");
-  const Navigate = useNavigate();
+  const [vehicleData, setVehicleData] = useState([]);
+  const [data ,setdata] =useState([]);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    
+    fetch("https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.Results); 
+        const formattedData = data.Results.map((item) => ({
+          key: item.Mfr_ID.toString(),
+          makeId: item.Mfr_ID,
+          makeName: item.Mfr_CommonName || "N/A", 
+          country: item.Country || "N/A",
+        }));
+        setVehicleData(formattedData);
+      })
+      .catch((error) => console.error("Error fetching vehicle data:", error));
+  }, []);
+  
   const handleSignOut = () => {
     setUser(null);
     setIsLogin(false);
-    Navigate("./NewHeader");
+    navigate("/NewHeader");
   };
 
   const menu = (
@@ -46,32 +68,34 @@ export default function Greeting() {
     </Menu>
   );
 
-  const userData = [
-    { key: "1", attribute: "First Name", data: user?.firstName || "N/A" },
-    { key: "2", attribute: "Last Name", data: user?.lastName || "N/A" },
-    { key: "3", attribute: "Email", data: user?.email || "N/A" },
-    { key: "4", attribute: "Date of Birth", data: user?.birthDate || "N/A" },
-    { key: "5", attribute: "Gender", data: user?.gender || "N/A" },
+  const vehicleColumns = [
+    { title: "Manufacturer ID", dataIndex: "makeId", key: "makeId" },
+    { title: "Common Name", dataIndex: "makeName", key: "makeName" },
+    { title: "Country", dataIndex: "country", key: "country" },
   ];
+  const useStyle = createStyles(({ css, token }) => {
+    const { antCls } = token;
+    
+    return {
+      customTable: css`
+        ${antCls}-table {
+          ${antCls}-table-container {
+            ${antCls}-table-body,
+            ${antCls}-table-content {
+              scrollbar-width: thin;
+              scrollbar-color: #eaeaea transparent;
+              scrollbar-gutter: stable;
+            }
+          }
+        }
+      `,
+    };
+  });
+  const { styles } = useStyle();
+  return ( 
 
-  const userColumns = [
-    { title: "User Data", dataIndex: "attribute", key: "attribute" },
-    { title: "Data", dataIndex: "data", key: "data" },
-  ];
-
-  const dataSource = [
-    { key: "1", name: "Mike", age: 32, address: "10 Downing Street" },
-    { key: "2", name: "John", age: 42, address: "10 Downing Street" },
-  ];
-
-  const columns = [
-    { title: "Name", dataIndex: "name", key: "name" },
-    { title: "Age", dataIndex: "age", key: "age" },
-    { title: "Address", dataIndex: "address", key: "address" },
-  ];
-
-  return (
     <UserContext.Provider value={user}>
+      
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible breakpoint="lg">
           <div className="logo" style={{ padding: "10px", color: "white" }}>
@@ -86,11 +110,7 @@ export default function Greeting() {
             <Menu.Item key="1" icon={<HomeOutlined />}>
               Home
             </Menu.Item>
-            <Menu.SubMenu
-              key="2"
-              icon={<DashboardOutlined />}
-              title="Dashboard"
-            >
+            <Menu.SubMenu key="2" icon={<DashboardOutlined />} title="Dashboard">
               <Menu.Item key="3">Item 1</Menu.Item>
               <Menu.Item key="4">Item 2</Menu.Item>
             </Menu.SubMenu>
@@ -113,14 +133,8 @@ export default function Greeting() {
           </Menu>
 
           <Dropdown overlay={menu} placement="bottomLeft">
-            <div
-              className="d-flex align-items-center text-white"
-              style={{ padding: "10px" }}
-            >
-              <Avatar
-                style={{ backgroundColor: "#87d068" }}
-                icon={<UserOutlined />}
-              />
+            <div className="d-flex align-items-center text-white" style={{ padding: "10px" }}>
+              <Avatar style={{ backgroundColor: "#87d068" }} icon={<UserOutlined />} />
               {user ? (
                 <span className="d-none d-sm-inline mx-1">
                   {user.firstName} {user.lastName}
@@ -136,22 +150,27 @@ export default function Greeting() {
           <Header className="site-layout-background" />
           <Content>
             {selectedKey === "7" || selectedKey === "8" ? (
-              <Row
-                justify="center"
-                align="middle"
-                style={{ padding: "20px 10px", minHeight: "100vh" }}
-              >
+              <Row justify="center" align="middle" style={{ padding: "20px 10px", minHeight: "100vh" }}>
                 <Col xs={24} sm={20} md={16} lg={12}>
-                
                   {selectedKey === "7" ? (
                     <div>
-                      <h2>User Data</h2>
-                      <DataTable dataSource={userData} columns={userColumns} />
+                      <h2>Vehicle Manufacturers</h2>
+                      <DataTable dataSource={vehicleData} columns={vehicleColumns} 
+    
+   
+    className={styles.customTable}
+    
+    pagination={{
+      pageSize: 50,
+    }}
+    scroll={{
+      y: 55 * 5,
+    }}/>
                     </div>
                   ) : (
                     <div>
-                      <h3>Another table</h3>
-                      <DataTable dataSource={dataSource} columns={columns} />
+                      <DataTable dataSources={data} columnse={vehicleColumns} />
+                      
                     </div>
                   )}
                 </Col>
