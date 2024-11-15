@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, Avatar, Dropdown, Button, Col, Row ,Form,Switch} from "antd";
-import {
-  DashboardOutlined,
-  HomeOutlined,
-  TableOutlined,
-  AppstoreOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+import { Layout, Menu, Avatar, Dropdown, Button, Col, Row, Form, Switch } from "antd";
+import { DashboardOutlined, HomeOutlined, TableOutlined, AppstoreOutlined, UserOutlined } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./UserContext";
 import DataTable from "./ DataTable";
 import { useNavigate } from "react-router-dom";
-
 
 const { Header, Sider, Content } = Layout;
 
@@ -21,17 +14,14 @@ export default function Greeting() {
   const [selectedKey, setSelectedKey] = useState("1");
   const [vehicleData, setVehicleData] = useState([]);
   const [loading, setLoading] = useState(true); 
-  const [make ,setmake] =useState([]);
+  const [make, setMake] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true); // Start loading before fetching data
-    fetch(
-      "https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json"
-    )
+    setLoading(true);
+    fetch("https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.Results);
         const formattedData = data.Results.map((item) => ({
           key: item.Mfr_ID.toString(),
           makeId: item.Mfr_ID,
@@ -43,22 +33,20 @@ export default function Greeting() {
       .catch((error) => console.error("Error fetching vehicle data:", error))
       .finally(() => setLoading(false));
   }, []);
+
   useEffect(() => {
     setLoading(true); 
-    fetch(
-      "https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json"
-    )
+    fetch("https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.Results);
-        const Data = data.Results.map((item) => ({
-          key: item.Mfr_ID.toString(),
-          makeId1:item.Make_ID,
+        const makeData = data.Results.map((item) => ({
+          key: item.Make_ID.toString(),
+          makeId1: item.Make_ID,
           makeName: item.Make_Name,
         }));
-        setmake(Data);
+        setMake(makeData);
       })
-      .catch((error) => console.error("Error fetching vehicle data:", error))
+      .catch((error) => console.error("Error fetching makes data:", error))
       .finally(() => setLoading(false));
   }, []);
 
@@ -71,9 +59,18 @@ export default function Greeting() {
   const handleLoadingChange = (enable) => {
     setLoading(enable);
   };
-  const tableProps = {
-    loading,
-  }
+
+  const vehicleColumns = [
+    { title: "Manufacturer ID", dataIndex: "makeId", key: "makeId" },
+    { title: "Common Name", dataIndex: "makeName", key: "makeName" },
+    { title: "Country", dataIndex: "country", key: "country" },
+  ];
+
+  const makeColumns = [
+    { title: "Make ID", dataIndex: "makeId1", key: "makeId1" },
+    { title: "Make Name", dataIndex: "makeName", key: "makeName" },
+  ];
+
   const menu = (
     <Menu>
       <Menu.Item>
@@ -94,43 +91,23 @@ export default function Greeting() {
     </Menu>
   );
 
-  const vehicleColumns = [
-    { title: "Manufacturer ID", dataIndex: "makeId", key: "makeId" },
-    { title: "Common Name", dataIndex: "makeName", key: "makeName" },
-    { title: "Country", dataIndex: "country", key: "country" },
-  ];
-  const data = [
-    { title: "Manufacturer ID", dataIndex: "makeId", key: "makeId" },
-    { title: "Common Name", dataIndex: "makeName", key: "makeName" },
-    { title: "Country", dataIndex: "country", key: "country" },
-  ];
   return (
     <UserContext.Provider value={user}>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible breakpoint="lg">
-          <div className="logo" style={{ padding: "10px", color: "white" }}>
-            Menu
-          </div>
+          <div className="logo" style={{ padding: "10px", color: "white" }}>Menu</div>
           <Menu
             theme="dark"
             mode="inline"
             defaultSelectedKeys={["1"]}
             onClick={(e) => setSelectedKey(e.key)}
           >
-            <Menu.Item key="1" icon={<HomeOutlined />}>
-              Home
-            </Menu.Item>
-            <Menu.SubMenu
-              key="2"
-              icon={<DashboardOutlined />}
-              title="Dashboard"
-            >
+            <Menu.Item key="1" icon={<HomeOutlined />}>Home</Menu.Item>
+            <Menu.SubMenu key="2" icon={<DashboardOutlined />} title="Dashboard">
               <Menu.Item key="3">Item 1</Menu.Item>
               <Menu.Item key="4">Item 2</Menu.Item>
             </Menu.SubMenu>
-            <Menu.Item key="5" icon={<TableOutlined />}>
-              Orders
-            </Menu.Item>
+            <Menu.Item key="5" icon={<TableOutlined />}>Orders</Menu.Item>
             <Menu.SubMenu key="6" icon={<AppstoreOutlined />} title="Bootstrap">
               <Menu.Item key="7">User Data</Menu.Item>
               <Menu.Item key="8">This is a table</Menu.Item>
@@ -141,24 +118,14 @@ export default function Greeting() {
               <Menu.Item key="12">Product 3</Menu.Item>
               <Menu.Item key="13">Product 4</Menu.Item>
             </Menu.SubMenu>
-            <Menu.Item key="14" icon={<UserOutlined />}>
-              Customers
-            </Menu.Item>
+            <Menu.Item key="14" icon={<UserOutlined />}>Customers</Menu.Item>
           </Menu>
 
           <Dropdown overlay={menu} placement="bottomLeft">
-            <div
-              className="d-flex align-items-center text-white"
-              style={{ padding: "10px" }}
-            >
-              <Avatar
-                style={{ backgroundColor: "#87d068" }}
-                icon={<UserOutlined />}
-              />
+            <div className="d-flex align-items-center text-white" style={{ padding: "10px" }}>
+              <Avatar style={{ backgroundColor: "#87d068" }} icon={<UserOutlined />} />
               {user ? (
-                <span className="d-none d-sm-inline mx-1">
-                  {user.firstName} {user.lastName}
-                </span>
+                <span className="d-none d-sm-inline mx-1">{user.firstName} {user.lastName}</span>
               ) : (
                 <span className="d-none d-sm-inline mx-1">Guest</span>
               )}
@@ -170,40 +137,31 @@ export default function Greeting() {
           <Header className="site-layout-background" />
 
           <Content>
-          <Form.Item label="loading">
-          <Switch checked={loading} onChange={handleLoadingChange} />
-        </Form.Item>
+            <Form.Item label="Loading">
+              <Switch checked={loading} onChange={handleLoadingChange} />
+            </Form.Item>
             {selectedKey === "7" || selectedKey === "8" ? (
-              
-              <Row
-                justify="center"
-                align="middle"
-                style={{ padding: "20px 10px", minHeight: "100vh" }}
-              >
-                
+              <Row justify="center" align="middle" style={{ padding: "20px 10px", minHeight: "100vh" }}>
                 <Col xs={24} sm={20} md={16} lg={12}>
                   {selectedKey === "7" ? (
                     <div>
                       <h2>Vehicle Manufacturers</h2>
                       <DataTable
-                       {...tableProps}
                         dataSource={vehicleData}
                         columns={vehicleColumns}
-                        loading={loading} // Pass loading prop
-                       
-                        pagination={{
-                          pageSize: 50,
-                        }}
-                        scroll={{
-                          y: 55 * 5,
-                        }}
+                        loading={loading}
+                        pagination={{ pageSize: 50 }}
+                        scroll={{ y: 895 * 10 }}
                       />
                     </div>
                   ) : (
                     <div>
-                      <DataTable  columnsED={make}
-                      dataSource={data}
-                       />
+                      <h2>Vehicle Makes</h2>
+                      <DataTable
+                        dataSource={make}
+                        columns={makeColumns}
+                        loading={loading}
+                      />
                     </div>
                   )}
                 </Col>
