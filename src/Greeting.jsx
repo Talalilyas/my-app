@@ -1,6 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Menu, Avatar, Dropdown, Button, Col, Row, Form, Switch } from "antd";
-import { DashboardOutlined, HomeOutlined, TableOutlined, AppstoreOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  Layout,
+  Menu,
+  Avatar,
+  Dropdown,
+  Button,
+  Col,
+  Row,
+  
+} from "antd";
+import {
+  DashboardOutlined,
+  HomeOutlined,
+  TableOutlined,
+  AppstoreOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./UserContext";
 import DataTable from "./ DataTable";
@@ -13,13 +28,14 @@ export default function Greeting() {
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const [selectedKey, setSelectedKey] = useState("1");
   const [vehicleData, setVehicleData] = useState([]);
-  const [loading, setLoading] = useState(true); 
+
   const [make, setMake] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    setLoading(true);
-    fetch("https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json")
+    fetch(
+      "https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json"
+    )
       .then((response) => response.json())
       .then((data) => {
         const formattedData = data.Results.map((item) => ({
@@ -30,12 +46,10 @@ export default function Greeting() {
         }));
         setVehicleData(formattedData);
       })
-      .catch((error) => console.error("Error fetching vehicle data:", error))
-      .finally(() => setLoading(false));
+      .catch((error) => console.error("Error fetching vehicle data:", error));
   }, []);
 
   useEffect(() => {
-    setLoading(true); 
     fetch("https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json")
       .then((response) => response.json())
       .then((data) => {
@@ -46,18 +60,13 @@ export default function Greeting() {
         }));
         setMake(makeData);
       })
-      .catch((error) => console.error("Error fetching makes data:", error))
-      .finally(() => setLoading(false));
+      .catch((error) => console.error("Error fetching makes data:", error));
   }, []);
 
   const handleSignOut = () => {
     setUser(null);
     setIsLogin(false);
     navigate("/NewHeader");
-  };
-
-  const handleLoadingChange = (enable) => {
-    setLoading(enable);
   };
 
   const vehicleColumns = [
@@ -70,6 +79,7 @@ export default function Greeting() {
     { title: "ID", dataIndex: "makeId1", key: "makeId1" },
     { title: "Brand ", dataIndex: "makeName", key: "makeName" },
   ];
+  console.log(isLogin)
 
   const menu = (
     <Menu>
@@ -95,19 +105,29 @@ export default function Greeting() {
     <UserContext.Provider value={user}>
       <Layout style={{ minHeight: "100vh" }}>
         <Sider collapsible breakpoint="lg">
-          <div className="logo" style={{ padding: "10px", color: "white" }}>Menu</div>
+          <div className="logo" style={{ padding: "10px", color: "white" }}>
+            Menu
+          </div>
           <Menu
             theme="dark"
             mode="inline"
             defaultSelectedKeys={["1"]}
             onClick={(e) => setSelectedKey(e.key)}
           >
-            <Menu.Item key="1" icon={<HomeOutlined />}>Home</Menu.Item>
-            <Menu.SubMenu key="2" icon={<DashboardOutlined />} title="Dashboard">
+            <Menu.Item key="1" icon={<HomeOutlined />}>
+              Home
+            </Menu.Item>
+            <Menu.SubMenu
+              key="2"
+              icon={<DashboardOutlined />}
+              title="Dashboard"
+            >
               <Menu.Item key="3">Item 1</Menu.Item>
               <Menu.Item key="4">Item 2</Menu.Item>
             </Menu.SubMenu>
-            <Menu.Item key="5" icon={<TableOutlined />}>Orders</Menu.Item>
+            <Menu.Item key="5" icon={<TableOutlined />}>
+              Orders
+            </Menu.Item>
             <Menu.SubMenu key="6" icon={<AppstoreOutlined />} title="Bootstrap">
               <Menu.Item key="7">User Data</Menu.Item>
               <Menu.Item key="8">This is a table</Menu.Item>
@@ -118,14 +138,24 @@ export default function Greeting() {
               <Menu.Item key="12">Product 3</Menu.Item>
               <Menu.Item key="13">Product 4</Menu.Item>
             </Menu.SubMenu>
-            <Menu.Item key="14" icon={<UserOutlined />}>Customers</Menu.Item>
+            <Menu.Item key="14" icon={<UserOutlined />}>
+              Customers
+            </Menu.Item>
           </Menu>
 
           <Dropdown overlay={menu} placement="bottomLeft">
-            <div className="d-flex align-items-center text-white" style={{ padding: "10px" }}>
-              <Avatar style={{ backgroundColor: "#87d068" }} icon={<UserOutlined />} />
+            <div
+              className="d-flex align-items-center text-white"
+              style={{ padding: "10px" }}
+            >
+              <Avatar
+                style={{ backgroundColor: "#87d068" }}
+                icon={<UserOutlined />}
+              />
               {user ? (
-                <span className="d-none d-sm-inline mx-1">{user.firstName} {user.lastName}</span>
+                <span className="d-none d-sm-inline mx-1">
+                  {user.firstName} {user.lastName}
+                </span>
               ) : (
                 <span className="d-none d-sm-inline mx-1">Guest</span>
               )}
@@ -137,11 +167,12 @@ export default function Greeting() {
           <Header className="site-layout-background" />
 
           <Content>
-            <Form.Item label="Loading">
-              <Switch checked={loading} onChange={handleLoadingChange} />
-            </Form.Item>
             {selectedKey === "7" || selectedKey === "8" ? (
-              <Row justify="center" align="middle" style={{ padding: "20px 10px", minHeight: "100vh" }}>
+              <Row
+                justify="center"
+                align="middle"
+                style={{ padding: "20px 10px", minHeight: "100vh" }}
+              >
                 <Col xs={24} sm={20} md={16} lg={12}>
                   {selectedKey === "7" ? (
                     <div>
@@ -149,7 +180,6 @@ export default function Greeting() {
                       <DataTable
                         dataSource={vehicleData}
                         columns={vehicleColumns}
-                        loading={loading}
                         pagination={{ pageSize: 50 }}
                         scroll={{ y: 895 * 10 }}
                       />
@@ -157,11 +187,7 @@ export default function Greeting() {
                   ) : (
                     <div>
                       <h2>Vehicle Makes</h2>
-                      <DataTable
-                        dataSource={make}
-                        columns={makeColumns}
-                        loading={loading}
-                      />
+                      <DataTable dataSource={make} columns={makeColumns} />
                     </div>
                   )}
                 </Col>
