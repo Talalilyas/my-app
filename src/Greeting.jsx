@@ -67,8 +67,8 @@ export default function Greeting() {
   ];
 
   const makeColumns = [
-    { title: "Make ID", dataIndex: "makeId1", key: "makeId1" },
-    { title: "Make Name", dataIndex: "makeName", key: "makeName" },
+    { title: "ID", dataIndex: "makeId1", key: "makeId1" },
+    { title: "Brand ", dataIndex: "makeName", key: "makeName" },
   ];
 
   const menu = (
