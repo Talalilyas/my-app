@@ -4,14 +4,14 @@ import {
   BrowserRouter,
   Routes,
   Route,
-  Outlet,
   Navigate,
+  Outlet,
 } from "react-router-dom";
 import Layout from "./Layout";
 import FromCard from "./Fromcard";
 import Greeting from "./Greeting";
 import useLocalStorageState from "use-local-storage-state";
-import UserContext from "./UserContext";
+import UserContext from "./Usercontext";
 
 const LayoutTwow = () => {
   return (
@@ -32,10 +32,10 @@ export default function App() {
           {!isLogin && (
             <Route path="/" element={<Layout />}>
               <Route
-                path="NewHeader"
+                path="login"
                 element={<FromCard setIsLogin={setIsLogin} setUser={setUser} />}
               />
-              <Route path="/" element={<Navigate to="/NewHeader" />} />
+              <Route path="/" element={<Navigate to="/login" />} />
             </Route>
           )}
 
@@ -45,9 +45,10 @@ export default function App() {
             </Route>
           )}
 
+          {/* Handle all other paths */}
           <Route
             path="*"
-            element={<Navigate to={isLogin ? "/" : "/NewHeader"} />}
+            element={<Navigate to={isLogin ? "/" : "/login"} />}
           />
         </Routes>
       </BrowserRouter>

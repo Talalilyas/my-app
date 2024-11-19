@@ -17,7 +17,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
-import UserContext from "./UserContext";
+import UserContext from "./Usercontext";
 import DataTable from "./ DataTable";
 import { useNavigate } from "react-router-dom";
 
@@ -63,6 +63,20 @@ export default function Greeting() {
       .catch((error) => console.error("Error fetching makes data:", error));
   }, []);
 
+
+  fetch('https://dummyjson.com/user/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      
+      username: 'user.firstname',
+      password: 'emilyspass',
+      expiresInMins: 30, 
+    }),
+  })
+  .then(res => res.json())
+  .then(console.log);
+  
   const handleSignOut = () => {
     setUser(null);
     setIsLogin(false);

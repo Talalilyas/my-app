@@ -1,111 +1,122 @@
-import Fristname from "./Firstname";
+import React, { useState } from "react";
+import { Button, Input, Form, Row, Col, Card, message } from "antd";
 
-import { useState } from "react";
-import Buttonlogin from "./Butoonlogin";
-import validator from "email-validator";
+import { useNavigate } from "react-router-dom";
+
 export default function Login() {
   const [password, setPassword] = useState("");
-  const [Passworderorr, setPasswordErorr] = useState(false);
-  const [email, setEmail] = useState(false);
-  const [emailerorr, setEmailError] = useState("");
+  const [email, setEmail] = useState("");
+  const [form] = Form.useForm();
+  const navigate = useNavigate(); 
 
-  const handleChange = (valuess, name) => {
-    console.log([valuess, name]);
+  const handleChange = (changedValues) => {
+    const { name, value } = changedValues;
+
+    if (name === "email") {
+      setEmail(value);
+    }
 
     if (name === "password") {
-      setPassword(valuess);
-      setPasswordErorr(valuess === "");
-    }
-    if (name === "email") {
-      setEmail(valuess);
-      setEmailError(!validator.validate(valuess));
+      setPassword(value);
     }
   };
-  const handleClick = (event) => {
-    if (password === "") {
-      setPasswordErorr(true);
-    }
 
-    if (!validator.validate(email)) {
-      setEmailError(!validator.validate(email));
-    }
-
-    console.log(password, email);
-  };
-
+ 
+  
+   
+    const handleSubmit = () => {
+      const loginData = {
+        username: "emilys", 
+        password: "emilyspass", 
+        expiresInMins: 30,
+      };
+    
+      console.log("Request Body:", JSON.stringify(loginData)); 
+    
+      fetch("https://dummyjson.com/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
+      })
+        .then(async (res) => {
+          const data = await res.json();
+          console.log("Response Status:", res.status); 
+          console.log("Response Data:", data); 
+          if (!res.ok) throw new Error(data.message || "Invalid credentials");
+          return data;
+        })
+        .then((data) => {
+          message.success("Login successful!");
+          localStorage.setItem("token", data.token);
+          navigate("/greeting"); 
+        })
+        .catch((err) => {
+          console.error("Error:", err.message);
+          message.error(`Error: ${err.message}`);
+        });
+    };
+  
   return (
-    <div class="row">
-      <div class="col-4">
-        
-       
-      </div>
-      <div class="col-5">
-        <div
-          class="card   "
-          style={{ marginTop: "100px", maxHeight: "900px", maxWidth: "410px" }}
+    <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
+      <Col xs={24} sm={18} md={12} lg={8}>
+        <Card
+          title="Login"
+          bordered={false}
+          style={{
+            maxWidth: 400,
+            margin: "auto",
+            borderRadius: 8,
+            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+          }}
         >
-          <div class="card-header bg-white">
-            <h3> Login</h3>
-            <button
-              style={{
-                height: "5px",
-                width: "5px",
-                marginRight: "3px",
-                marginTop: "4px",
-              }}
-              type="button"
-              class="btn-close position-absolute top-0 end-0 "
-              aria-label="Close"
-            ></button>
-            <p class="text-muted fs-6">it's quick and easy</p>
-          </div>
-          <div class="card-body">
-            <div className="col-md-12" style={{ maxHeight: "50px" }}>
-              <Fristname
-                type="text"
-                className="form-control"
-                id="lastName"
-                name="email"
-                placeholder="Email address"
-                value={email}
-                onChange={handleChange}
-              />
-              {emailerorr && (
-                <p className="text-danger" style={{ fontSize: "10px" }}>
-                  please enter you email adress
-                </p>
-              )}
-            </div>
-            <div className="col-md-12" style={{ maxHeight: "100px" }}>
-              <Fristname
-                type="password"
-                className="form-control"
-                id="lastName"
-                name="password"
-                placeholder="Password"
-                value={password}
-                onChange={handleChange}
-              />
-              {Passworderorr && (
-                <p className="text-danger" style={{ fontSize: "10px" }}>
-                  Please enter your password
-                </p>
-              )}
-            </div>
-
-            <div
-              class="d-grid gap-2 col-6 mx-auto"
-              style={{ marginTop: "15px" }}
+          <Form
+            form={form}
+            layout="vertical"
+            onValuesChange={(_, allValues) => handleChange(allValues)}
+            onFinish={handleSubmit}
+          >
+            {/* Email Input */}
+            <Form.Item
+              label="Email Address"
+              name="email"
+              rules={[
+                { required: true, message: "Please enter your email address!" },
+                { type: "email", message: "Please enter a valid email!" },
+              ]}
             >
-              <Buttonlogin onClick={handleClick} />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-3 ">
-        
-        </div>
+              <Input
+                placeholder="Enter your email address"
+                value={email}
+                onChange={(e) =>
+                  handleChange({ name: "email", value: e.target.value })
+                }
+              />
+            </Form.Item>
 
-    </div>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please enter your password!" },
+              ]}
+            >
+              <Input.Password
+                placeholder="Enter your password"
+                value={password}
+                onChange={(e) =>
+                  handleChange({ name: "password", value: e.target.value })
+                }
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <Button type="primary" htmlType="submit" block>
+                Log In
+              </Button>
+            </Form.Item>
+          </Form>
+        </Card>
+      </Col>
+    </Row>
   );
 }
