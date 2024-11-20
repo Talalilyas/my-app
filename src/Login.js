@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Button, Input, Form, Row, Col, Card, message } from "antd";
-
+import useLocalStorageState from "use-local-storage-state";
 import { useNavigate } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
 export default function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [form] = Form.useForm();
-  const navigate = useNavigate(); 
-
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [isLogin, setLogin] = useLocalStorageState("Sginup", false);
   const handleChange = (changedValues) => {
     const { name, value } = changedValues;
 
@@ -21,41 +22,39 @@ export default function Login() {
     }
   };
 
- 
-  
-   
-    const handleSubmit = () => {
-      const loginData = {
-        username: "emilys", 
-        password: "emilyspass", 
-        expiresInMins: 30,
-      };
-    
-      console.log("Request Body:", JSON.stringify(loginData)); 
-    
-      fetch("https://dummyjson.com/user/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(loginData),
-      })
-        .then(async (res) => {
-          const data = await res.json();
-          console.log("Response Status:", res.status); 
-          console.log("Response Data:", data); 
-          if (!res.ok) throw new Error(data.message || "Invalid credentials");
-          return data;
-        })
-        .then((data) => {
-          message.success("Login successful!");
-          localStorage.setItem("token", data.token);
-          navigate("/greeting"); 
-        })
-        .catch((err) => {
-          console.error("Error:", err.message);
-          message.error(`Error: ${err.message}`);
-        });
+  const handleSubmit = () => {
+    setLogin(true);
+    const loginData = {
+      username: "emilys",
+      password: "emilyspass",
+      expiresInMins: 30,
     };
-  
+
+    console.log("Request Body:", JSON.stringify(loginData));
+
+    fetch("https://dummyjson.com/user/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(loginData),
+    })
+      .then(async (res) => {
+        const data = await res.json();
+        console.log("Response Status:", res.status);
+        console.log("Response Data:", data);
+        if (!res.ok) throw new Error(data.message || "Invalid credentials");
+        return data;
+      })
+      .then((data) => {
+        message.success("Login successful!");
+        localStorage.setItem("token", data.token);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error("Error:", err.message);
+        message.error(`Error: ${err.message}`);
+      });
+  };
+
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Col xs={24} sm={18} md={12} lg={8}>
@@ -75,7 +74,6 @@ export default function Login() {
             onValuesChange={(_, allValues) => handleChange(allValues)}
             onFinish={handleSubmit}
           >
-            {/* Email Input */}
             <Form.Item
               label="Email Address"
               name="email"

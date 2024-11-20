@@ -14,8 +14,13 @@ export default function Loginbutton() {
   const handleToggleForm = () => {
     setIsLogin((prev) => !prev);
   };
+  const handleFormSubmit = () =>
+ {
 
-  if (location.pathname !== "/") {
+
+
+ }
+  if (location.pathname !== "/login") {
     return null;
   }
 
@@ -32,7 +37,7 @@ export default function Loginbutton() {
               type="primary"
               icon={<PoweroffOutlined />}
               style={{ marginRight: "10px" }}
-              onClick={() => navigate("/")}
+              onClick={() => navigate("/Login")}
             >
               Home
             </Button>
