@@ -25,7 +25,7 @@ const { Header, Sider, Content } = Layout;
 
 export default function Greeting() {
   const [user, setUser] = useLocalStorageState("user", null);
-  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
+  const [isLogin, setIsLogin] = useLocalStorageState("Sginup", false);
   const [selectedKey, setSelectedKey] = useState("1");
   const [vehicleData, setVehicleData] = useState([]);
 
@@ -69,7 +69,7 @@ export default function Greeting() {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       
-      username: 'user.firstname',
+      username: 'emilys',
       password: 'emilyspass',
       expiresInMins: 30, 
     }),

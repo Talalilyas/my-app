@@ -13,8 +13,9 @@ export default function FromCard() {
     gender: "",
   });
 
-  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
-  const navigate = useNavigate();
+
+  const navigate = useNavigate(); 
+   const [isLogin, setIsLogin] = useLocalStorageState("Sginup", false);
   const handleFormSubmit = (values) => {
     setUser({
       firstName: values.firstName,

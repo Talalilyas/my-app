@@ -12,43 +12,56 @@ import FromCard from "./Fromcard";
 import Greeting from "./Greeting";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./Usercontext";
+import Login from "./Login";
 
-const LayoutTwow = () => {
-  return (
-    <div className="cols-lg-4">
-      <Outlet />
-    </div>
-  );
-};
+const LayoutTwow = () => (
+  <div className="cols-lg-4">
+    <Outlet />
+  </div>
+);
 
 export default function App() {
   const [user, setUser] = useLocalStorageState("user", null);
-  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
+  const [Sginup, setSginup] = useLocalStorageState("Sginup", false);
+  const [login, setIsLogin] = useLocalStorageState("isLogin", false);
 
   return (
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Routes>
-          {!isLogin && (
+          {/* Route for Signup */}
+          {!Sginup && (
             <Route path="/" element={<Layout />}>
               <Route
-                path="login"
-                element={<FromCard setIsLogin={setIsLogin} setUser={setUser} />}
+                path="Sginup"
+                element={<FromCard setIsLogin={setSginup} setUser={setUser} />}
               />
-              <Route path="/" element={<Navigate to="/login" />} />
+              <Route index element={<Navigate to="Sginup" />} />
             </Route>
           )}
 
-          {isLogin && (
+          {/* Route for Greeting */}
+          {Sginup && (
             <Route path="/" element={<LayoutTwow />}>
-              <Route path="/" element={<Greeting />} />
+              <Route index element={<Greeting />} />
             </Route>
           )}
 
-          {/* Handle all other paths */}
+          {/* Route for Login */}
+          {!login && (
+            <Route path="/Loginbutton" element={<Layout />}>
+              <Route
+                path="Login"
+                element={<Login setIsLogin={setIsLogin} setUser={setUser} />}
+              />
+              <Route index element={<Navigate to="Login" />} />
+            </Route>
+          )}
+
+          {/* Fallback route */}
           <Route
             path="*"
-            element={<Navigate to={isLogin ? "/" : "/login"} />}
+            element={<Navigate to={Sginup ? "/" : "/Loginbutton/Login"} />}
           />
         </Routes>
       </BrowserRouter>
