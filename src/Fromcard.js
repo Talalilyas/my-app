@@ -12,10 +12,9 @@ export default function FromCard() {
     birthDate: "",
     gender: "",
   });
-
-
   const navigate = useNavigate(); 
-   const [isLogin, setIsLogin] = useLocalStorageState("Sginup", false);
+   const [isLogin, setIsLogin] = useLocalStorageState("login", false);
+ 
   const handleFormSubmit = (values) => {
     setUser({
       firstName: values.firstName,
@@ -25,7 +24,6 @@ export default function FromCard() {
       birthDate: values.birthDate.format("YYYY-MM-DD"),
       gender: values.gender,
     });
-
     setIsLogin(true);
     navigate("/");
     console.log("Form Submitted", values);

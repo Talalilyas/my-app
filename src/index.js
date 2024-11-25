@@ -19,7 +19,6 @@ const LayoutTwow = () => (
     <Outlet />
   </div>
 );
-
 export default function App() {
   const [user, setUser] = useLocalStorageState("user", null);
   const [Sginup, setSginup] = useLocalStorageState("Sginup", false);
@@ -29,7 +28,7 @@ export default function App() {
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Routes>
-          {/* Route for Signup */}
+        
           {!Sginup && (
             <Route path="/" element={<Layout />}>
               <Route
@@ -47,7 +46,7 @@ export default function App() {
             </Route>
           )}
 
-          {/* Route for Login */}
+       
           {!login && (
             <Route path="/Loginbutton" element={<Layout />}>
               <Route
@@ -58,7 +57,7 @@ export default function App() {
             </Route>
           )}
 
-          {/* Fallback route */}
+          
           <Route
             path="*"
             element={<Navigate to={Sginup ? "/" : "/Loginbutton/Login"} />}

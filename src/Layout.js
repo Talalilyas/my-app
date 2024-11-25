@@ -12,7 +12,7 @@ import { useNavigate } from "react-router-dom";
     <>
       <NewHeader />
       
-
+      <Loginbutton/>
       {location.pathname === "/" ? (
         <div>
           <h1>Welcome! Good evening </h1>

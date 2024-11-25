@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Layout,
-  Menu,
-  Avatar,
-  Dropdown,
-  Button,
-  Col,
-  Row,
-  
-} from "antd";
+import { Layout, Menu, Avatar, Dropdown, Button, Col, Row } from "antd";
 import {
   DashboardOutlined,
   HomeOutlined,
@@ -28,7 +19,6 @@ export default function Greeting() {
   const [isLogin, setIsLogin] = useLocalStorageState("Sginup", false);
   const [selectedKey, setSelectedKey] = useState("1");
   const [vehicleData, setVehicleData] = useState([]);
-
   const [make, setMake] = useState([]);
   const navigate = useNavigate();
 
@@ -63,20 +53,6 @@ export default function Greeting() {
       .catch((error) => console.error("Error fetching makes data:", error));
   }, []);
 
-
-  fetch('https://dummyjson.com/user/login', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      
-      username: 'emilys',
-      password: 'emilyspass',
-      expiresInMins: 30, 
-    }),
-  })
-  .then(res => res.json())
-  .then(console.log);
-  
   const handleSignOut = () => {
     setUser(null);
     setIsLogin(false);
@@ -93,7 +69,6 @@ export default function Greeting() {
     { title: "ID", dataIndex: "makeId1", key: "makeId1" },
     { title: "Brand ", dataIndex: "makeName", key: "makeName" },
   ];
-  console.log(isLogin)
 
   const menu = (
     <Menu>
@@ -169,9 +144,10 @@ export default function Greeting() {
               {user ? (
                 <span className="d-none d-sm-inline mx-1">
                   {user.firstName} {user.lastName}
+                  {user.email}
                 </span>
               ) : (
-                <span className="d-none d-sm-inline mx-1">Guest</span>
+                <span className="d-none d-sm-inline mx-1"></span>
               )}
             </div>
           </Dropdown>

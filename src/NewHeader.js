@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import React from "react";
 import { Button, Layout, Menu } from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
+import Loginbutton from "./Loginbutton";
 
 const { Header } = Layout;
 
@@ -26,8 +27,17 @@ export default function NewHeader() {
                 icon={<PoweroffOutlined />}
                 style={{ marginRight: "10px" }}
               >
-                Sign in
+            Login
+
+            
               </Button>
+              <Button
+                type="primary"
+                icon={<PoweroffOutlined />}
+                style={{ marginRight: "10px" }}
+              ><Loginbutton/>
+             Sginup
+                </Button>
             </Link>
           </div>
         </Menu>

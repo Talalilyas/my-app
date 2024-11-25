@@ -10,6 +10,11 @@ export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isLogin, setLogin] = useLocalStorageState("Sginup", false);
+  const [users, setisUser] = useLocalStorageState("user", {
+    email:""
+    
+  });
+
   const handleChange = (changedValues) => {
     const { name, value } = changedValues;
 
