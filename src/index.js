@@ -35,7 +35,7 @@ export default function App() {
                 path="Sginup"
                 element={<FromCard setIsLogin={setSginup} setUser={setUser} />}
               />
-              <Route index element={<Navigate to="Sginup" />} />
+              <Route index element={<Navigate to="Sginup" />} /> 
             </Route>
           )}
 

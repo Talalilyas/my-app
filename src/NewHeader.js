@@ -11,7 +11,6 @@ export default function NewHeader() {
   if (location.pathname !== "/") {
     return null;
   }
-
   return (
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
@@ -27,17 +26,16 @@ export default function NewHeader() {
                 icon={<PoweroffOutlined />}
                 style={{ marginRight: "10px" }}
               >
-            Login
-
-            
+                Login
               </Button>
               <Button
                 type="primary"
                 icon={<PoweroffOutlined />}
                 style={{ marginRight: "10px" }}
-              ><Loginbutton/>
-             Sginup
-                </Button>
+              >
+                <Loginbutton />
+                Sginup
+              </Button>
             </Link>
           </div>
         </Menu>

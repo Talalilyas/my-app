@@ -98,7 +98,7 @@ export default function FromCard() {
               rules={[
                 { required: true, message: "Please select your birth date!" },
               ]}
-            >
+            >bvxzz1
               <DatePicker
                 style={{ width: "100%" }}
                 format="YYYY-MM-DD"
