@@ -3,6 +3,7 @@ import { Button, Input, Form, Row, Col, Card, message } from "antd";
 import useLocalStorageState from "use-local-storage-state";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+
 export default function Login() {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -11,8 +12,7 @@ export default function Login() {
   const location = useLocation();
   const [isLogin, setLogin] = useLocalStorageState("Sginup", false);
   const [users, setisUser] = useLocalStorageState("user", {
-    email:""
-    
+    email: "",
   });
 
   const handleChange = (changedValues) => {
@@ -27,39 +27,39 @@ export default function Login() {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     setLogin(true);
     const loginData = {
       username: "emilys",
       password: "emilyspass",
       expiresInMins: 30,
+       lastName: 'Owais'
     };
-console.log(loginData,"---hey----")
+    console.log(loginData, "---hey----");
     console.log("Request Body:", JSON.stringify(loginData));
 
-    fetch("https://dummyjson.com/user/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(loginData),
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        console.log("Response Status:", res.status);
-        console.log("Response Data:", data);
-        if (!res.ok) throw new Error(data.message || "Invalid credentials");
-        
-
-        return data;
-      })
-      .then((data) => {
-        message.success("Login successful!");
-        localStorage.setItem("token", data.token);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.error("Error:", err.message);
-        message.error(`Error: ${err.message}`);
+    try {
+      const response = await fetch("https://dummyjson.com/user/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
       });
+
+      if (!response.ok) {
+        throw new Error(response.statusText || "Invalid credentials");
+      }
+
+      const data = await response.json();
+      console.log("Response Status:", response.status);
+      console.log("Response Data:", data);
+
+      message.success("Login successful!");
+      localStorage.setItem("accessToken", data.token);
+      navigate("/");
+    } catch (err) {
+      console.error("Error:", err.message);
+      message.error(`Error: ${err.message}`);
+    }
   };
 
   return (

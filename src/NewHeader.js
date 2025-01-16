@@ -32,11 +32,13 @@ export default function NewHeader() {
                 type="primary"
                 icon={<PoweroffOutlined />}
                 style={{ marginRight: "10px" }}
-              >
-                <Loginbutton />
+              ></Button> 
+              
+                    </Link>
+                {/* <Loginbutton />
                 Sginup
-              </Button>
-            </Link>
+              </Button> */}
+    
           </div>
         </Menu>
       </Header>
