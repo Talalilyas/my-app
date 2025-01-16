@@ -28,14 +28,13 @@ export default function App() {
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Routes>
-        
           {!Sginup && (
             <Route path="/" element={<Layout />}>
               <Route
                 path="Sginup"
                 element={<FromCard setIsLogin={setSginup} setUser={setUser} />}
               />
-              <Route index element={<Navigate to="Sginup" />} /> 
+              <Route index element={<Navigate to="Sginup" />} />
             </Route>
           )}
 
@@ -46,7 +45,6 @@ export default function App() {
             </Route>
           )}
 
-       
           {!login && (
             <Route path="/Loginbutton" element={<Layout />}>
               <Route
@@ -57,7 +55,6 @@ export default function App() {
             </Route>
           )}
 
-          
           <Route
             path="*"
             element={<Navigate to={Sginup ? "/" : "/Loginbutton/Login"} />}

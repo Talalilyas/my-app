@@ -34,7 +34,7 @@ export default function Login() {
       password: "emilyspass",
       expiresInMins: 30,
     };
-
+console.log(loginData,"---hey----")
     console.log("Request Body:", JSON.stringify(loginData));
 
     fetch("https://dummyjson.com/user/login", {
@@ -47,6 +47,8 @@ export default function Login() {
         console.log("Response Status:", res.status);
         console.log("Response Data:", data);
         if (!res.ok) throw new Error(data.message || "Invalid credentials");
+        
+
         return data;
       })
       .then((data) => {
