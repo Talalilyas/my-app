@@ -56,7 +56,7 @@ export default function App() {
           )}
 
           <Route
-            path="*"
+            path="/"
             element={<Navigate to={Sginup ? "/" : "/Loginbutton/Login"} />}
           />
         </Routes>

@@ -41,7 +41,8 @@ export default function FromCard() {
           style={{
             padding: "20px",
             border: "1px solid #ddd",
-            borderRadius: "8px",
+            borderRadius: "8px",marginTop:"20px"
+
           }}
         >
           <h3>User Registration Form</h3>

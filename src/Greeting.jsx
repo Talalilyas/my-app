@@ -56,7 +56,7 @@ export default function Greeting() {
   const handleSignOut = () => {
     setUser(null);
     setIsLogin(false);
-    navigate("/NewHeader");
+    navigate("/");
   };
 
   const vehicleColumns = [
@@ -138,8 +138,9 @@ export default function Greeting() {
               style={{ padding: "10px" }}
             >
               <Avatar
-                style={{ backgroundColor: "#87d068" }}
+                style={{ backgroundColor: "#87d068",marginLeft:"12px" }} 
                 icon={<UserOutlined />}
+              
               />
               {user ? (
                 <span className="d-none d-sm-inline mx-1">

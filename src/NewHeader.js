@@ -1,26 +1,18 @@
-import { Link, useLocation } from "react-router-dom";
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button, Layout, Menu } from "antd";
 import { PoweroffOutlined } from "@ant-design/icons";
-import Loginbutton from "./Loginbutton";
 
 const { Header } = Layout;
 
 export default function NewHeader() {
-  const location = useLocation();
-  if (location.pathname !== "/") {
-    return null;
-  }
   return (
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-        <div
-          className="logo"
-          style={{ color: "white", fontSize: "20px" }}
-        ></div>
+       
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
           <div style={{ float: "right" }}>
-            <Link to="/NewHeader">
+            <Link to="/Loginbutton/Login">
               <Button
                 type="primary"
                 icon={<PoweroffOutlined />}
@@ -28,17 +20,17 @@ export default function NewHeader() {
               >
                 Login
               </Button>
+            </Link>
+            <Link to="/Sginup">
               <Button
                 type="primary"
                 icon={<PoweroffOutlined />}
-                style={{ marginRight: "10px" }}
-              ></Button> 
-              
-                    </Link>
-                {/* <Loginbutton />
-                Sginup
-              </Button> */}
-    
+                style={{ marginRight: "10px",}}
+
+              >
+                Signup
+              </Button>
+            </Link>
           </div>
         </Menu>
       </Header>
