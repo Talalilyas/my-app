@@ -116,6 +116,7 @@ export default function Greeting() {
             </Menu.SubMenu>
             <Menu.Item key="5" icon={<TableOutlined />}>
               Orders
+              {user.password}
             </Menu.Item>
             <Menu.SubMenu key="6" icon={<AppstoreOutlined />} title="Bootstrap">
               <Menu.Item key="7">User Data</Menu.Item>
@@ -146,6 +147,7 @@ export default function Greeting() {
                 <span className="d-none d-sm-inline mx-1">
                   {user.firstName} {user.lastName}
                   {user.email}
+                  {user.password}
                 </span>
               ) : (
                 <span className="d-none d-sm-inline mx-1"></span>

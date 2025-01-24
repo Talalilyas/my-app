@@ -1,3 +1,5 @@
+
+
 import React from "react";
 import ReactDOM from "react-dom/client";
 import {
@@ -13,12 +15,14 @@ import Greeting from "./Greeting";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./Usercontext";
 import Login from "./Login";
+import Profile from "./Profile"; // Import the Profile component
 
 const LayoutTwow = () => (
   <div className="cols-lg-4">
     <Outlet />
   </div>
 );
+
 export default function App() {
   const [user, setUser] = useLocalStorageState("user", null);
   const [Sginup, setSginup] = useLocalStorageState("Sginup", false);
@@ -28,6 +32,7 @@ export default function App() {
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Routes>
+          {/* Signup Routes */}
           {!Sginup && (
             <Route path="/" element={<Layout />}>
               <Route
@@ -38,13 +43,14 @@ export default function App() {
             </Route>
           )}
 
-          {/* Route for Greeting */}
+          {/* Greeting Routes */}
           {Sginup && (
             <Route path="/" element={<LayoutTwow />}>
               <Route index element={<Greeting />} />
             </Route>
           )}
 
+          {/* Login Routes */}
           {!login && (
             <Route path="/Loginbutton" element={<Layout />}>
               <Route
@@ -55,6 +61,14 @@ export default function App() {
             </Route>
           )}
 
+          {/* Profile Route */}
+          {login && (
+            <Route path="/profile" element={<LayoutTwow />}>
+              <Route index element={<Profile />} />
+            </Route>
+          )}
+
+          {/* Default Redirect */}
           <Route
             path="/"
             element={<Navigate to={Sginup ? "/" : "/Loginbutton/Login"} />}
