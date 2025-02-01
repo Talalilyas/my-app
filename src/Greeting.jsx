@@ -139,9 +139,8 @@ export default function Greeting() {
               style={{ padding: "10px" }}
             >
               <Avatar
-                style={{ backgroundColor: "#87d068",marginLeft:"12px" }} 
+                style={{ backgroundColor: "#87d068", marginLeft: "12px" }}
                 icon={<UserOutlined />}
-              
               />
               {user ? (
                 <span className="d-none d-sm-inline mx-1">

@@ -1,10 +1,10 @@
-import './App.css';
+import "./App.css";
 import Formcard from "./Fromcard";
 function Apps() {
   return (
     <div>
       <header className="App-header">
-      <Formcard />
+        <Formcard />
       </header>
     </div>
   );

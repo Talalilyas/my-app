@@ -27,15 +27,28 @@ export default function FromCard() {
   };
 
   return (
-    <Row justify="center" align="middle" style={{ minHeight: "100vh", padding: "20px" }}>
+    <Row
+      justify="center"
+      align="middle"
+      style={{ minHeight: "100vh", padding: "20px" }}
+    >
       <Col xs={24} sm={14} md={8} lg={6}>
-        <div style={{ padding: "20px", border: "1px solid #ddd", borderRadius: "8px", marginTop: "20px" }}>
+        <div
+          style={{
+            padding: "20px",
+            border: "1px solid #ddd",
+            borderRadius: "8px",
+            marginTop: "20px",
+          }}
+        >
           <h3>User Registration Form</h3>
           <Form onFinish={handleFormSubmit} layout="vertical">
             <Form.Item
               label="First Name"
               name="firstName"
-              rules={[{ required: true, message: "Please input your first name!" }]}
+              rules={[
+                { required: true, message: "Please input your first name!" },
+              ]}
             >
               <Input placeholder="Enter your first name" />
             </Form.Item>
@@ -43,7 +56,9 @@ export default function FromCard() {
             <Form.Item
               label="Last Name"
               name="lastName"
-              rules={[{ required: true, message: "Please input your last name!" }]}
+              rules={[
+                { required: true, message: "Please input your last name!" },
+              ]}
             >
               <Input placeholder="Enter your last name" />
             </Form.Item>
@@ -51,7 +66,13 @@ export default function FromCard() {
             <Form.Item
               label="Email"
               name="email"
-              rules={[{ required: true, type: "email", message: "Please enter a valid email!" }]}
+              rules={[
+                {
+                  required: true,
+                  type: "email",
+                  message: "Please enter a valid email!",
+                },
+              ]}
             >
               <Input placeholder="Enter your email" />
             </Form.Item>
@@ -59,7 +80,9 @@ export default function FromCard() {
             <Form.Item
               label="Password"
               name="password"
-              rules={[{ required: true, message: "Please input your password!" }]}
+              rules={[
+                { required: true, message: "Please input your password!" },
+              ]}
             >
               <Input.Password placeholder="Enter your password" />
             </Form.Item>
@@ -67,15 +90,23 @@ export default function FromCard() {
             <Form.Item
               label="Birth Date"
               name="birthDate"
-              rules={[{ required: true, message: "Please select your birth date!" }]}
+              rules={[
+                { required: true, message: "Please select your birth date!" },
+              ]}
             >
-              <DatePicker style={{ width: "100%" }} format="YYYY-MM-DD" placeholder="Select your birth date" />
+              <DatePicker
+                style={{ width: "100%" }}
+                format="YYYY-MM-DD"
+                placeholder="Select your birth date"
+              />
             </Form.Item>
 
             <Form.Item
               label="Gender"
               name="gender"
-              rules={[{ required: true, message: "Please select your gender!" }]}
+              rules={[
+                { required: true, message: "Please select your gender!" },
+              ]}
             >
               <Radio.Group>
                 <Radio value="Male">Male</Radio>

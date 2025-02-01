@@ -13,7 +13,7 @@ import Greeting from "./Greeting";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./Usercontext";
 import Login from "./Login";
-import Profile from "./Profile"; 
+import Profile from "./Profile";
 
 const LayoutTwow = () => (
   <div className="cols-lg-4">
@@ -41,28 +41,22 @@ export default function App() {
             </Route>
           )}
 
-         
           {Sginup && (
             <Route path="/" element={<LayoutTwow />}>
               <Route index element={<Greeting />} />
             </Route>
           )}
 
-          
           {!login && (
-            <Route path="/login" element={<Login setIsLogin={setIsLogin} setUser={setUser} />} />
+            <Route
+              path="/login"
+              element={<Login setIsLogin={setIsLogin} setUser={setUser} />}
+            />
           )}
 
-          
-          {login && (
-            <Route path="/login" element={<Profile />} />
-          )}
+          {login && <Route path="/login" element={<Profile />} />}
 
-         
-          <Route
-            path="*"
-            element={<Navigate to={Sginup ? "/" : "/login"} />}
-          />
+          <Route path="*" element={<Navigate to={Sginup ? "/" : "/login"} />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

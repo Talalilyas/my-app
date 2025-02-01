@@ -14,24 +14,18 @@ export default function Loginbutton() {
   const handleToggleForm = () => {
     setIsLogin((prev) => !prev);
   };
-  const handleFormSubmit = () =>
- {
-
-
-
- }
+  const handleFormSubmit = () => {};
   if (location.pathname !== "/Fromcard") {
     return null;
   }
 
   return (
     <Flex wrap gap="small">
-       <Link to="/Loginbutton">
-    <Button type="primary" danger>
-      Primary
-    </Button>
-    </Link>
+      <Link to="/Loginbutton">
+        <Button type="primary" danger>
+          Primary
+        </Button>
+      </Link>
     </Flex>
-   
   );
 }

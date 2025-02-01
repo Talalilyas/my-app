@@ -36,9 +36,9 @@ export default function Login() {
       message.success("Login successful!");
       setAccessToken(data.accessToken);
       setUser({ username });
-      setIsLogin(true); 
-      navigate("/profile"); 
-      console.log(data.accessToken)
+      setIsLogin(true);
+      navigate("/profile");
+      console.log(data.accessToken);
     } catch (err) {
       message.error(`Error: ${err.message}`);
     }
@@ -47,18 +47,38 @@ export default function Login() {
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Col xs={24} sm={18} md={12} lg={8}>
-        <Card title="Login" bordered={false} style={{ maxWidth: 400, margin: "auto" }}>
+        <Card
+          title="Login"
+          bordered={false}
+          style={{ maxWidth: 400, margin: "auto" }}
+        >
           <Form layout="vertical" onFinish={handleSubmit}>
             <Form.Item
               label="Username"
               name="username"
-              rules={[{ required: true, message: "Please enter your username!" }]}
+              rules={[
+                { required: true, message: "Please enter your username!" },
+              ]}
             >
-              <Input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username" />
+              <Input
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Enter your username"
+              />
             </Form.Item>
 
-            <Form.Item label="Password" name="password" rules={[{ required: true, message: "Please enter your password!" }]}>
-              <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[
+                { required: true, message: "Please enter your password!" },
+              ]}
+            >
+              <Input.Password
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your password"
+              />
             </Form.Item>
 
             <Form.Item>

@@ -5,14 +5,14 @@ import NewHeader from "./NewHeader";
 import Login from "./Login";
 import Loginbutton from "./Loginbutton";
 import { useNavigate } from "react-router-dom";
-   export default function Layout(){
+export default function Layout() {
   const location = useLocation();
 
   return (
     <>
       <NewHeader />
-      
-      <Loginbutton/>
+
+      <Loginbutton />
       {location.pathname === "/" ? (
         <div>
           <h1>Welcome! Good evening </h1>
@@ -20,7 +20,7 @@ import { useNavigate } from "react-router-dom";
       ) : (
         <Outlet />
       )}
-    <Loginbutton/>
+      <Loginbutton />
     </>
   );
-};
+}

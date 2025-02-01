@@ -9,7 +9,6 @@ export default function NewHeader() {
   return (
     <Layout>
       <Header style={{ position: "fixed", zIndex: 1, width: "100%" }}>
-       
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]}>
           <div style={{ float: "right" }}>
             <Link to="/Loginbutton/Login">
@@ -25,8 +24,7 @@ export default function NewHeader() {
               <Button
                 type="primary"
                 icon={<PoweroffOutlined />}
-                style={{ marginRight: "10px",}}
-
+                style={{ marginRight: "10px" }}
               >
                 Signup
               </Button>
