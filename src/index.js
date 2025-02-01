@@ -13,6 +13,7 @@ import Greeting from "./Greeting";
 import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./Usercontext";
 import Login from "./Login";
+import Profile from "./Profile"; 
 
 const LayoutTwow = () => (
   <div className="cols-lg-4">
@@ -29,7 +30,7 @@ export default function App() {
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Routes>
-          {/* Route for Signup */}
+          {/* Signup Routes */}
           {!Sginup && (
             <Route path="/" element={<Layout />}>
               <Route
@@ -40,28 +41,27 @@ export default function App() {
             </Route>
           )}
 
-          {/* Route for Greeting */}
+         
           {Sginup && (
             <Route path="/" element={<LayoutTwow />}>
               <Route index element={<Greeting />} />
             </Route>
           )}
 
-          {/* Route for Login */}
+          
           {!login && (
-            <Route path="/Loginbutton" element={<Layout />}>
-              <Route
-                path="Login"
-                element={<Login setIsLogin={setIsLogin} setUser={setUser} />}
-              />
-              <Route index element={<Navigate to="Login" />} />
-            </Route>
+            <Route path="/login" element={<Login setIsLogin={setIsLogin} setUser={setUser} />} />
           )}
 
-          {/* Fallback route */}
+          
+          {login && (
+            <Route path="/login" element={<Profile />} />
+          )}
+
+         
           <Route
             path="*"
-            element={<Navigate to={Sginup ? "/" : "/Loginbutton/Login"} />}
+            element={<Navigate to={Sginup ? "/" : "/login"} />}
           />
         </Routes>
       </BrowserRouter>

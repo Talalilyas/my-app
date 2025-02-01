@@ -2,109 +2,63 @@ import React, { useState } from "react";
 import { Button, Input, Form, Row, Col, Card, message } from "antd";
 import useLocalStorageState from "use-local-storage-state";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+
 export default function Login() {
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [form] = Form.useForm();
+  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
+  const [users, setUser] = useLocalStorageState("user", { username: "" });
+  const [accessToken, setAccessToken] = useLocalStorageState("accessToken", "");
+
   const navigate = useNavigate();
-  const location = useLocation();
-  const [isLogin, setLogin] = useLocalStorageState("Sginup", false);
-  const handleChange = (changedValues) => {
-    const { name, value } = changedValues;
 
-    if (name === "email") {
-      setEmail(value);
-    }
-
-    if (name === "password") {
-      setPassword(value);
-    }
-  };
-
-  const handleSubmit = () => {
-    setLogin(true);
+  const handleSubmit = async () => {
     const loginData = {
-      username: "emilys",
-      password: "emilyspass",
+      username: username,
+      password: password,
       expiresInMins: 30,
     };
 
-    console.log("Request Body:", JSON.stringify(loginData));
-
-    fetch("https://dummyjson.com/user/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(loginData),
-    })
-      .then(async (res) => {
-        const data = await res.json();
-        console.log("Response Status:", res.status);
-        console.log("Response Data:", data);
-        if (!res.ok) throw new Error(data.message || "Invalid credentials");
-        return data;
-      })
-      .then((data) => {
-        message.success("Login successful!");
-        localStorage.setItem("token", data.token);
-        navigate("/");
-      })
-      .catch((err) => {
-        console.error("Error:", err.message);
-        message.error(`Error: ${err.message}`);
+    try {
+      const response = await fetch("https://dummyjson.com/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(loginData),
       });
+
+      if (!response.ok) {
+        const errorDetails = await response.json();
+        throw new Error(errorDetails.message || "Invalid credentials");
+      }
+
+      const data = await response.json();
+
+      message.success("Login successful!");
+      setAccessToken(data.accessToken);
+      setUser({ username });
+      setIsLogin(true); 
+      navigate("/profile"); 
+      console.log(data.accessToken)
+    } catch (err) {
+      message.error(`Error: ${err.message}`);
+    }
   };
 
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Col xs={24} sm={18} md={12} lg={8}>
-        <Card
-          title="Login"
-          bordered={false}
-          style={{
-            maxWidth: 400,
-            margin: "auto",
-            borderRadius: 8,
-            boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-          }}
-        >
-          <Form
-            form={form}
-            layout="vertical"
-            onValuesChange={(_, allValues) => handleChange(allValues)}
-            onFinish={handleSubmit}
-          >
+        <Card title="Login" bordered={false} style={{ maxWidth: 400, margin: "auto" }}>
+          <Form layout="vertical" onFinish={handleSubmit}>
             <Form.Item
-              label="Email Address"
-              name="email"
-              rules={[
-                { required: true, message: "Please enter your email address!" },
-                { type: "email", message: "Please enter a valid email!" },
-              ]}
+              label="Username"
+              name="username"
+              rules={[{ required: true, message: "Please enter your username!" }]}
             >
-              <Input
-                placeholder="Enter your email address"
-                value={email}
-                onChange={(e) =>
-                  handleChange({ name: "email", value: e.target.value })
-                }
-              />
+              <Input value={username} onChange={(e) => setUsername(e.target.value)} placeholder="Enter your username" />
             </Form.Item>
 
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                { required: true, message: "Please enter your password!" },
-              ]}
-            >
-              <Input.Password
-                placeholder="Enter your password"
-                value={password}
-                onChange={(e) =>
-                  handleChange({ name: "password", value: e.target.value })
-                }
-              />
+            <Form.Item label="Password" name="password" rules={[{ required: true, message: "Please enter your password!" }]}>
+              <Input.Password value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Enter your password" />
             </Form.Item>
 
             <Form.Item>
