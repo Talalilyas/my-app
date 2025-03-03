@@ -11,9 +11,7 @@ import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./Usercontext";
 import DataTable from "./ DataTable";
 import { useNavigate } from "react-router-dom";
-
 const { Header, Sider, Content } = Layout;
-
 export default function Greeting() {
   const [user, setUser] = useLocalStorageState("user", null);
   const [isLogin, setIsLogin] = useLocalStorageState("Sginup", false);
@@ -21,24 +19,19 @@ export default function Greeting() {
   const [vehicleData, setVehicleData] = useState([]);
   const [make, setMake] = useState([]);
   const navigate = useNavigate();
-
   useEffect(() => {
     fetch(
-      "https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json"
-    )
+      "https://vpic.nhtsa.dot.gov/api/vehicles/getallmanufacturers?format=json")
       .then((response) => response.json())
       .then((data) => {
         const formattedData = data.Results.map((item) => ({
           key: item.Mfr_ID.toString(),
           makeId: item.Mfr_ID,
           makeName: item.Mfr_CommonName || "N/A",
-          country: item.Country || "N/A",
-        }));
-        setVehicleData(formattedData);
-      })
+          country: item.Country || "N/A",}));
+        setVehicleData(formattedData);})
       .catch((error) => console.error("Error fetching vehicle data:", error));
   }, []);
-
   useEffect(() => {
     fetch("https://vpic.nhtsa.dot.gov/api/vehicles/getallmakes?format=json")
       .then((response) => response.json())
@@ -52,24 +45,20 @@ export default function Greeting() {
       })
       .catch((error) => console.error("Error fetching makes data:", error));
   }, []);
-
   const handleSignOut = () => {
     setUser(null);
     setIsLogin(false);
     navigate("/");
   };
-
   const vehicleColumns = [
     { title: "Manufacturer ID", dataIndex: "makeId", key: "makeId" },
     { title: "Common Name", dataIndex: "makeName", key: "makeName" },
     { title: "Country", dataIndex: "country", key: "country" },
   ];
-
   const makeColumns = [
     { title: "ID", dataIndex: "makeId1", key: "makeId1" },
     { title: "Brand ", dataIndex: "makeName", key: "makeName" },
   ];
-
   const menu = (
     <Menu>
       <Menu.Item>
@@ -87,9 +76,7 @@ export default function Greeting() {
           Sign out
         </Button>
       </Menu.Item>
-    </Menu>
-  );
-
+    </Menu>);
   return (
     <UserContext.Provider value={user}>
       <Layout style={{ minHeight: "100vh" }}>
@@ -101,16 +88,14 @@ export default function Greeting() {
             theme="dark"
             mode="inline"
             defaultSelectedKeys={["1"]}
-            onClick={(e) => setSelectedKey(e.key)}
-          >
+            onClick={(e) => setSelectedKey(e.key)}>
             <Menu.Item key="1" icon={<HomeOutlined />}>
               Home
             </Menu.Item>
             <Menu.SubMenu
               key="2"
               icon={<DashboardOutlined />}
-              title="Dashboard"
-            >
+              title="Dashboard">
               <Menu.Item key="3">Item 1</Menu.Item>
               <Menu.Item key="4">Item 2</Menu.Item>
             </Menu.SubMenu>
@@ -147,10 +132,8 @@ export default function Greeting() {
                   {user.firstName} {user.lastName}
                   {user.email}
                   {user.password}
-                </span>
-              ) : (
-                <span className="d-none d-sm-inline mx-1"></span>
-              )}
+                </span>) : (
+                <span className="d-none d-sm-inline mx-1"></span>)}
             </div>
           </Dropdown>
         </Sider>

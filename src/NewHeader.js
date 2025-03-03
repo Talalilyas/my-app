@@ -15,8 +15,7 @@ export default function NewHeader() {
               <Button
                 type="primary"
                 icon={<PoweroffOutlined />}
-                style={{ marginRight: "10px" }}
-              >
+                style={{ marginRight: "10px" }}>
                 Login
               </Button>
             </Link>
@@ -24,8 +23,7 @@ export default function NewHeader() {
               <Button
                 type="primary"
                 icon={<PoweroffOutlined />}
-                style={{ marginRight: "10px" }}
-              >
+                style={{ marginRight: "10px" }}>
                 Signup
               </Button>
             </Link>

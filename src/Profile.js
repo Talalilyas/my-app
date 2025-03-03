@@ -1,34 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Card, Spin, message, Descriptions } from "antd";
 import useLocalStorageState from "use-local-storage-state";
-
 export default function Profile() {
   console.log("Profile Component Loaded");
-
   const [loading, setLoading] = useState(true);
   const [userData, setUserData] = useState(null);
-
   const [accessToken, setAccessToken] = useLocalStorageState("accessToken", "");
   console.log("Access Token in Profile:", accessToken);
-
   useEffect(() => {
     if (!accessToken) {
       console.log("No access token found, redirecting...");
       message.error("Access token missing! Please log in again.");
       return;
     }
-
-    fetch("https://dummyjson.com/user/me", {
+    fetch("https://dummyjson.com/user/1", {
       method: "GET",
       headers: { Authorization: `Bearer ${accessToken}` },
     })
       .then((response) => {
         console.log("Response Status:", response.status);
         if (!response.ok) {
-          throw new Error("Failed to fetch user data");
-        }
-        return response.json();
-      })
+          throw new Error("Failed to fetch user data"); }
+        return response.json();})
       .then((data) => {
         console.log("Fetched Data:", data);
         setUserData(data);
@@ -37,10 +30,8 @@ export default function Profile() {
       .catch((error) => {
         console.error("Error fetching user data:", error.message);
         message.error(`Error: ${error.message}`);
-        setLoading(false);
-      });
+        setLoading(false);});
   }, [accessToken]);
-
   if (loading) {
     return (
       <div style={{ textAlign: "center", marginTop: "20%" }}>
@@ -48,7 +39,6 @@ export default function Profile() {
       </div>
     );
   }
-
   return (
     <Card title="User Profile" style={{ maxWidth: 1000, margin: "auto" }}>
       {userData ? (
@@ -59,6 +49,24 @@ export default function Profile() {
           <Descriptions.Item label="Email">{userData.email}</Descriptions.Item>
           <Descriptions.Item label="middlename">
             {userData.maidenName}
+          </Descriptions.Item>
+          <Descriptions.Item label="age">
+            {userData.age}
+          </Descriptions.Item>
+          <Descriptions.Item label="cell number">
+            {userData.phone}
+          </Descriptions.Item>
+          <Descriptions.Item label="birth date">
+            {userData.birthDate}
+          </Descriptions.Item>
+          <Descriptions.Item label="Blood Group">
+            {userData.bloodGroup}
+          </Descriptions.Item>
+          <Descriptions.Item label="Height">
+            {userData.height}
+          </Descriptions.Item>
+          <Descriptions.Item label="eye color">
+            {userData.eyeColor}
           </Descriptions.Item>
         </Descriptions>
       ) : (
