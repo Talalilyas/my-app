@@ -10,7 +10,7 @@ export default function Profile() {
   useEffect(() => {
     if (!accessToken) {
       console.log("No access token found, redirecting...");
-      message.error("Access token missing! Please log in again.");
+      message.error("Access token missing! Please log in again");
       return;
     }
     fetch("https://dummyjson.com/user/1", {
