@@ -11,28 +11,23 @@ export default function Login() {
   const [accessToken, setAccessToken] = useLocalStorageState("accessToken", "");
 
   const navigate = useNavigate();
-
   const handleSubmit = async () => {
     const loginData = {
       username: username,
       password: password,
       expiresInMins: 30,
     };
-
     try {
       const response = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
       });
-
       if (!response.ok) {
         const errorDetails = await response.json();
         throw new Error(errorDetails.message || "Invalid credentials");
       }
-
       const data = await response.json();
-
       message.success("Login successful!");
       setAccessToken(data.accessToken);
       setUser({ username });
@@ -43,7 +38,6 @@ export default function Login() {
       message.error(`Error: ${err.message}`);
     }
   };
-
   return (
     <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
       <Col xs={24} sm={18} md={12} lg={8}>
@@ -66,7 +60,6 @@ export default function Login() {
                 placeholder="Enter your username"
               />
             </Form.Item>
-
             <Form.Item
               label="Password"
               name="password"
@@ -80,7 +73,6 @@ export default function Login() {
                 placeholder="Enter your password"
               />
             </Form.Item>
-
             <Form.Item>
               <Button type="primary" htmlType="submit" block>
                 Log In
