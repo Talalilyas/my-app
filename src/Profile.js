@@ -1,77 +1,139 @@
-import React, { useState, useEffect } from "react";
-import { Card, Spin, message, Descriptions } from "antd";
+import React, { useState } from "react";
+import {
+  Layout,
+  Menu,
+  Card,
+  Spin,
+  message,
+  Descriptions,
+  Button,
+  Col,
+  Divider,
+  Row,
+  Flex,
+} from "antd";
+import {
+  UserOutlined,
+  SettingOutlined,
+  LogoutOutlined,
+} from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
-export default function Profile() {
-  console.log("Profile Component Loaded");
-  const [loading, setLoading] = useState(true);
+
+const { Header, Content, Sider } = Layout;
+
+export default function Dashboard() {
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [accessToken, setAccessToken] = useLocalStorageState("accessToken", "");
-  console.log("Access Token in Profile:", accessToken);
-  useEffect(() => {
-    if (!accessToken) {
-      console.log("No access token found, redirecting...");
-      message.error("Access token missing! Please log in again");
-      return;
+  const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
+  const navigate = useNavigate();
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch("https://dummyjson.com/users/1", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      if (!response.ok) throw new Error("Failed to fetch user data");
+      const data = await response.json();
+      setUserData(data);
+      setActiveTab("profile");
+      setIsLogin(true);
+    } catch (error) {
+      message.error(`Error: ${error.message}`);
+    } finally {
+      setLoading(false);
     }
-    fetch("https://dummyjson.com/user/1", {
-      method: "GET",
-      headers: { Authorization: `Bearer ${accessToken}` },
-    })
-      .then((response) => {
-        console.log("Response Status:", response.status);
-        if (!response.ok) {
-          throw new Error("Failed to fetch user data"); }
-        return response.json();})
-      .then((data) => {
-        console.log("Fetched Data:", data);
-        setUserData(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching user data:", error.message);
-        message.error(`Error: ${error.message}`);
-        setLoading(false);});
-  }, [accessToken]);
-  if (loading) {
-    return (
-      <div style={{ textAlign: "center", marginTop: "20%" }}>
-        <Spin size="large" />
-      </div>
-    );
-  }
+  };
+  const handleSignOuts = () => {
+    setIsLogin(false);
+    navigate("/");
+    localStorage.removeItem("accessToken");
+    setUserData(null);
+  };
+
   return (
-    <Card title="User Profile" style={{ maxWidth: 1000, margin: "auto" }}>
-      {userData ? (
-        <Descriptions bordered>
-          <Descriptions.Item label="Username">
-            {userData.username}
-          </Descriptions.Item>
-          <Descriptions.Item label="Email">{userData.email}</Descriptions.Item>
-          <Descriptions.Item label="middlename">
-            {userData.maidenName}
-          </Descriptions.Item>
-          <Descriptions.Item label="age">
-            {userData.age}
-          </Descriptions.Item>
-          <Descriptions.Item label="cell number">
-            {userData.phone}
-          </Descriptions.Item>
-          <Descriptions.Item label="birth date">
-            {userData.birthDate}
-          </Descriptions.Item>
-          <Descriptions.Item label="Blood Group">
-            {userData.bloodGroup}
-          </Descriptions.Item>
-          <Descriptions.Item label="Height">
-            {userData.height}
-          </Descriptions.Item>
-          <Descriptions.Item label="eye color">
-            {userData.eyeColor}
-          </Descriptions.Item>
-        </Descriptions>
-      ) : (
-        <p>No data available.</p>
-      )}
-    </Card>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Header
+        style={{
+          background: "#001529",
+          color: "#fff",
+          padding: "0 20px",
+          fontSize: 18,
+        }}>
+        <Row justify="center">
+          <Col span={2} style={{marginTop:"5px"}}>
+          <Flex gap="small" wrap>
+          <Button type="primary" style={{height:"50px",width:"100px"}}>nav 1</Button>
+          </Flex>
+          </Col>
+          <Col span={2} style={{marginTop:"5px"}}><Flex gap="small" wrap>
+          <Button type="primary" style={{height:"50px", width:"100px"}}>nav 2</Button>
+          </Flex></Col>
+          <Col span={2} style={{marginTop:"5px"}}>
+          <Flex gap="small" wrap>
+          <Button type="primary"style={{height:"50px",width:"100px"}}>nav 3</Button>
+          </Flex>
+          </Col>
+        </Row>
+      </Header>
+      <Layout>
+        <Sider width={220} theme="dark">
+          <Menu mode="inline" theme="dark">
+            <Menu.Item key="1" onClick={fetchUserData} icon={<UserOutlined />}>
+              Profile
+            </Menu.Item>
+            <Menu.Item
+              key="2"
+              onClick={() => setActiveTab("settings")}
+              icon={<SettingOutlined />}>
+              Settings
+            </Menu.Item>
+            <Menu.Item key="3" icon={<LogoutOutlined />}>
+              <Button type="link" onClick={handleSignOuts}>
+                Sign out
+              </Button>
+            </Menu.Item>
+          </Menu>
+        </Sider>
+        <Content style={{ margin: "20px", padding: 24, background: "#fff" }}>
+          {activeTab === "dashboard" && <h2>Welcome, Good Evening!</h2>}
+
+          {activeTab === "profile" && (
+            <Card
+              title="User Profile"
+              style={{ maxWidth: 800, margin: "auto" }}
+            >
+              {loading ? (
+                <div style={{ textAlign: "center" }}>
+                  <Spin size="large" />
+                </div>
+              ) : userData ? (
+                <Descriptions bordered column={1}>
+                  <Descriptions.Item label="Username">
+                    {userData.username}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Email">
+                    {userData.email}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Full Name">
+                    {userData.firstName} {userData.lastName}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Phone">
+                    {userData.phone}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Birth Date">
+                    {userData.birthDate}
+                  </Descriptions.Item>
+                </Descriptions>
+              ) : (
+                <p>No data available.</p>
+              )}
+            </Card>
+          )}
+          {activeTab === "settings" && <h2></h2>}
+        </Content>
+      </Layout>
+    </Layout>
   );
 }
