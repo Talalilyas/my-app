@@ -20,7 +20,12 @@ import {
 import { useNavigate } from "react-router-dom";
 import useLocalStorageState from "use-local-storage-state";
 
-const { Header, Content, Sider } = Layout;
+const { Header, Content, Footer, Sider } = Layout;
+
+const items1 = ["1", "2", "3"].map((key) => ({
+  key,
+  label: `nav ${key}`,
+}));
 
 export default function Dashboard() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -29,6 +34,7 @@ export default function Dashboard() {
   const [accessToken, setAccessToken] = useLocalStorageState("accessToken", "");
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const navigate = useNavigate();
+  
   const fetchUserData = async () => {
     try {
       const response = await fetch("https://dummyjson.com/users/1", {
@@ -45,6 +51,7 @@ export default function Dashboard() {
       setLoading(false);
     }
   };
+  
   const handleSignOuts = () => {
     setIsLogin(false);
     navigate("/");
@@ -54,34 +61,24 @@ export default function Dashboard() {
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Header
-        style={{
-          background: "#001529",
-          color: "#fff",
-          padding: "0 20px",
-          fontSize: 18,
-        }}>
-        <Row justify="center">
-          <Col span={2} style={{marginTop:"5px"}}>
-          <Flex gap="small" wrap>
-          <Button type="primary" style={{height:"50px",width:"100px"}}>nav 1</Button>
-          </Flex>
-          </Col>
-          <Col span={2} style={{marginTop:"5px"}}><Flex gap="small" wrap>
-          <Button type="primary" style={{height:"50px", width:"100px"}}>nav 2</Button>
-          </Flex></Col>
-          <Col span={2} style={{marginTop:"5px"}}>
-          <Flex gap="small" wrap>
-          <Button type="primary"style={{height:"50px",width:"100px"}}>nav 3</Button>
-          </Flex>
-          </Col>
-        </Row>
+      <Header style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div className="demo-logo" />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={["2"]}
+          items={items1}
+          style={{ flex: 2, minWidth: 0 , justifyContent: "center",alignItems:"center"}}
+        />
       </Header>
       <Layout>
         <Sider width={220} theme="dark">
           <Menu mode="inline" theme="dark">
             <Menu.Item key="1" onClick={fetchUserData} icon={<UserOutlined />}>
               Profile
+            </Menu.Item>
+            <Menu.Item key="2 "  icon={<UserOutlined />}>
+              Profile 2
             </Menu.Item>
             <Menu.Item
               key="2"
@@ -134,6 +131,9 @@ export default function Dashboard() {
           {activeTab === "settings" && <h2></h2>}
         </Content>
       </Layout>
+      <Footer style={{ textAlign: "center" }}>
+        Ant Design ©{new Date().getFullYear()} Created by Ant UED
+      </Footer>
     </Layout>
   );
 }
