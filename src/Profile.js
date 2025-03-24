@@ -40,7 +40,6 @@ export default function Dashboard() {
     }
   };
 
-  
   const fetchRecipes = async () => {
     setLoading(true);
     try {
@@ -63,7 +62,6 @@ export default function Dashboard() {
     }
   };
 
- 
   const handleSignOut = () => {
     setIsLogin(false);
     navigate("/");
@@ -76,7 +74,6 @@ export default function Dashboard() {
       <Header style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={["1"]} />
       </Header>
-
       <Layout>
         <Sider width={220} theme="dark">
           <Menu mode="inline" theme="dark">
@@ -105,7 +102,6 @@ export default function Dashboard() {
                 </div>
               ) : recipes.length > 0 ? (
                 <Foodrecipe
-    
                   dataSource={recipes}
                   columns={[
                     { title: "Recipe Name", dataIndex: "name", key: "name" },
@@ -114,7 +110,6 @@ export default function Dashboard() {
                   rowKey="key"
                   pagination={{ pageSize: 5 }}
                 />
-        
               ) : (
                 <p>No recipes available.</p>
               )}
