@@ -20,16 +20,13 @@ export default function Dashboard() {
   const [accessToken] = useLocalStorageState("accessToken", "");
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const navigate = useNavigate();
-
   const fetchUserData = async () => {
     setLoading(true);
     try {
       const response = await fetch("https://dummyjson.com/users/1", {
         headers: { Authorization: `Bearer ${accessToken}` },
       });
-
       if (!response.ok) throw new Error("Failed to fetch user data");
-
       const data = await response.json();
       setUserData([data]);
       setActiveTab("profile");
@@ -39,20 +36,17 @@ export default function Dashboard() {
       setLoading(false);
     }
   };
-
   const fetchRecipes = async () => {
     setLoading(true);
     try {
-      const response = await fetch("https://dummyjson.com/recipes");
+      const response = await fetch("https://dummyjson.com/recipes?sortBy=name&order=asc");
       if (!response.ok) throw new Error("Failed to fetch recipes");
-
       const data = await response.json();
       const formattedData = data.recipes.map((recipe) => ({
         key: recipe.id.toString(),
         name: recipe.name,
         ingredients: recipe.ingredients,
       }));
-
       setRecipes(formattedData);
       setActiveTab("recipes");
     } catch (error) {
@@ -61,7 +55,6 @@ export default function Dashboard() {
       setLoading(false);
     }
   };
-
   const handleSignOut = () => {
     setIsLogin(false);
     navigate("/");
