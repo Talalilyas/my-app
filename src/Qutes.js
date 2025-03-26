@@ -6,7 +6,7 @@ const Qoutes = ({ dataSource, columns }) => {
     <Table
       dataSource={dataSource}
       columns={columns}
-      rowKey="username"
+      rowKey="qoute"
       
     />
   );

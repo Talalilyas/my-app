@@ -99,7 +99,7 @@ export default function Dashboard() {
           {activeTab === "settings" && <h2>Settings Page</h2>}
           {activeTab === "recipes" && (
             <Card title="Food Recipes" style={{ maxWidth: 900, margin: "auto" }}>
-              {loading ? <Spin size="large" /> : recipes.length > 0 ? (
+              {loading ? <Spin size="large" /> : recipes.length > 10 ? (
                 <Foodrecipe dataSource={recipes} columns={[{ title: "Recipe Name", dataIndex: "name", key: "name" }, { title: "Ingredients", dataIndex: "ingredients", key: "ingredients" }]} pagination={{ pageSize: 5 }} />
               ) : <p>No recipes available.</p>}
             </Card>
@@ -112,7 +112,7 @@ export default function Dashboard() {
             </Card>
           )}
           {activeTab === "qoute" && (
-            <Card title="Quotes" style={{ maxWidth: 900, margin: "auto" }}>
+            <Card title="Quotes" style={{ maxWidth: 1000, margin: "auto" }}>
               {loading ? <Spin size="large" /> : qoute.length > 0 ? (
                 <Qoutes dataSource={qoute} columns={[{ title: "Quote", dataIndex: "quote", key: "quote" }, { title: "Author", dataIndex: "author", key: "author" }]}  pagination={{ pageSize: 9 }}/>
               ) : <p>No quotes available.</p>}
