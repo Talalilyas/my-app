@@ -49,6 +49,7 @@ export default function Greeting() {
     setUser(null);
     setIsLogin(false);
     navigate("/");
+    console.log(isLogin)
   };
   const vehicleColumns = [
     { title: "Manufacturer ID", dataIndex: "makeId", key: "makeId" },

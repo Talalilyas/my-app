@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Card } from "antd";
+import { Table} from "antd";
 
 const Userdata = ({ dataSource, columns }) => {
   return (

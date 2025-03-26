@@ -31,6 +31,8 @@ export default function Dashboard() {
       message.error(`Error: ${error.message}`);
     } finally {
       setLoading(false);
+
+      console.log(isLogin)
     }
   };
   const fetchRecipes = async () => {
@@ -102,25 +104,21 @@ export default function Dashboard() {
               {loading ? <Spin size="large" /> : recipes.length > 10 ? (
                 <Foodrecipe dataSource={recipes} columns={[{ title: "Recipe Name", dataIndex: "name", key: "name" }, { title: "Ingredients", dataIndex: "ingredients", key: "ingredients" }]} pagination={{ pageSize: 5 }} />
               ) : <p>No recipes available.</p>}
-            </Card>
-          )}
+            </Card>)}
           {activeTab === "profile" && (
             <Card title="User Profile" style={{ maxWidth: 900, margin: "auto" }}>
               {loading ? <Spin size="large" /> : userData.length > 0 ? (
                 <Userdata dataSource={userData} columns={[{ title: "Username", dataIndex: "username", key: "username" }, { title: "Email", dataIndex: "email", key: "email" }, { title: "Full Name", key: "fullName", render: (record) => `${record.firstName} ${record.lastName}` }, { title: "Phone", dataIndex: "phone", key: "phone" }, { title: "Birth Date", dataIndex: "birthDate", key: "birthDate" }]} />
               ) : <p>No user data available.</p>}
-            </Card>
-          )}
+            </Card>)}
           {activeTab === "qoute" && (
             <Card title="Quotes" style={{ maxWidth: 1000, margin: "auto" }}>
               {loading ? <Spin size="large" /> : qoute.length > 0 ? (
                 <Qoutes dataSource={qoute} columns={[{ title: "Quote", dataIndex: "quote", key: "quote" }, { title: "Author", dataIndex: "author", key: "author" }]}  pagination={{ pageSize: 9 }}/>
               ) : <p>No quotes available.</p>}
-            </Card>
-          )}
+            </Card>)}
         </Content>
       </Layout>
       <Footer style={{ textAlign: "center" }}>Ant Design ©{new Date().getFullYear()} Created by Ant UED</Footer>
-    </Layout>
-  );
+    </Layout>);
 }
