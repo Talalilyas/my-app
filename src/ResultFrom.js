@@ -5,19 +5,13 @@ export default function ResultForm() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [value, setValue] = useState(3);
-
-  // Handle number input change
   function handleChange(val) {
     setValue(val);
     console.log("InputNumber value:", val);
   }
-
-  // Handle select change
   const handleChangeSelect = (val) => {
     console.log(`Selected: ${val}`);
   };
-
-  // Handle form submission
   const handleFormSubmit = (values) => {
     console.log("Form Submitted:", values);
   };
@@ -38,7 +32,6 @@ export default function ResultForm() {
               placeholder="Enter your first name"
             />
           </Form.Item>
-
           <Form.Item
             label="Last Name"
             name="lastName"
@@ -50,11 +43,12 @@ export default function ResultForm() {
               placeholder="Enter your last name"
             />
           </Form.Item>
-
-          <Form.Item label="Select Result type">
+          <Col span={12} lg={24}>
+          <Form.Item label="Enter class">
+            <InputNumber min={1} max={20} defaultValue={3} onChange={handleChange}  style={{width :"40%"}}/>
             <Select
               defaultValue="lucy"
-              style={{ width: 120 }}
+              style={{ width:"60%"}}
               onChange={handleChangeSelect}
               options={[
                 { value: "jack", label: "Final result" },
@@ -63,10 +57,10 @@ export default function ResultForm() {
               ]}
             />
           </Form.Item>
-
-          <Form.Item label="Enter Number">
-            <InputNumber min={1} max={20} defaultValue={3} onChange={handleChange} />
-          </Form.Item>
+          </Col>
+          {value < 12 ? <p>Final Result</p> : <p>Semester System</p>}
+         
+          
 
           <Form.Item>
             <Button type="primary" htmlType="submit">
