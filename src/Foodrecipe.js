@@ -1,15 +1,15 @@
-// import React from "react";
-// import { Table } from "antd";
+import React from "react";
+import { Table } from "antd";
 
-// const Foodrecipe = ({ dataSource, columns }) => {
-//   return (
-//     <Table
-//       dataSource={dataSource}
-//       columns={columns}
-//       rowKey="key"
-//       pagination={{ pageSize: 5 }}
-//     />
-//   );
-// };
+const Foodrecipe = ({ dataSource, columns }) => {
+  return (
+    <Table
+      dataSource={dataSource}
+      columns={columns}
+      rowKey="key"
+      pagination={{ pageSize: 5 }}
+    />
+  );
+};
 
-// export default Foodrecipe;
+export default Foodrecipe;

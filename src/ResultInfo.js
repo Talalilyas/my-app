@@ -1,58 +1,63 @@
 import React, { useState } from "react";
-import { Form, Select, Row, Col, Typography, Input } from "antd";
+import { Form, Select, Row, Col, Typography } from "antd";
+
+const { Text } = Typography;
 
 const ResultInfo = ({ form }) => {
-  const [value, setValue] = useState(3);
+  const [classNumber, setClassNumber] = useState(4);
   const [resultType, setResultType] = useState("");
-  const [teacher, setTeacher] = useState("");
-  const { Text } = Typography;
+  const [teacherOptions, setTeacherOptions] = useState([]);
 
-  const handleChange = (val) => {
-    setValue(val);
+  const classOptions = Array.from({ length: 13 }, (_, i) => ({
+    label: `Class ${i + 4}`,
+    value: i + 4,
+  }));
 
-    let newResultType = "";
-    let newTeacher = "";
+  const handleClassChange = (value) => {
+    setClassNumber(value);
 
-    if (val <= 12) {
-      newResultType = "Final Result";
-    } else if (val <= 16) {
-      newResultType = "Semester Result";
-    }
-
-    if (val <= 6) {
-      newTeacher = "Select your teacher ";
-    } else if (val <= 9) {
-      newTeacher = "Select your teacher ";
-    } else if (val <= 12) {
-      newTeacher = "Select your teacher ";
-    } else if (val <= 16) {
-      newTeacher = "Select your teacher ";
-    }
-
+    const newResultType = value <= 12 ? "Final Result" : "Semester Result";
     setResultType(newResultType);
-    setTeacher(newTeacher);
 
+    let options = [];
+    if (value >= 4 && value <= 6) {
+      options = [
+        { value: "Asad", label: "Asad" },
+        { value: "Ahmad", label: "Ahmad" },
+        { value: "Syed", label: "Syed" },
+      ];
+    } else if (value >= 7 && value <= 8) {
+      options = [
+        { value: "Maryam", label: "Maryam" },
+        { value: "Bilal", label: "Bilal" },
+        { value: "Abdullah", label: "Abdullah" },
+      ];
+    } else if (value >= 9 && value <= 10) {
+      options = [
+        { value: "Iqbal", label: "Iqbal" },
+        { value: "Murad", label: "Murad" },
+      ];
+    } else if (value >= 11 && value <= 12) {
+      options = [
+        { value: "Sarfaraz", label: "Sarfaraz" },
+        { value: "Arshad", label: "Arshad" },
+      ];
+    } else if (value >= 13 && value <= 14) {
+      options = [
+        { value: "Ali", label: "Ali" },
+        { value: "Aasad", label: "Aasad" },
+      ];
+    } else if (value >= 15 && value <= 16) {
+      options = [{ value: "Hamza", label: "Hamza" }];
+    }
+    setTeacherOptions(options);
     form.setFieldsValue({
       resultType: newResultType,
-      teacher: newTeacher,
+      teacher: undefined,
+      grade:undefined,
+      cgpa:undefined,
     });
   };
-
-  const classOptions = [
-    { label: "Class 4", value: 4 },
-    { label: "Class 5", value: 5 },
-    { label: "Class 6", value: 6 },
-    { label: "Class 7", value: 7 },
-    { label: "Class 8", value: 8 },
-    { label: "Class 9", value: 9 },
-    { label: "Class 10", value: 10 },
-    { label: "Class 11", value: 11 },
-    { label: "Class 12", value: 12 },
-    { label: "Class 13", value: 13 },
-    { label: "Class 14", value: 14 },
-    { label: "Class 15", value: 15 },
-    { label: "Class 16", value: 16 },
-  ];
 
   return (
     <Row gutter={16}>
@@ -60,55 +65,50 @@ const ResultInfo = ({ form }) => {
         <Form.Item
           label="Enter Class"
           name="classNumber"
-          rules={[{ required: true, message: "Please select your class!" }]}
-        >
+          rules={[{ required: true, message: "Please select your class!" }]}>
           <Select
             placeholder="Select class"
             options={classOptions}
-            value={value}
-            onChange={handleChange}
-            style={{ width: "100%" }}
+            value={classNumber}
+            onChange={handleClassChange}
           />
         </Form.Item>
       </Col>
-
-      {value >= 4 && value <= 12 && (
-        <Col span={12}>
+      {classNumber >= 4 && classNumber <= 12 && (
+        <Col span={14}>
           <Form.Item
             label="Grade"
             name="grade"
-            rules={[{ required: true, message: "Please enter your grade!" }]}
-          >
+            rules={[{ required: true, message: "Please select your grade!" }]}>
             <Select
-              placeholder="Select your grade"
+              placeholder="Select grade"
               options={[
-                { value: "1", label: "A+" },
-                { value: "2", label: "B" },
-                { value: "3", label: "C" },
-              ]}
+                { value: "A+", label: "A+" },
+                { value: "B", label: "B" },
+                { value: "C", label: "C" },]}
             />
           </Form.Item>
         </Col>
       )}
-
-      {value >= 13 && (
-        <Col span={12}>
+      {classNumber >= 13 && (
+        <Col span={14}>
           <Form.Item
             label="CGPA"
             name="cgpa"
-            rules={[{ required: true, message: "Please enter your CGPA!" }]}
+            rules={[{ required: true, message: "Please select your CGPA!" }]}
           >
             <Select
               placeholder="Select CGPA"
               options={[
-                { value: "1", label: "4" },
-                { value: "2", label: "3.5" },
+                { value: "4", label: "4" },
+                { value: "3.5", label: "3.5" },
                 { value: "3", label: "3" },
               ]}
             />
           </Form.Item>
         </Col>
       )}
+
       <Col span={11}>
         <Form.Item label="Result Type" name="resultType">
           <Text type="secondary">
@@ -116,83 +116,15 @@ const ResultInfo = ({ form }) => {
           </Text>
         </Form.Item>
       </Col>
-      {value >= 4 && value <= 6 && (
+
+      {teacherOptions.length > 0 && (
         <Col span={13}>
-          <Form.Item label="Teacher" name="teacher">
-            <Select
-              placeholder="Select CGPA"
-              options={[
-                { value: "1", label: "Asad " },
-                { value: "2", label: "ahmad" },
-                { value: "3", label: "syed" },
-              ]}
-            />
-          </Form.Item>
-        </Col>
-      )}
-      {value >= 7 && value <= 8 && (
-        <Col span={13}>
-          <Form.Item label="Teacher" name="teacher">
-            <Select
-              placeholder="Select CGPA"
-              options={[
-                { value: "1", label: "Maryam" },
-                { value: "2", label: "Bilal" },
-                { value: "3", label: "Abdullah" },
-              ]}
-            />
-          </Form.Item>
-        </Col>
-      )}
-      {value >= 9 && value <= 10 && (
-        <Col span={13}>
-          <Form.Item label="Teacher" name="teacher">
-            <Select
-              placeholder="Select CGPA"
-              options={[
-                { value: "1", label: "iqbal" },
-                { value: "2", label: "murad" },
-              ]}
-            />
-          </Form.Item>
-        </Col>
-      )}
-      {value >= 11 && value <= 12 && (
-        <Col span={13}>
-          <Form.Item label="Teacher" name="teacher">
-            <Select
-              placeholder="Select CGPA"
-              options={[
-                { value: "1", label: "Sarfaraz" },
-                { value: "2", label: "arshad" },
-              ]}
-            />
-          </Form.Item>
-        </Col>
-      )}
-       {value >= 13 && value <= 14 && (
-        <Col span={13}>
-          <Form.Item label="Teacher" name="teacher">
-            <Select
-              placeholder="Select CGPA"
-              options={[
-                { value: "1", label: "ALi" },
-                { value: "2", label: "aasad" },
-              ]}
-            />
-          </Form.Item>
-        </Col>
-      )}
-       {value >= 15 && value <= 16 && (
-        <Col span={13}>
-          <Form.Item label="Teacher" name="teacher">
-            <Select
-              placeholder="Select CGPA"
-              options={[
-                { value: "1", label: "hamza " },
-                
-              ]}
-            />
+          <Form.Item
+            label="Teacher"
+            name="teacher"
+            rules={[{ required: true, message: "Please select your teacher!" }]}
+          >
+            <Select placeholder="Select teacher" options={teacherOptions} />
           </Form.Item>
         </Col>
       )}
