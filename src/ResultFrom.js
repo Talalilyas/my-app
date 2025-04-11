@@ -10,8 +10,8 @@ export default function ResultForm() {
     console.log("Form Submitted:", values);
   };
   return (
-    <Row justify="center" align="middle" style={{ minHeight: "100vh" }}>
-      <Col xs={24} sm={18} md={12} lg={8}>
+    <Row justify="center" align="middle" style={{ minHeight: "100%" ,minWidth:"50%" }}>
+      <Col xs={24} sm={18} md={12} lg={10}>
         <h3>Student Result Card</h3>
         <Form form={form} layout="vertical" onFinish={handleFormSubmit}>
           <PersonalInfo />
