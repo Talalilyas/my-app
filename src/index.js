@@ -53,10 +53,7 @@ export default function App() {
         </Routes>
         
       </BrowserRouter>
-      {/* <BrowserRouter>
-      <Route exact path="/" component={ResultFrom} />
       
-    </BrowserRouter> */}
     </UserContext.Provider>
   );
 }const root = ReactDOM.createRoot(document.getElementById("root"));
