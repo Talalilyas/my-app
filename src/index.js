@@ -15,10 +15,15 @@ import UserContext from "./Usercontext";
 import Login from "./Login";
 import Profile from "./Profile";
 import ResultFrom from "./ResultFrom";
+import Dashboard from "./Dashborad";
+import Grade from "./Grade";
+import QuotesPage from "./Qutes";
+import SettingsPage from "./Setting";
+import ResultForm from "./ResultFrom";
 const LayoutTwow = () => (
   <div className="cols-lg-4">
     <Outlet />
-  </div>  
+  </div>
 );
 export default function App() {
   const [user, setUser] = useLocalStorageState("user", null);
@@ -28,6 +33,7 @@ export default function App() {
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Routes>
+        
           {!Sginup && (
             <Route path="/" element={<Layout />}>
               <Route
@@ -37,11 +43,15 @@ export default function App() {
               <Route index element={<Navigate to="Sginup" />} />
             </Route>
           )}
+
+        
           {Sginup && (
             <Route path="/" element={<LayoutTwow />}>
               <Route index element={<Greeting />} />
             </Route>
           )}
+
+         
           {!login && (
             <Route
               path="/login"
@@ -49,14 +59,28 @@ export default function App() {
             />
           )}
           {login && <Route path="/login" element={<Profile />} />}
+
+       
+          {login && (
+            <Route path="/dashboard" element={<Dashboard />}>
+            <Route index element={<h2>Welcome, Good Evening!</h2>} />
+            <Route path="profile" element={<Profile/>} />
+            <Route path="grade" element={< Grade/>} />
+            <Route path="settings" element={<SettingsPage />} />
+            <Route path="quotes" element={<QuotesPage />} />
+            <Route path="result-form" element={<ResultForm />} />
+          </Route>
+          
+          )}
+
+         
           <Route path="*" element={<Navigate to={Sginup ? "/" : "/login"} />} />
         </Routes>
-        
       </BrowserRouter>
-      
     </UserContext.Provider>
   );
-}const root = ReactDOM.createRoot(document.getElementById("root"));
+}
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <App />
