@@ -32,7 +32,7 @@ export default function Login() {
       setAccessToken(data.accessToken);
       setUser({ username });
       setIsLogin(true);
-      navigate("/profile");
+      navigate("/dashboard");
       console.log(data.accessToken);
     } catch (err) {
       message.error(`Error: ${err.message}`);

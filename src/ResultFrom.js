@@ -1,24 +1,40 @@
 import React from "react";
-import { Form, Button, Row, Col } from "antd";
+import { Form, Button, Row, Col, Typography, Divider } from "antd";
 import PersonalInfo from "./PersonalInfo";
 import ResultInfo from "./ResultInfo";
+
+const { Title } = Typography;
 
 export default function ResultForm() {
   const [form] = Form.useForm();
 
   const handleFormSubmit = (values) => {
-    console.log("Form Submitted:", values);
+    console.log("✅ Form Submitted:", values);
+    
   };
+
   return (
-    <Row justify="center" align="middle" style={{ minHeight: "100%" ,minWidth:"50%" }}>
-      <Col xs={24} sm={18} md={12} lg={10}>
-        <h3>Student Result Card</h3>
-        <Form form={form} layout="vertical" onFinish={handleFormSubmit}>
+    <Row justify="center" align="middle" style={{ minHeight: "100vh", padding: "20px" }}>
+      <Col xs={24} sm={20} md={16} lg={12} xl={10}>
+        <Title level={3} style={{ textAlign: "center" }}>
+          Student Result Card
+        </Title>
+        <Divider />
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleFormSubmit}
+          size="middle"
+        >
+         
           <PersonalInfo />
+
+        
           <ResultInfo form={form} />
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              Submit
+
+          <Form.Item style={{ textAlign: "center", marginTop: "20px" }}>
+            <Button type="primary" htmlType="submit" block>
+              Submit Result
             </Button>
           </Form.Item>
         </Form>
