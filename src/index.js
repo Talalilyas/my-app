@@ -55,7 +55,7 @@ export default function App() {
               element={<Login setIsLogin={setIsLogin} setUser={setUser} />}
             />
           )}
-          {login && <Route path="/login" element={<Profile />} />}
+          {login && <Route path="/login" element={<Login />} />}
 
           {login && (
             <Route path="/dashboard" element={<Dashboard />}>
