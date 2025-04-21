@@ -28,9 +28,7 @@ export default function Dashboard() {
       <Layout>
         <Sider width={220} theme="dark">
           <Menu mode="inline" theme="dark" defaultSelectedKeys={["profile"]}>
-            <Menu.Item
-              key="profile"
-              icon={<UserOutlined />}
+            <Menu.Item key="profile"  icon={<UserOutlined />}
               onClick={() => navigate("profile")}
             >
               Profile
