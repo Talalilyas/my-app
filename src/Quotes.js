@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { Card, Spin } from "antd";
 import Qoutes from "./Qutes";
-import useFetch from "./Usefetch";
+import useFetchQuotes from "./Usefetch";
 
 export default function QuotesPage() {
-  const { data, loading } = useFetch("http://localhost:8080/Studen");
 
+  
+  const { data, loading } = useFetchQuotes("http://localhost:8080/Student");
+console.log(data,"hey")
   useEffect(() => {
     console.log("Fetched Data:", data);
   }, [data]);
@@ -14,15 +16,16 @@ export default function QuotesPage() {
     <Card title="User List" style={{ maxWidth: 1000, margin: "auto" }}>
       {loading ? (
         <Spin size="large" />
-      ) : Array.isArray(data) && data.length > 0 ? (
+      ) : data && data.length > 0 ? (
         <Qoutes
           dataSource={data}
           columns={[
-            { title: "First Name", dataIndex: "first_name", key: "first_name" },
-            { title: "Last Name", dataIndex: "last_name", key: "last_name" },
+            { title: "First Name", dataIndex: "first_name", key: "firstname" },
+            { title: "Last Name", dataIndex: "last_name", key: "lastname" },
             { title: "Email", dataIndex: "email", key: "email" },
+            { title:"Gender",dataIndex:"gender",key:"gender" },
+            { title:"Country",dataIndex:"country",key:"country" }
           ]}
-          
           pagination={{ pageSize: 9 }}
         />
       ) : (
