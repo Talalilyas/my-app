@@ -17,7 +17,7 @@ import Profile from "./Profile";
 import ResultFrom from "./ResultFrom";
 import Dashboard from "./Dashborad";
 import Grade from "./Grade";
-import QuotesPage from "./Qutes";
+import QuotesPage from "./Quotes";
 import SettingsPage from "./Setting";
 import ResultForm from "./ResultFrom";
 const LayoutTwow = () => (
@@ -67,7 +67,7 @@ export default function App() {
             <Route path="profile" element={<Profile/>} />
             <Route path="grade" element={< Grade/>} />
             <Route path="settings" element={<SettingsPage />} />
-            <Route path="quotes" element={<QuotesPage />} />
+            <Route path="quotes" element={<QuotesPage/>} />
             <Route path="result-form" element={<ResultForm />} />
           </Route>
           

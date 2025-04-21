@@ -1,52 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { Card, Spin, message } from "antd";
+import React, { useEffect } from "react";
+import { Card, Spin } from "antd";
 import Qoutes from "./Qutes";
+import useFetchQuotes from "./Usefetch";
 
 export default function QuotesPage() {
-  const [loading, setLoading] = useState(false);
-  const [User, setUser] = useState([]);
 
+  
+  const { data, loading } = useFetchQuotes("http://localhost:8080/Student");
+console.log(data,"hey")
   useEffect(() => {
-    const fetchQuotes = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch("http://localhost:8080/user");
-        if (!response.ok) throw new Error("Failed to fetch data");
-
-        const data = await response.json();
-        console.log("Raw API Data:", data);
-        const formattedData = Array.isArray(data)
-          ? data.map((user, index) => ({
-              key: index.toString(),
-              firstname: user.first_name,
-              lastname: user.last_name,
-              email: user.email,
-            }))
-          : [];
-console.log(User)
-        setUser(formattedData);
-        console.log(formattedData)
-      } catch (error) {
-        message.error(`Error: ${error.message}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchQuotes();
-  }, []);
+    console.log("Fetched Data:", data);
+  }, [data]);
 
   return (
     <Card title="User List" style={{ maxWidth: 1000, margin: "auto" }}>
       {loading ? (
         <Spin size="large" />
-      ) : User.length > 0 ? (
+      ) : data && data.length > 0 ? (
         <Qoutes
-          dataSource={User}
+          dataSource={data}
           columns={[
-            { title: "First Name", dataIndex: "firstname", key: "firstname" },
-            { title: "Last Name", dataIndex: "lastname", key: "lastname" },
+            { title: "First Name", dataIndex: "first_name", key: "firstname" },
+            { title: "Last Name", dataIndex: "last_name", key: "lastname" },
             { title: "Email", dataIndex: "email", key: "email" },
+            { title:"Gender",dataIndex:"gender",key:"gender" },
+            { title:"Country",dataIndex:"country",key:"country" }
           ]}
           pagination={{ pageSize: 9 }}
         />

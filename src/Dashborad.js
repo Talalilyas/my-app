@@ -18,7 +18,7 @@ export default function Dashboard() {
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
 
   const handleSignOut = () => {
-    setIsLogin(false);
+    setIsLogin(true);
     localStorage.removeItem("accessToken");
     navigate("/");
   };
