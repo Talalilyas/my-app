@@ -4,10 +4,8 @@ import Qoutes from "./Qutes";
 import useFetchQuotes from "./Usefetch";
 
 export default function QuotesPage() {
-
-  
   const { data, loading } = useFetchQuotes("http://localhost:8080/Student");
-console.log(data,"hey")
+  console.log(data, "hey");
   useEffect(() => {
     console.log("Fetched Data:", data);
   }, [data]);
@@ -23,8 +21,8 @@ console.log(data,"hey")
             { title: "First Name", dataIndex: "first_name", key: "firstname" },
             { title: "Last Name", dataIndex: "last_name", key: "lastname" },
             { title: "Email", dataIndex: "email", key: "email" },
-            { title:"Gender",dataIndex:"gender",key:"gender" },
-            { title:"Country",dataIndex:"country",key:"country" }
+            { title: "Gender", dataIndex: "gender", key: "gender" },
+            { title: "Country", dataIndex: "country", key: "country" },
           ]}
           pagination={{ pageSize: 9 }}
         />

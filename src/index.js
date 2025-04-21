@@ -33,7 +33,6 @@ export default function App() {
     <UserContext.Provider value={user}>
       <BrowserRouter>
         <Routes>
-        
           {!Sginup && (
             <Route path="/" element={<Layout />}>
               <Route
@@ -44,14 +43,12 @@ export default function App() {
             </Route>
           )}
 
-        
           {Sginup && (
             <Route path="/" element={<LayoutTwow />}>
               <Route index element={<Greeting />} />
             </Route>
           )}
 
-         
           {!login && (
             <Route
               path="/login"
@@ -60,20 +57,17 @@ export default function App() {
           )}
           {login && <Route path="/login" element={<Profile />} />}
 
-       
           {login && (
             <Route path="/dashboard" element={<Dashboard />}>
-            <Route index element={<h2>Welcome, Good Evening!</h2>} />
-            <Route path="profile" element={<Profile/>} />
-            <Route path="grade" element={< Grade/>} />
-            <Route path="settings" element={<SettingsPage />} />
-            <Route path="quotes" element={<QuotesPage/>} />
-            <Route path="result-form" element={<ResultForm />} />
-          </Route>
-          
+              <Route index element={<h2>Welcome, Good Evening!</h2>} />
+              <Route path="profile" element={<Profile />} />
+              <Route path="grade" element={<Grade />} />
+              <Route path="settings" element={<SettingsPage />} />
+              <Route path="quotes" element={<QuotesPage />} />
+              <Route path="result-form" element={<ResultForm />} />
+            </Route>
           )}
 
-         
           <Route path="*" element={<Navigate to={Sginup ? "/" : "/login"} />} />
         </Routes>
       </BrowserRouter>
