@@ -9,13 +9,16 @@ export default function Login() {
   const [isLogin, setIsLogin] = useLocalStorageState("isLogin", false);
   const [users, setUser] = useLocalStorageState("user", { username: "" });
   const [accessToken, setAccessToken] = useLocalStorageState("accessToken", "");
-
+console.log(isLogin)
+console.log(users)
+console.log(accessToken)
   const navigate = useNavigate();
   const handleSubmit = async () => {
     const loginData = {
       username: username,
       password: password,
       expiresInMins: 30,
+      
     };
     try {
       const response = await fetch("https://dummyjson.com/auth/login", {

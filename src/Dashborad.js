@@ -11,7 +11,7 @@ import {
 } from "@ant-design/icons";
 import useLocalStorageState from "use-local-storage-state";
 
-const { Header, Content, Footer, Sider } = Layout;
+const {  Content, Footer, Sider } = Layout;
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -21,6 +21,7 @@ export default function Dashboard() {
     setIsLogin(true);
     localStorage.removeItem("accessToken");
     navigate("/");
+    console.log(isLogin)
   };
 
   return (
@@ -28,9 +29,7 @@ export default function Dashboard() {
       <Layout>
         <Sider width={220} theme="dark">
           <Menu mode="inline" theme="dark" defaultSelectedKeys={["profile"]}>
-            <Menu.Item
-              key="profile"
-              icon={<UserOutlined />}
+            <Menu.Item key="profile"  icon={<UserOutlined />}
               onClick={() => navigate("profile")}
             >
               Profile

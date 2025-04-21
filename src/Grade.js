@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Card, Spin, message } from "antd";
+import React, { useEffect } from "react";
+import { Card, Spin } from "antd";
 import Foodrecipe from "./Foodrecipe";
 import useFetchQuotes from "./Usefetch";
 export default function Grade() {

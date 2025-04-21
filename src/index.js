@@ -14,7 +14,7 @@ import useLocalStorageState from "use-local-storage-state";
 import UserContext from "./Usercontext";
 import Login from "./Login";
 import Profile from "./Profile";
-import ResultFrom from "./ResultFrom";
+
 import Dashboard from "./Dashborad";
 import Grade from "./Grade";
 import QuotesPage from "./Quotes";
@@ -55,7 +55,7 @@ export default function App() {
               element={<Login setIsLogin={setIsLogin} setUser={setUser} />}
             />
           )}
-          {login && <Route path="/login" element={<Profile />} />}
+          {login && <Route path="/login" element={<Login />} />}
 
           {login && (
             <Route path="/dashboard" element={<Dashboard />}>
