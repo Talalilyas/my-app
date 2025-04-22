@@ -1,24 +1,45 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
+import { Spin } from 'antd';
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [load,setload] =useState(1)
+  // console.log(data,"-----thisis data")
 
-const useFetchQuotes = (url) => {
-  const [data, setData] = useState();
-  const [error, setError] = useState();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
+  const fetchData = () => {
+    setLoading(true);
+    fetch(url)
+    .then(response => response.json())
+      .then((json) => {
         setData(json);
-      } catch (err) {
+         
+        setLoading(false);
+        setError(null);
+      })
+      .catch((err) => {
         setError(err.message);
-      }
-    };
+        setLoading(false);
+      });
+  };
 
+  console.log(fetchData,"-----------fetch ---------")
+  
+  useEffect(() => {
     fetchData();
-  }, [url]);
+   
+    const interval = setInterval(fetchData, 10000); 
+    console.log(interval ,"------interval-------")
+    setTimeout(() => { 
+        clearInterval(interval);
+        setLoading(true)
+    }, 10000);
 
-  return { data, error };
-};
 
-export default useFetchQuotes;
+   
+  }, []);
+
+  return { data, loading, error };
+}
+
+export default useFetch;

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { Card, Spin } from "antd";
 import Qoutes from "./Qutes";
-import useFetchQuotes from "./Usefetch";
+import useFetch from "./Usefetch";
 
 export default function QuotesPage() {
-  const { data, loading } = useFetchQuotes("http://localhost:8080/Student");
+  const { data, loading } = useFetch("http://localhost:8080/Student");
   console.log(data, "hey");
   useEffect(() => {
-    console.log("Fetched Data:", data);
+    console.log(data,"this is my data")
   }, [data]);
 
   return (

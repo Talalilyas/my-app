@@ -7,7 +7,7 @@ const Foodrecipe = ({ dataSource, columns }) => {
       dataSource={dataSource}
       columns={columns}
       rowKey="key"
-      pagination={{ pageSize: 5 }}
+      pagination={{ pageSize: 8 }}
     />
   );
 };
