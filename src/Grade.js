@@ -27,7 +27,7 @@ export default function Grade() {
               key: "teacher_name",
             },
           ]}
-          pagination={{ pageSize: 9 }}
+          pagination={{ pageSize: 11 }}
         />
       ) : (
         <p>No users available.</p>
