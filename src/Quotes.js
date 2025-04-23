@@ -10,6 +10,7 @@ export default function QuotesPage() {
     console.log(data,"this is my data")
   }, [data]);
 
+
   return (
     <Card title="User List" style={{ maxWidth: 1000, margin: "auto" }}>
       {loading ? (

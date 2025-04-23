@@ -6,7 +6,7 @@ export default function SettingsPage() {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   const handleSubmit = (values) => {
-    console.log("Settings updated:", { ...values, notificationsEnabled });
+    console.log("Settings updated:", { ...values, notificationsEnabled });  
     message.success("Settings have been updated!");
   };
 
