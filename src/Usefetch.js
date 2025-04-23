@@ -1,45 +1,47 @@
-import { useEffect, useState } from 'react';
-import { Spin } from 'antd';
-function useFetch(url) {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [load,setload] =useState(1)
-  // console.log(data,"-----thisis data")
+import { useState, useEffect } from "react";
 
-  const fetchData = () => {
+const useFetchQuotes = (url) => {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const sendReq = () => {
     setLoading(true);
+
     fetch(url)
-    .then(response => response.json())
-      .then((json) => {
-        setData(json);
-         
-        setLoading(false);
-        setError(null);
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
       })
-      .catch((err) => {
-        setError(err.message);
+      .then((result) => {
+        const addmydata = {
+          first_name: "Talal",
+          last_name: "Ilyas",
+          score: 12.3,
+          grade: "B",
+          teacher_name: "Amjad",
+        };
+
+        setData([addmydata, ...result]);
+        console.log(result);
+      })
+      .catch((error) => {
+        console.error("Fetch error:", error);
+        setData([]);
+      })
+      .finally(() => {
         setLoading(false);
       });
   };
-
-  console.log(fetchData,"-----------fetch ---------")
-  
+  // useEffect(() => {
+  //      sendReq()
+  // }, [url, trigger]);
   useEffect(() => {
-    fetchData();
-   
-    const interval = setInterval(fetchData, 10000); 
-    console.log(interval ,"------interval-------")
-    setTimeout(() => { 
-        clearInterval(interval);
-        setLoading(true)
-    }, 10000);
-
-
-   
+    sendReq();
   }, []);
 
-  return { data, loading, error };
-}
+  return { data, loading, sendReq };
+};
 
-export default useFetch;
+export default useFetchQuotes;

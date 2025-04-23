@@ -1,13 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Spin } from "antd";
 import Foodrecipe from "./Foodrecipe";
 import useFetchQuotes from "./Usefetch";
+
 export default function Grade() {
-  const { data, loading } = useFetchQuotes("http://localhost:8080/result");
-  console.log(data, "hey");
+  const [trigger, setTrigger] = useState(0);
+  const { data, loading, sendReq } = useFetchQuotes("http://localhost:8080/result", trigger);
+
+  console.log(loading,"loading---")
   useEffect(() => {
-    console.log("Fetched Data:", data);
-  }, [data]);
+    const timer = setTimeout(() => {
+      sendReq()
+    }, 10000);
+
+
+    return () => clearTimeout(timer); 
+  }, []);
 
   return (
     <Card title="Grades" style={{ maxWidth: 1000, margin: "auto" }}>
