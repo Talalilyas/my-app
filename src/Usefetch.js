@@ -15,16 +15,34 @@ const useFetchQuotes = (url) => {
         return response.json();
       })
       .then((result) => {
+        const mydata = {
+        first_name :"talal",
+        last_name : "ilyas",
+        grade :  "54",
+        score : "12.3",
+        teacher_name: "Amjad",
+        email: "talailyas@gmail.com",
+        gender : "male"}
         const addmydata = {
-          first_name: "Talal",
-          last_name: "Ilyas",
-          score: 12.3,
-          grade: "B",
+          first_name :"tahir",
+          last_name : "ilyas",
+          grade :  "54",
+          score : "12.3",
           teacher_name: "Amjad",
-        };
+           email: "talailyas@gmail.com",
+           gender : "male" ,
+           country :"pakistan  "
+          }
+          const merge = {
+             
+            ...addmydata,
+             country : "dubai"
 
-        setData([addmydata, ...result]);
-        console.log(result);
+          }
+          console.log(merge,"-----hello---")
+
+          setData([mydata,merge,...result])
+          console.log(mydata,"-------hello-----")
       })
       .catch((error) => {
         console.error("Fetch error:", error);
