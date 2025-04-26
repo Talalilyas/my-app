@@ -20,8 +20,28 @@ const useFetchQuotes = (url) => {
         last_name : "ilyas",
         grade :  "54",
         score : "12.3",
-        teacher_name: "Amjad"}
-          setData([mydata,...result])
+        teacher_name: "Amjad",
+        email: "talailyas@gmail.com",
+        gender : "male"}
+        const addmydata = {
+          first_name :"tahir",
+          last_name : "ilyas",
+          grade :  "54",
+          score : "12.3",
+          teacher_name: "Amjad",
+           email: "talailyas@gmail.com",
+           gender : "male" ,
+           country :"pakistan  "
+          }
+          const merge = {
+             
+            ...addmydata,
+             country : "dubai"
+
+          }
+          console.log(merge,"-----hello---")
+
+          setData([mydata,merge,...result])
           console.log(mydata,"-------hello-----")
       })
       .catch((error) => {
