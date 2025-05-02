@@ -6,14 +6,11 @@ const useFetchQuotes = (url) => {
 
   const sendReq = () => {
     setLoading(true);
-
     fetch(url)
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
+          throw new Error(`HTTP error! Status: ${response.status}`); }
+        return response.json(); })
       .then((result) => {
         const mydata = {
         first_name :"talal",
@@ -33,11 +30,9 @@ const useFetchQuotes = (url) => {
            gender : "male" ,
            country :"pakistan  "
           }
-          const merge = {
-             
+          const merge = { 
             ...addmydata,
              country : "dubai"
-
           }
           console.log(merge,"-----hello---")
 

@@ -5,8 +5,7 @@ import {
   Routes,
   Route,
   Navigate,
-  Outlet,
-} from "react-router-dom";
+  Outlet,} from "react-router-dom";
 import Layout from "./Layout";
 import FromCard from "./Fromcard";
 import Greeting from "./Greeting";
