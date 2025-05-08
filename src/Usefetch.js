@@ -6,6 +6,8 @@ const useFetchQuotes = (url) => {
 
   const sendReq = () => {
     setLoading(true);
+
+    
     fetch(url)
       .then((response) => {
         if (!response.ok) {

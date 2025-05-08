@@ -63,8 +63,7 @@ export default function App() {
               <Route path="settings" element={<SettingsPage />} />
               <Route path="quotes" element={<QuotesPage />} />
               <Route path="result-form" element={<ResultForm />} />
-            </Route>
-          )}
+            </Route> )}
 
           <Route path="*" element={<Navigate to={Sginup ? "/" : "/login"} />} />
         </Routes>

@@ -29,12 +29,7 @@ export default function Grade() {
             { title: "Last Name", dataIndex: "last_name", key: "lastname" },
             { title: "Score", dataIndex: "score", key: "score" },
             { title: "Grade", dataIndex: "grade", key: "grade" },
-            {
-              title: "Teacher name",
-              dataIndex: "teacher_name",
-              key: "teacher_name",
-            },
-          ]}
+            { title: "Teacher name", dataIndex: "teacher_name",key: "teacher_name",},]}
           pagination={{ pageSize: 11 }}
         />
       ) : (
