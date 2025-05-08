@@ -24,12 +24,9 @@ export default function ResultForm() {
           form={form}
           layout="vertical"
           onFinish={handleFormSubmit}
-          size="middle"
-        >
+          size="middle">
          
           <PersonalInfo />
-
-        
           <ResultInfo form={form} />
 
           <Form.Item style={{ textAlign: "center", marginTop: "20px" }}>
