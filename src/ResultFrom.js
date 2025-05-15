@@ -17,7 +17,7 @@ export default function ResultForm() {
     <Row justify="center" align="middle" style={{ minHeight: "100vh", padding: "20px" }}>
       <Col xs={24} sm={20} md={16} lg={12} xl={10}>
         <Title level={3} style={{ textAlign: "center" }}>
-          Student Result Card
+          Student Result Cards
         </Title>
         <Divider />
         <Form
