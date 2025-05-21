@@ -12,9 +12,7 @@ export default function ProfilePage() {
     const fetchUserData = async () => {
       setLoading(true);
       try {
-        const response = await fetch("https://dummyjson.com/users/1", {
-          headers: { Authorization: `Bearer ${accessToken}` },
-        });
+        const response = await fetch("https://dummyjson.com/users/1", {});
         if (!response.ok) throw new Error("Failed to fetch user data");
 
         const data = await response.json();
