@@ -5,9 +5,7 @@ import useFetchQuotes from "./Usefetch";
 
 export default function Grade() {
   const [trigger, setTrigger] = useState(0);
-  const { data, loading, sendReq } = useFetchQuotes(
-    "http://localhost:8080/result"
-  );
+  const { data, loading, sendReq } = useFetchQuotes("http://localhost:8080/result");
 
   return (
     <Card title="Grades" style={{ maxWidth: 1000, margin: "auto" }}>
