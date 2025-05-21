@@ -7,9 +7,8 @@ export default function QuotesPage() {
   const { data, loading } = useFetch("http://localhost:8080/Student");
   console.log(data, "hey");
   useEffect(() => {
-    console.log(data,"this is my data")
+    console.log(data, "this is my data");
   }, [data]);
-
 
   return (
     <Card title="User List" style={{ maxWidth: 1000, margin: "auto" }}>
