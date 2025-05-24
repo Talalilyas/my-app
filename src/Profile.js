@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Spin, Card, message } from "antd";
 import useLocalStorageState from "use-local-storage-state";
 import Userdata from "./Userdata";
+import useFetchQuotes from "./Usefetch";
 
 export default function ProfilePage() {
   const [userData, setUserData] = useState([]);
@@ -26,6 +27,10 @@ export default function ProfilePage() {
 
     fetchUserData();
   }, [accessToken]);
+
+      
+   
+    
 
   return (
     <Card
